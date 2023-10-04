@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+$spacer: 1rem !default;
+
+textarea.form-control {
+    height: auto !important;
+    padding: 25px 20px;
+}
+
+.datepicker-inline {
+    width: 100% !important;
+}
+
+.datepicker td,
+.datepicker th {
+    border-radius: 50% !important;
+}
+
+.datepicker td {
+    padding: 10px 14px;
+}
+
+.datepicker th {
+    padding: 10px 0px;
+}
+
+.datepicker table tr td.active {
+    background-image: linear-gradient(
+        to bottom,
+        var(--orange-color),
+        var(--orange-color)
+    ) !important;
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .next:hover,
+.datepicker .prev:hover,
+.datepicker tfoot tr th:hover {
+    background: inherit !important;
+}
+
+.btn-check:checked + .ud-btn {
+    color: #fff;
+    background-color: var(--orange-color);
+    border-color: var(--orange-color);
+}
+
+.btn-check .ud-btn i {
+    margin-left: 0px;
+    transform: none;
+}
+
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel button.owl-dot {
+    margin: 1px 6px !important;
+    display: inline-flex;
+}
+
+.table-orange {
+    --bs-table-bg: var(--orange-color);
+}
+
+@media (max-width: 1231px) {
+    .hidden-block-sm {
+        display: none;
+    }
+    .hidden-block {
+        display: block !important;
+    }
+}
+
+.hidden-block {
+    display: none;
+}
+
+.category {
+    transition: transform 0.3s ease;
+}
+
+.category:hover {
+    transform: scale(1.1);
+}
+
+.message {
+    white-space: nowrap;
+    font-family: arabswell_1 Regular;
+    font-size: x-large;
+    top: 29px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background-color: rgba(0, 0, 0, 0.8); */
+    color: white;
+    padding: 3px;
+    /* border-radius: 5px; */
+    font-weight: bold;
+    display: none;
+}
+
+div.category:hover .message {
+    display: block;
+}
+
+.line-orange {
+    color: #ce4500 !important;
+}
+
+.bgc-thm {
+    background-color: #ce4500;
+}
+
+.fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover {
+    background: rgba(235, 103, 83, 0.1);
+    cursor: pointer;
+}
+
+// .fc-event-selected, .fc-event:focus {
+//     box-shadow: none;
+// }
+
+// #section-join {
+//     background-image: url(/resources/images/home/cta-img-1.png);
+//     background-repeat: no-repeat;
+//     background-position: bottom right;
+//     min-height: 400px;
+// }
+
+// @media (max-width: 768px) {
+//     #section-join {
+//         background-image: none;
+//     }
+// }
+
+// .home-style4:before {
+//     background-color: rgba(24, 26, 32, 0.2);
+//     bottom: 0;
+//     content: "";
+//     height: 100%;
+//     left: 0;
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     width: 100%;
+//     border-radius: 24px;
+// }
+
+// .cta-banner4::before {
+//     background-color: rgba(24, 26, 32, 0.6);
+//     bottom: 0;
+//     content: "";
+//     height: 100%;
+//     left: 0;
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     width: 100%;
+//     border-radius: 24px;
+// }

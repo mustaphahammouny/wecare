@@ -1,0 +1,21 @@
+$direction: left;
+
+@import 'bootstrap/dist/css/bootstrap.rtl.min';
+
+@import './app';
+
+@import './rtl/ace-responsive-menu';
+
+@import './rtl/menu';
+
+@import './style';
+
+@import './rtl/style';
+
+@import './rtl/ud-custom-spacing';
+
+@import './dashboard';
+
+@import './rtl/responsive';
+
+@import './custom';
