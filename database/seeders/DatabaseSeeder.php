@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +14,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->clear();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(UserSeeder::class);
+        $this->call(ServiceSeeder::class);
+    }
+
+    private function clear(): void
+    {
+        $excludeTables = ['migrations'];
+        $tables = DB::select('SHOW TABLES');
+
+        Schema::disableForeignKeyConstraints();
+
+        foreach ($tables as $table) {
+            $tableName = reset($table);
+
+            if (!in_array($tableName, $excludeTables)) {
+                DB::table($tableName)->truncate();
+            }
+        }
+
+        Schema::enableForeignKeyConstraints();
     }
 }
