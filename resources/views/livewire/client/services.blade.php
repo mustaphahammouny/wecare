@@ -1,5 +1,5 @@
 <div>
-    <div class="row wow fadeInUp row-cols-1 row-cols-lg-2 justify-content-center" data-wow-delay="300ms">
+    <div class="row wow fadeInUp row-cols-1 row-cols-lg-2 row-cols-xl-3 justify-content-center" data-wow-delay="300ms">
         @foreach ($services as $service)
             <div class="col mb-4">
                 <div class="card h-100 border-0 bdrs24" style="overflow: hidden;">

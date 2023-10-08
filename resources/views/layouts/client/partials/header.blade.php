@@ -8,7 +8,7 @@
                             {{-- <a wire:navigate href="{{ route('home') }}" class="logo">
                                 <img src="{{ Vite::image('header-logo2.svg') }}">
                             </a> --}}
-                            <x-logo width="150" />
+                            <x-logo width="160" />
                         </div>
                         <div class="fz20 ms-2 ms-xl-5">
                             <a href="javascript:void(0)" class="dashboard_sidebar_toggle_icon text-thm1 vam">
