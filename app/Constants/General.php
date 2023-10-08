@@ -17,8 +17,8 @@ abstract class General
     const VALID_DATETIME_FORMAT = 'Y-m-d\\TH:i:sP';
 
     const LOCALES = [
-        'en' => ['title' => 'app.english', 'flag' => 'gb', 'dir' => 'ltr',],
-        'fr' => ['title' => 'app.french', 'flag' => 'fr', 'dir' => 'ltr',],
-        'ar' => ['title' => 'app.arabic', 'flag' => 'ma', 'dir' => 'rtl',],
+        'en' => ['title' => 'English', 'flag' => 'gb', 'dir' => 'ltr',],
+        'fr' => ['title' => 'French', 'flag' => 'fr', 'dir' => 'ltr',],
+        'ar' => ['title' => 'Arabic', 'flag' => 'ma', 'dir' => 'rtl',],
     ];
 }

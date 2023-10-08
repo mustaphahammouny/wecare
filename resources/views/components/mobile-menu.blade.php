@@ -6,9 +6,9 @@
                     <a class="menubar" href="#menu">
                         <img src="{{ Vite::image('mobile-dark-nav-icon.svg') }}">
                     </a>
-                    <a class="mobile_logo" wire:navigate href="{{ route('home') }}">
-                        <img src="{{ Vite::image('header-logo2.svg') }}">
-                    </a>
+
+                    <x-logo width="130" />
+
                     @if (Auth::check())
                         <a wire:navigate href='{{ route('client.services') }}'>
                             <span class="icon fz18 far fa-user-circle"></span>
@@ -19,7 +19,7 @@
                     @else
                         <a wire:navigate href='{{ route('auth.login') }}'>
                             <span class="icon fz18 far fa-user-circle"></span>
-                            <span>{{ __('auth.sign-in') }}</span>
+                            <span>@lang('Sign in')</span>
                         </a>
                     @endif
                 </div>
@@ -32,7 +32,7 @@
             @foreach (\App\Constants\Menu::STORE_MENU as $menu)
                 <li>
                     <a wire:navigate href="{{ route($menu['route']) }}">
-                        {{ __($menu['title']) }}
+                        @lang($menu['title'])
                     </a>
                 </li>
             @endforeach

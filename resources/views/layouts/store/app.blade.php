@@ -14,14 +14,14 @@
 
     <div class="wrapper ovh">
         <!-- Header -->
-        @include('layouts.guest.partials.header')
+        @include('layouts.store.partials.header')
 
         <div class="body_content">
             <!-- Body -->
             {{ $slot }}
 
             <!-- Footer -->
-            @include('layouts.guest.partials.footer')
+            @include('layouts.store.partials.footer')
         </div>
     </div>
 

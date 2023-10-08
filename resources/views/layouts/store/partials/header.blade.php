@@ -6,11 +6,11 @@
                     <x-logo />
                 </div>
                 <div class="col-auto">
-                    {{-- <x-nav-menu></x-nav-menu> --}}
+                    <x-nav-menu></x-nav-menu>
                 </div>
                 <div class="col-auto">
                     <div class="d-flex align-items-center">
-                        {{-- <x-locale /> --}}
+                        <x-locale />
                         @if (Auth::check())
                             <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
                         @else
@@ -23,4 +23,4 @@
     </nav>
 </header>
 
-{{-- <x-mobile-menu></x-mobile-menu> --}}
+<x-mobile-menu></x-mobile-menu>

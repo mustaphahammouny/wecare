@@ -8,7 +8,7 @@
             <li>
                 <a class="dropdown-item" href="{{ route('locale.update', $key) }}">
                     <span class="fi fi-{{ $item['flag'] }}"></span>
-                    {{ __($item['title']) }}
+                    @lang($item['title'])
                 </a>
             </li>
         @endforeach
