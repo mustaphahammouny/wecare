@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Extra;
+use App\Models\Pricing;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Blade;
@@ -34,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             1 => User::class,
             2 => Service::class,
             3 => Extra::class,
+            4 => Pricing::class,
         ]);
     }
 }

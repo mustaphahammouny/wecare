@@ -11,8 +11,12 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
+            $table->string('title');
             $table->string('description')->nullable();
             $table->boolean('active')->default(false);
+            $table->unsignedTinyInteger('min_duration');
+            $table->unsignedTinyInteger('max_duration');
+            $table->unsignedTinyInteger('step_duration');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

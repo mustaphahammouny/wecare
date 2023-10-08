@@ -5,9 +5,6 @@
                 <div class="col-6 col-lg-auto">
                     <div class="text-center text-lg-start d-flex align-items-center">
                         <div class="dashboard_header_logo position-relative me-2 me-xl-5">
-                            {{-- <a wire:navigate href="{{ route('home') }}" class="logo">
-                                <img src="{{ Vite::image('header-logo2.svg') }}">
-                            </a> --}}
                             <x-logo width="160" />
                         </div>
                         <div class="fz20 ms-2 ms-xl-5">

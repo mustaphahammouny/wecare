@@ -12,8 +12,8 @@ enum PlanList: int
     public function title(): string
     {
         $title = match ($this) {
-            self::Once => 'db.plans.once',
-            self::Regular => 'db.plans.regular',
+            self::Once => 'Once',
+            self::Regular => 'Regular',
         };
 
         return __($title);
@@ -45,17 +45,16 @@ enum PlanList: int
     {
         return match ($this) {
             self::Once => [
-                ['title' => 'store.pricing.pay-after', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.free-cancellation', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.free-products', 'icon' => 'fa-xmark bgc-danger'],
-                ['title' => 'store.pricing.favourite-cleaner', 'icon' => 'fa-xmark bgc-danger'],
+                ['title' => 'Payment online after the session', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Free cancellation', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Favourite pro guaranteed', 'icon' => 'fa-xmark bgc-danger'],
+                ['title' => 'Pause your booking anytime', 'icon' => 'fa-xmark bgc-danger'],
             ],
             self::Regular => [
-                ['title' => 'store.pricing.pay-after', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.free-cancellation', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.free-products', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.favourite-cleaner', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'store.pricing.pause-booking', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Payment online after the session', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Free cancellation', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Favourite pro guaranteed', 'icon' => 'fa-check bgc-success'],
+                ['title' => 'Pause your booking anytime', 'icon' => 'fa-check bgc-success'],
             ],
         };
     }

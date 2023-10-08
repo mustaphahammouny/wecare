@@ -14,7 +14,7 @@ class Number
 
     public static function toPrice($number)
     {
-        return self::format($number) . __('app.currency');
+        return self::format($number) . __('MAD');
     }
 
     public static function toPercentage($number)
@@ -24,7 +24,7 @@ class Number
 
     public static function toHourlyPrice($number)
     {
-        return self::toPrice($number) . '/' . __('app.h');
+        return self::toPrice($number) . '/' . __('h');
     }
 
     public static function toLetters($number)
@@ -34,8 +34,8 @@ class Number
         
         return SpellNumber::value($number)
             ->locale($locale)
-            ->currency(__('app.dirhams'))
-            ->fraction(__('app.cents'))
+            ->currency(__('dirhams'))
+            ->fraction(__('cents'))
             ->toMoney();
     }
 }

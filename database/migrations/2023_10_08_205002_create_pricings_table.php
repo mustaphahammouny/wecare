@@ -8,16 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('extras', function (Blueprint $table) {
+        Schema::create('pricings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')
-                ->constrained('services')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->string('slug')->unique();
-            $table->string('title');
+            $table->unsignedTinyInteger('plan');
+            $table->unsignedTinyInteger('min_duration');
+            $table->unsignedTinyInteger('max_duration');
             $table->decimal('price');
-            $table->text('description')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -25,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('extras');
+        Schema::dropIfExists('pricings');
     }
 };
