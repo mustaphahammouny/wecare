@@ -1,27 +1,19 @@
 <?php
 
+use App\Livewire\Views\Auth\ForgotPassword;
+use App\Livewire\Views\Auth\Login;
+use App\Livewire\Views\Auth\Register;
+use App\Livewire\Views\Store\Home;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::middleware(['guest'])->group(function () {
-        Route::get('login', function () {
-            return 'auth.login';
-        })->name('login');
+        Route::get('login', Login::class)->name('login');
 
-        Route::get('register', function () {
-            return 'auth.register';
-        })->name('register');
+        Route::get('register', Register::class)->name('register');
+
+        Route::get('forgot-password', ForgotPassword::class)->name('password.request');
     });
 });
 
-Route::get('/', function () {
-    return view('store.home');
-})->name('home');
-
-Route::get('/client', function () {
-    return view('client.dashboard');
-});
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('/', Home::class)->name('home');

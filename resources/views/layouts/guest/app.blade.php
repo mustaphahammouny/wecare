@@ -1,7 +1,7 @@
 <x-layout::app>
 
     <x-slot name="title">
-        {{ $title ?? '' }}
+        @lang($title)
     </x-slot>
 
     <x-slot name="styles">

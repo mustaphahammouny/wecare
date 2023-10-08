@@ -3,9 +3,7 @@
         <div class="container posr menu_bdrt1">
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto">
-                    <a class="header-logo" wire:navigate href="{{ route('home') }}">
-                        <img src="{{ Vite::image('header-logo2.svg') }}">
-                    </a>
+                    <x-logo />
                 </div>
                 <div class="col-auto">
                     {{-- <x-nav-menu></x-nav-menu> --}}

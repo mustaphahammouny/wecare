@@ -1,5 +1,4 @@
-<x-layout::guest.app>
-
+<div>
     <section class="home-banner-style4 p0 bgc-white">
         <div class="home-style4 maxw1600 bdrs24 position-relative mx-auto mx20-lg">
             <div class="container">
@@ -15,11 +14,7 @@
                             From as low as $10 per day with limited time offer discounts.
                         </p> --}}
                             <div class="animate-up-2 mt-4">
-                                <a class="ud-btn btn-thm py-3 px-4 rounded-pill fs-6" wire:navigate=""
-                                    href="{{ route('home') }}">
-                                    <i class="far fa-calendar me-1"></i>
-                                    Book your session now
-                                </a>
+                                <x-a title="Book your session now" route="home" icon="far fa-calendar" />
                             </div>
                         </div>
                     </div>
@@ -28,30 +23,30 @@
         </div>
     </section>
 
-    {{-- <section class="px40">
+    <section class="px40">
         <div class="container">
             <div class="row">
                 <div class="col m-auto wow fadeInUp" data-wow-delay="100ms">
                     <div class="main-title text-center">
-                        <h2 class="title fz40 fw700">Discover our best services</h2>
-                        <p class="paragraph">Aliquam lacinia diam quis lacus euismod</p>
+                        <h2 class="title fz40 fw700">@lang('Discover our best services')</h2>
+                        {{-- <p class="paragraph">Aliquam lacinia diam quis lacus euismod</p> --}}
                     </div>
                 </div>
             </div>
-            <div class="row wow fadeInUp row-cols-1 row-cols-lg-2 row-cols-xl-3 justify-content-center"
+            <div class="row wow fadeInUp row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center"
                 data-wow-delay="300ms">
                 @foreach ($services as $service)
                     <div class="col mb-4">
                         <div class="card h-100 border-0 bdrs24" style="overflow: hidden;">
-                            <img src="{{ Vite::image('services/' . $service->slug . '.' . \App\Constants\General::LOCALES[app()->getLocale()]['dir'] . '.png') }}"
+                            <img src="{{ $service->media() }}"
                                 class="card-img">
                             <div class="card-img-overlay d-flex flex-column justify-content-center">
                                 <div class="text-start ms-2 ">
-                                    <h5 class="card-title text-dark fz30 fw700 mb-4">{{ $service->title }}</h5>
+                                    <h5 class="card-title text-dark fz30 fw700 mb-4">{{ $service->title() }}</h5>
                                     <a class="ud-btn btn-thm py-3 px-4 rounded-pill fs-6" wire:navigate
                                         href="{{ route('home') }}">
                                         <i class="far fa-calendar me-1"></i>
-                                        Book now
+                                        @lang('Book now')
                                     </a>
                                 </div>
                             </div>
@@ -60,7 +55,7 @@
                 @endforeach
             </div>
         </div>
-    </section> --}}
+    </section>
 
     <section class="mx-auto maxw1600 bgc-thm-light bdrs24">
         <div class="container">
@@ -68,8 +63,8 @@
                 <div class="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms"
                     style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
                     <div class="main-title text-center">
-                        <h2 class="title fz40 fw700">See how Realton can help</h2>
-                        <p class="paragraph">Aliquam lacinia diam quis lacus euismod</p>
+                        <h2 class="title fz40 fw700">@lang('Easy steps for everyone')</h2>
+                        {{-- <p class="paragraph">Aliquam lacinia diam quis lacus euismod</p> --}}
                     </div>
                 </div>
             </div>
@@ -132,7 +127,7 @@
             </div>
         </div>
     </div>
-</section> --}}
+    </section> --}}
 
     <section>
         <div class="container">
@@ -153,9 +148,8 @@
                 </div>
                 <div class="col-md-6 col-lg-5 offset-lg-1 wow fadeInUp" data-wow-delay="500ms">
                     <div class="main-title2">
-                        <h2 class="title">Why Choose Us</h2>
-                        <p class="paragraph fz15">As the complexity of buildings to increase, the <br
-                                class="d-none d-lg-block"> field of architecture.</p>
+                        <h2 class="title">@lang('Why Choose Us?')</h2>
+                        <p class="paragraph fz15">@lang('We have the best Pros that can help you in any service you want.')</p>
                     </div>
                     <div class="why-chose-list style3">
                         <div class="list-one d-flex align-items-start mb30">
@@ -194,7 +188,7 @@
             <div class="row">
                 <div class="col wow fadeInUp" data-wow-delay="100ms">
                     <div class="main-title">
-                        <h2 class="title fz40 fw700">People Love Living with Realton</h2>
+                        <h2 class="title fz40 fw700">@lang('What others say about us')</h2>
                         <p class="paragraph">Aliquam lacinia diam quis lacus euismod</p>
                     </div>
                 </div>
@@ -318,5 +312,4 @@
             </div>
         </div>
     </section>
-
-</x-layout::guest.app>
+</div>

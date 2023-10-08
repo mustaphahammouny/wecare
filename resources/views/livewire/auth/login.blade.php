@@ -1,0 +1,37 @@
+<div class="log-reg-form signup-modal form-style1 bgc-white p50 p30-sm default-box-shadow2 bdrs12">
+    <div class="text-center mb40">
+        <x-logo />
+        <h2 class="mt25">@lang('Sign in')</h2>
+    </div>
+
+    <x-alert-session />
+
+    <form wire:submit="login">
+        <div class="mb25">
+            <x-input wire:model="form.email" placeholder="Email" />
+        </div>
+        <div class="mb15">
+            <x-input wire:model="form.password" type="password" placeholder="Password" />
+        </div>
+        <div class="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb10">
+            <label class="custom_checkbox fz14 ff-heading">
+                <span>@lang('Remember me')</span>
+                <input wire:model="form.remember" type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <a class="fz14 ff-heading" wire:navigate href="{{ route('auth.password.request') }}">
+                @lang('Forgot your password?')
+            </a>
+        </div>
+        <div class="d-grid mb20">
+            <x-btn-submit title="Sign in" />
+        </div>
+    </form>
+
+    <p class="dark-color text-center mb0 mt10">
+        @lang("Don't have an account?")
+        <a class="dark-color fw600" wire:navigate href="{{ route('auth.register') }}">
+            @lang('Sign up')
+        </a>
+    </p>
+</div>
