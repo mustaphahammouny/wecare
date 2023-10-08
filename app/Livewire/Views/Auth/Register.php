@@ -2,27 +2,17 @@
 
 namespace App\Livewire\Views\Auth;
 
-use App\Livewire\Forms\RegisterForm;
-use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[Layout('layouts.auth.app')]
 class Register extends Component
 {
-    public RegisterForm $form;
-
-    public function register()
+    #[On('authenticated')]
+    public function authenticated()
     {
-        $this->form->validate();
-
-        dd($this->form->all());
-
-        try {
-            return $this->redirect(Services::class, navigate: true);
-        } catch (\Exception $e) {
-            Session::flash('error', $e->getMessage());
-        }
+        return $this->redirect(Services::class, navigate: true);
     }
 
     public function render()

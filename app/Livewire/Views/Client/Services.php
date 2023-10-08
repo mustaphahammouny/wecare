@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Livewire\Views\Store;
+namespace App\Livewire\Views\Client;
 
 use App\Enums\ServiceList;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
-#[Layout('layouts.store.app')]
-class Home extends Component
+#[Layout('layouts.client.app')]
+class Services extends Component
 {
     #[Locked]
     public array $services;
@@ -20,7 +20,7 @@ class Home extends Component
 
     public function render()
     {
-        return view('livewire.store.home')
-            ->title('Home');
+        return view('livewire.client.services')
+            ->title('Services');
     }
 }
