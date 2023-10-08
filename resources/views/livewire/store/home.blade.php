@@ -38,13 +38,13 @@
                 @foreach ($services as $service)
                     <div class="col mb-4">
                         <div class="card h-100 border-0 bdrs24" style="overflow: hidden;">
-                            <img src="{{ $service->media() }}"
+                            <img src="{{ $service->list->media() }}"
                                 class="card-img">
                             <div class="card-img-overlay d-flex flex-column justify-content-center">
                                 <div class="text-start ms-2 ">
-                                    <h5 class="card-title text-dark fz30 fw700 mb-4">{{ $service->title() }}</h5>
+                                    <h5 class="card-title text-dark fz30 fw700 mb-4">{{ $service->list->title() }}</h5>
                                     <a class="ud-btn btn-thm py-3 px-4 rounded-pill fs-6" wire:navigate
-                                        href="{{ route('home') }}">
+                                        href="{{ route('booking', $service->slug) }}">
                                         <i class="far fa-calendar me-1"></i>
                                         @lang('Book now')
                                     </a>

@@ -26,7 +26,7 @@ Route::get('faq', Faq::class)->name('faq');
 
 Route::get('pricing', Pricing::class)->name('pricing');
 
-Route::get('booking', Booking::class)->name('booking');
+Route::get('booking/{slug}', Booking::class)->name('booking');
 
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::middleware(['guest'])->group(function () {
@@ -39,7 +39,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 
 Route::prefix('client')->name('client.')->group(function () {
-    Route::middleware(['guest'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::get('services', Services::class)->name('services');
 
         Route::get('upcoming-bookings', UpcomingBookings::class)->name('upcoming-bookings');

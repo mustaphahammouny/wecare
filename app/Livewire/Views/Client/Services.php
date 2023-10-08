@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Views\Client;
 
-use App\Enums\ServiceList;
+use App\Data\ServiceFilter;
+use App\Services\ServiceService;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -11,11 +13,13 @@ use Livewire\Component;
 class Services extends Component
 {
     #[Locked]
-    public array $services;
+    public Collection $services;
 
-    public function boot()
+    public function boot(ServiceService $serviceService)
     {
-        $this->services = ServiceList::cases();
+        $serviceFilter = ServiceFilter::from(['active' => true]);
+
+        $this->services = $serviceService->get($serviceFilter);
     }
 
     public function render()

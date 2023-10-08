@@ -18,7 +18,7 @@ class ServiceSeeder extends Seeder
                 'active' => true,
             ]);
 
-            // $serviceModel->addMedia(storage_path("app/services/{$service['media']}"))
+            // $serviceModel->addMedia($service->media())
             //     ->preservingOriginal()
             //     ->toMediaCollection();
         }

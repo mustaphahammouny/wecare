@@ -12,9 +12,7 @@
                     @if (Auth::check())
                         <a wire:navigate href='{{ route('client.services') }}'>
                             <span class="icon fz18 far fa-user-circle"></span>
-                            <span>
-                                {{-- {{ Auth::user()->full_name }} --}}
-                            </span>
+                            <span>{{ Auth::user()->full_name }}</span>
                         </a>
                     @else
                         <a wire:navigate href='{{ route('auth.login') }}'>

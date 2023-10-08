@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\ServiceList;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -21,13 +23,18 @@ class Service extends Model implements HasMedia
     ];
 
     protected $appends = [
-        'title',
+        'list',
     ];
 
-    protected function title(): Attribute
+    protected function list(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => ServiceList::from($attributes['slug'])->title()
+            get: fn (mixed $value, array $attributes) => ServiceList::from($attributes['slug'])
         );
+    }
+
+    public function extras(): HasMany
+    {
+        return $this->hasMany(Extra::class);
     }
 }

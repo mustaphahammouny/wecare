@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(ExtraSeeder::class);
     }
 
     private function clear(): void

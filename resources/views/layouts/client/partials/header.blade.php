@@ -31,7 +31,7 @@
                                     <button class="ud-btn btn-thm text-white rounded-pill fs-6" href="#"
                                         data-bs-toggle="dropdown">
                                         <i class="far fa-user-circle me-1"></i>
-                                        {{-- {{ Auth::user()->full_name }} --}}
+                                        {{ Auth::user()->full_name }}
                                         <i class="far fa-angle-down ms-1"></i>
                                     </button>
                                     <div class="dropdown-menu">
@@ -40,7 +40,7 @@
                                                 <a wire:navigate href="{{ route($menu['route']) }}"
                                                     class="dropdown-item mb-2 {{ request()->routeIs($menu['route']) ? '-is-active' : '' }}">
                                                     <i class="{{ $menu['icon'] }} me-3"></i>
-                                                    {{ __($menu['title']) }}
+                                                    @lang($menu['title'])
                                                 </a>
                                             @endforeach
 

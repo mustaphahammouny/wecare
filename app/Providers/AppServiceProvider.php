@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Extra;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Vite;
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
         Relation::enforceMorphMap([
             1 => User::class,
+            2 => Service::class,
+            3 => Extra::class,
         ]);
     }
 }
