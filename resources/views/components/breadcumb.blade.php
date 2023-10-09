@@ -1,6 +1,4 @@
-@props([
-    'title',
-])
+@props(['title'])
 
 <section class="breadcumb-section py-5" style="background-color: rgba(235, 103, 83, 0.07)">
     <div class="container">

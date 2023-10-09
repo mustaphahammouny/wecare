@@ -5,8 +5,6 @@ namespace App\Repositories;
 use App\Data\CompanyData;
 use App\Data\CompanyFilter;
 use App\Models\Company;
-use Exception;
-use Illuminate\Support\Facades\DB;
 
 class CompanyRepository
 {
@@ -34,20 +32,10 @@ class CompanyRepository
 
     private function persist(Company $company, CompanyData $companyData)
     {
-        try {
-            DB::beginTransaction();
+        $company->fill($companyData->except('userId')->toArray());
 
-            $company->fill($companyData->except('userId')->toArray());
+        $company->save();
 
-            $company->save();
-
-            DB::commit();
-
-            return $company;
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
-        }
+        return $company;
     }
 }

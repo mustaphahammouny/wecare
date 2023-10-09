@@ -23,6 +23,7 @@ class CompanyForm extends Form
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'ice' => ['required', 'string'],
+            'address' => ['nullable', 'string', 'min:3'],
         ];
     }
 
@@ -34,8 +35,8 @@ class CompanyForm extends Form
             $this->name = $company->name;
 
             $this->ice = $company->ice;
-
-            $this->address = $company->address;
         }
+
+        $this->address = $company->address ?? '';
     }
 }

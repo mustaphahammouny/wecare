@@ -14,7 +14,7 @@ class ServiceRepository
             ->get();
     }
 
-    public function first(ServiceFilter $serviceFilter = null): Service
+    public function first(ServiceFilter $serviceFilter): Service
     {
         return $this->findBy($serviceFilter)
             ->first();

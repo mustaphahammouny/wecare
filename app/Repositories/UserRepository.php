@@ -2,78 +2,48 @@
 
 namespace App\Repositories;
 
-use App\Enums\ProviderList;
+use App\Data\UserData;
+use App\Data\UserFilter;
 use App\Models\User;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserRepository
 {
-    public function first(array $filter): ?User
+    public function first(UserFilter $userFilter): ?User
     {
-        return $this->findBy($filter)->first();
+        return $this->findBy($userFilter)->first();
     }
 
-    public function store(array $data, ProviderList $provider = null)
+    public function update(User $user, UserData $userData)
     {
-        $user = new User();
-
-        $newData['first_name'] = $data['given_name'];
-        $newData['last_name'] = $data['family_name'];
-        $newData['email'] = $data['email'];
-
-        if ($provider) {
-            $newData['provider_name'] = $provider->value;
-            $newData['provider_id'] = $data['id'];
-            $newData['email_verified_at'] = Carbon::now();
-            $newData['password'] = Hash::make(Str::random(8));
-        }
-
-        return $this->persist($user, $newData);
+        return $this->persist($user, $userData);
     }
 
-    public function update(User $user, array $data)
+    public function updatePassword(User $user, string $password)
     {
-        return $this->persist($user, $data);
+        $user->password = $password;
+
+        $user->save();
+
+        return $user;
     }
 
-    public function updatePassword(User $user, array $data)
+    private function findBy(UserFilter $userFilter)
     {
-        return $this->persist($user, [
-            'password' => Hash::make($data['password']),
-        ]);
-    }
-
-    private function findBy(array $filter)
-    {
-        return User::when($filter['email'] ?? false, function ($query, $email) {
+        return User::when($userFilter->email ?? false, function ($query, $email) {
             $query->where('email', $email);
         });
     }
 
-    private function persist(User $user, array $data)
+    private function persist(User $user, UserData $userData)
     {
-        try {
-            DB::beginTransaction();
-
-            if ($user->isDirty('email')) {
-                $user->email_verified_at = null;
-            }
-
-            $user->fill($data);
-
-            $user->save();
-
-            DB::commit();
-
-            return $user;
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
+
+        $user->fill($userData->toArray());
+
+        $user->save();
+
+        return $user;
     }
 }

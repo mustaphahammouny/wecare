@@ -34,7 +34,7 @@ class Company extends Component
     public function save(CompanyService $companyService)
     {
         $this->form->validate();
-        
+
         try {
             $companyData = CompanyData::from($this->form->all());
 
@@ -42,7 +42,7 @@ class Company extends Component
 
             Session::flash('success', 'Saved!');
 
-            return $this->redirect(Company::class, navigate: true);
+            return $this->redirect(self::class, navigate: true);
         } catch (\Exception $e) {
             Session::flash('error', $e->getMessage());
         }

@@ -34,6 +34,9 @@
                                 </div>
                             </div>
                         </div>
+
+                        <x-alert-session />
+
                         <!-- Body -->
                         {{ $slot }}
                     </div>
