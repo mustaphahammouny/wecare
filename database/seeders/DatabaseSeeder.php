@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(ExtraSeeder::class);
         $this->call(PricingSeeder::class);
+        $this->call(BookingSeeder::class);
     }
 
     private function clear(): void

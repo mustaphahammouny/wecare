@@ -27,8 +27,8 @@ textarea.form-control {
 .datepicker table tr td.active {
     background-image: linear-gradient(
         to bottom,
-        var(--orange-color),
-        var(--orange-color)
+        var(--red-color),
+        var(--red-color)
     ) !important;
 }
 
@@ -41,8 +41,8 @@ textarea.form-control {
 
 .btn-check:checked + .ud-btn {
     color: #fff;
-    background-color: var(--orange-color);
-    border-color: var(--orange-color);
+    background-color: var(--red-color);
+    border-color: var(--red-color);
 }
 
 .btn-check .ud-btn i {
@@ -58,7 +58,7 @@ textarea.form-control {
 }
 
 .table-orange {
-    --bs-table-bg: var(--orange-color);
+    --bs-table-bg: var(--red-color);
 }
 
 @media (max-width: 1231px) {
