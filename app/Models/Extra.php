@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ExtraList;
 use App\Enums\PlanList;
 use App\Support\Number;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -22,16 +21,8 @@ class Extra extends Model
     ];
 
     protected $appends = [
-        'title',
         'formatted_price',
     ];
-
-    protected function title(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => ExtraList::from($attributes['slug'])->title()
-        );
-    }
 
     protected function plan(): Attribute
     {

@@ -5,7 +5,7 @@
 ])
 
 <button wire:loading.attr="disabled" class="ud-btn btn-thm" type="submit">
-    @if ($icon && $position === 'left')
+    @if ($icon && $position === 'start')
         <i class="{{ $icon }} me-1" wire:loading.class="d-none"></i>
         <div wire:loading>
             <div class="spinner-border spinner-border-sm" role="status">
@@ -14,9 +14,9 @@
         </div>
     @endif
 
-    {{ $title }}
+    @lang($title)
 
-    @if ($icon && $position === 'right')
+    @if ($icon && $position === 'end')
         <i class="{{ $icon }} ms-1" wire:loading.class="d-none"></i>
         <div wire:loading>
             <div class="spinner-border spinner-border-sm" role="status">
