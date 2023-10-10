@@ -10,15 +10,9 @@
                     <x-logo width="130" />
 
                     @if (Auth::check())
-                        <a wire:navigate href='{{ route('client.services') }}'>
-                            <span class="icon fz18 far fa-user-circle"></span>
-                            <span>{{ Auth::user()->full_name }}</span>
-                        </a>
+                        <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
                     @else
-                        <a wire:navigate href='{{ route('auth.login') }}'>
-                            <span class="icon fz18 far fa-user-circle"></span>
-                            <span>@lang('Sign in')</span>
-                        </a>
+                        <x-a title="Sign in" route="auth.login" icon="far fa-user-circle" />
                     @endif
                 </div>
             </div>

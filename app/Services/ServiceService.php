@@ -20,4 +20,9 @@ class ServiceService
     {
         return $this->serviceRepository->first($serviceFilter);
     }
+
+    public function firstOrFail(ServiceFilter $serviceFilter)
+    {
+        return $this->serviceRepository->firstOrFail($serviceFilter);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\City;
 use App\Models\Extra;
 use App\Models\Pricing;
 use App\Models\Service;
@@ -34,8 +35,10 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             1 => User::class,
             2 => Service::class,
-            3 => Extra::class,
-            4 => Pricing::class,
+            3 => City::class,
+            4 => Extra::class,
+            5 => Pricing::class,
+            6 => Booking::class,
         ]);
     }
 }

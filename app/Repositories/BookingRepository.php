@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Collection;
 
 class BookingRepository
 {
-    public function get(BookingFilter $bookingFilter): Collection
+    public function get(?BookingFilter $bookingFilter): Collection
     {
         return $this->findBy($bookingFilter)
             ->get();
     }
 
-    public function paginate(BookingFilter $bookingFilter)
+    public function paginate(?BookingFilter $bookingFilter)
     {
         return $this->findBy($bookingFilter)
             ->orderBy('created_at', 'desc')
@@ -38,7 +38,7 @@ class BookingRepository
         return $this->persist($booking, $bookingData);
     }
 
-    private function findBy(BookingFilter $bookingFilter)
+    private function findBy(?BookingFilter $bookingFilter)
     {
         return Booking::with(['service', 'extras'])
             ->when($bookingFilter->userId ?? false, function ($query, $userId) {

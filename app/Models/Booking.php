@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\CityList;
 use App\Enums\PlanList;
 use App\Enums\StatusList;
 use App\Support\Number;
@@ -45,14 +44,6 @@ class Booking extends Model
         );
     }
 
-    protected function city(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => CityList::from($attributes['city']),
-            // set: fn (CityList $city) => $city->value
-        );
-    }
-
     protected function status(): Attribute
     {
         return Attribute::make(
@@ -76,5 +67,10 @@ class Booking extends Model
         return $this->belongsToMany(Extra::class)
             ->using(BookingExtra::class)
             ->withPivot('extra_price');
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }

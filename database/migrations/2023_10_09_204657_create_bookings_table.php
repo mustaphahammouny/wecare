@@ -18,9 +18,12 @@ return new class extends Migration
                 ->constrained('services')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->foreignId('city_id')
+                ->constrained('cities')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->decimal('service_price');
             $table->string('phone');
-            $table->unsignedTinyInteger('city');
             $table->text('address');
             $table->unsignedTinyInteger('plan');
             $table->unsignedTinyInteger('plan_option')->nullable();

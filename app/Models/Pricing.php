@@ -19,10 +19,10 @@ class Pricing extends Model
         'updated_at' => 'datetime',
     ];
 
-    protected $appends = [
-        'formatted_price',
-        'hourly_price',
-    ];
+    // protected $appends = [
+    //     'formatted_price',
+    //     'hourly_price',
+    // ];
 
     protected function plan(): Attribute
     {
@@ -42,7 +42,7 @@ class Pricing extends Model
     protected function hourlyPrice(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Number::toHourlyPrice($attributes['service_price'])
+            get: fn (mixed $value, array $attributes) => Number::toHourlyPrice($attributes['price'])
         );
     }
 }

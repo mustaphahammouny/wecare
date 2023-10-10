@@ -1,5 +1,9 @@
 import "./bootstrap";
 
+// Components
+import InformationComponent from "./components/information";
+import DateComponent from "./components/date";
+
 // Views
 import HomeComponent from "./components/home";
 import ServicesComponent from "./components/services";
@@ -14,6 +18,8 @@ class App {
     static dir = $('meta[name="dir"]').attr("content");
 
     static components = {
+        "components.information": InformationComponent,
+        "components.date": DateComponent,
         "views.store.home": HomeComponent,
         "views.client.services": ServicesComponent,
     };

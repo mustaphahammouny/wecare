@@ -27,7 +27,7 @@ class UserRepository
         return $user;
     }
 
-    private function findBy(UserFilter $userFilter)
+    private function findBy(?UserFilter $userFilter)
     {
         return User::when($userFilter->email ?? false, function ($query, $email) {
             $query->where('email', $email);

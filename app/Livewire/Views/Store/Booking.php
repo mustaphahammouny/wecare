@@ -3,15 +3,16 @@
 namespace App\Livewire\Views\Store;
 
 use App\Data\BookingData;
+use App\Data\ServiceFilter;
 use App\Livewire\Components\Authenticate;
 use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
 use App\Livewire\Components\Duration;
 use App\Livewire\Components\Payment;
 use App\Livewire\Components\Plan;
-use App\Livewire\Components\Property;
 use App\Livewire\Components\Time;
 use App\Services\BookingService;
+use App\Services\ServiceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
@@ -23,6 +24,9 @@ use Livewire\Component;
 class Booking extends Component
 {
     #[Locked]
+    public $slug;
+
+    #[Locked]
     public $state = [];
 
     #[Locked]
@@ -31,7 +35,6 @@ class Booking extends Component
     protected $steps = [
         Information::class,
         Plan::class,
-        Property::class,
         Duration::class,
         Date::class,
         Time::class,
@@ -41,8 +44,17 @@ class Booking extends Component
 
     protected BookingService $bookingService;
 
-    public function boot(BookingService $bookingService)
+    public function boot(ServiceService $serviceService, BookingService $bookingService)
     {
+        $serviceFilter = ServiceFilter::from(['slug' => $this->slug]);
+
+        // $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
+        
+        $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
+        $this->state['phone'] = '0676991956';
+        $this->state['city'] = 1;
+        $this->state['address'] = 'Your address here please';
+
         $this->bookingService = $bookingService;
     }
 
@@ -80,6 +92,8 @@ class Booking extends Component
 
     private function store()
     {
+        dd('here');
+
         $servicePrice = $this->state['pricing']['service_price'];
         $duration = $this->state['pricing']['duration'];
         $extrasTotal = array_reduce(array_column($this->state['extras'], 'price'), fn ($carry, $item) => $carry += $item);

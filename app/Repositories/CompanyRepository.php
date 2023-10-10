@@ -23,7 +23,7 @@ class CompanyRepository
         return $this->persist($company, $companyData);
     }
 
-    private function findBy(CompanyFilter $companyFilter)
+    private function findBy(?CompanyFilter $companyFilter)
     {
         return Company::when($companyFilter->userId ?? false, function ($query, $userId) {
             $query->where('user_id', $userId);

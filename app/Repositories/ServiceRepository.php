@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ServiceRepository
 {
-    public function get(ServiceFilter $serviceFilter = null): Collection
+    public function get(?ServiceFilter $serviceFilter): Collection
     {
         return $this->findBy($serviceFilter)
             ->get();
@@ -20,13 +20,19 @@ class ServiceRepository
             ->first();
     }
 
+    public function firstOrFail(ServiceFilter $serviceFilter): Service
+    {
+        return $this->findBy($serviceFilter)
+            ->firstOrFail();
+    }
+
     public function find($id): Service
     {
         return Service::with(['extras', 'pricings'])
             ->findOrFail($id);
     }
 
-    private function findBy(ServiceFilter $serviceFilter)
+    private function findBy(?ServiceFilter $serviceFilter)
     {
         return Service::with(['extras'])
             ->when($serviceFilter->slug ?? false, function ($query, $slug) {

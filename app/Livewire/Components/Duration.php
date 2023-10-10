@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Livewire\Components;
+
+use App\Livewire\Forms\DurationForm;
+use App\Services\PricingService;
+use Livewire\Attributes\Locked;
+use Livewire\Component;
+
+class Duration extends Component
+{
+    public DurationForm $form;
+
+    #[Locked]
+    public array $state;
+
+    #[Locked]
+    public array $durations;
+
+    public function mount(PricingService $pricingService, array $state)
+    {
+        $this->state = $state;
+
+        $this->form->fillProps($this->state);
+
+        $pricings = $pricingService->get([
+            'plan' => $this->state['plan'],
+        ]);
+
+        $service = $this->state['service'];
+
+        for ($i = $service['min_duration']; $i <= $service['max_duration']; $i += $service['step_duration']) {
+            $pricing = $pricings->first(fn ($pricing) => $i >= $pricing->min_duration && $i <= $pricing->max_duration);
+            $this->durations[] = [
+                'id' => $pricing->id,
+                'duration' => $i,
+                'price' => $pricing->price,
+                'formatted_price' => $pricing->formatted_price,
+                'hourly_price' => $pricing->hourly_price,
+            ];
+        }
+    }
+
+    public function updatedFormDuration()
+    {
+        $this->fillState();
+
+        $this->form->validate();
+
+        $this->dispatch('state-updated', state: $this->state);
+    }
+
+    public function submit()
+    {
+        $this->validate();
+
+        $this->fillState();
+
+        $this->dispatch('next-step', current: self::class, state: $this->state);
+    }
+
+    public function render()
+    {
+        return view('livewire.components.duration');
+    }
+
+    private function fillState()
+    {
+        $this->state['duration'] = collect($this->durations)
+            ->first(fn ($duration) => $duration['duration'] == $this->form->duration);
+    }
+}
