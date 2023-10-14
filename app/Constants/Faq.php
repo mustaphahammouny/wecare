@@ -5,132 +5,67 @@ namespace App\Constants;
 abstract class Faq
 {
     const GENERAL = [
-        'title' => 'store.faq.general.title',
+        'title' => 'General',
         'pairs' => [
             [
-                'question' => 'store.faq.general.pair1.question',
-                'answer' => [
-                    'store.faq.general.pair1.answer.p1',
-                    'store.faq.general.pair1.answer.p2',
-                    'store.faq.general.pair1.answer.p3',
-                    'store.faq.general.pair1.answer.p4',
-                ],
+                'question' => 'What is our mission?',
+                'answer' => 'Our mission is to provide high-quality products and excellent service to our customers.'
             ],
             [
-                'question' => 'store.faq.general.pair2.question',
-                'answer' => 'store.faq.general.pair2.answer',
+                'question' => 'How can I contact customer support?',
+                'answer' => 'You can reach our customer support team by email at support@wecare.com or by phone at +212 123456789.'
             ],
             [
-                'question' => 'store.faq.general.pair3.question',
-                'answer' => 'store.faq.general.pair3.answer',
+                'question' => 'Do you offer refunds for products?',
+                'answer' => 'Yes, we have a refund policy in place. Please review our refund policy for details.'
             ],
             [
-                'question' => 'store.faq.general.pair4.question',
-                'answer' => 'store.faq.general.pair4.answer',
+                'question' => 'Where are you located?',
+                'answer' => 'Our company is headquartered in City, State, and we have multiple branches across the country.'
             ],
         ],
     ];
 
     const BOOKING = [
-        'title' => 'store.faq.booking.title',
+        'title' => 'Booking',
         'pairs' => [
             [
-                'question' => 'store.faq.booking.pair1.question',
-                'answer' => 'store.faq.booking.pair1.answer',
+                'question' => 'How do I make a booking?',
+                'answer' => 'To make a booking, visit our website, select the desired service, and follow the on-screen instructions.'
             ],
             [
-                'question' => 'store.faq.booking.pair2.question',
-                'answer' => 'store.faq.booking.pair2.answer',
+                'question' => 'Can I cancel or reschedule a booking?',
+                'answer' => 'Yes, you can cancel or reschedule your booking through your user account on our website.'
             ],
             [
-                'question' => 'store.faq.booking.pair3.question',
-                'answer' => 'store.faq.booking.pair3.answer',
+                'question' => 'Is there a cancellation fee?',
+                'answer' => 'Cancellation fees may apply depending on the timing of the cancellation. Please refer to our terms and conditions for details.'
             ],
             [
-                'question' => 'store.faq.booking.pair4.question',
-                'answer' => 'store.faq.booking.pair4.answer',
-            ],
-            [
-                'question' => 'store.faq.booking.pair5.question',
-                'answer' => 'store.faq.booking.pair5.answer',
-            ],
-            [
-                'question' => 'store.faq.booking.pair6.question',
-                'answer' => 'store.faq.booking.pair6.answer',
-            ],
-        ],
-    ];
-
-    const CLEANING = [
-        'title' => 'store.faq.cleaning.title',
-        'pairs' => [
-            [
-                'question' => 'store.faq.cleaning.pair1.question',
-                'answer' => 'store.faq.cleaning.pair1.answer',
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair2.question',
-                'answer' => 'store.faq.cleaning.pair2.answer',
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair3.question',
-                'answer' => 'store.faq.cleaning.pair3.answer',
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair4.question',
-                'answer' => 'store.faq.cleaning.pair4.answer',
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair5.question',
-                'answer' => [
-                    'store.faq.cleaning.pair5.answer.p1',
-                    'store.faq.cleaning.pair5.answer.p2',
-                    'store.faq.cleaning.pair5.answer.p3',
-                    'store.faq.cleaning.pair5.answer.p4',
-                    'store.faq.cleaning.pair5.answer.p5',
-                    'store.faq.cleaning.pair5.answer.p6',
-                ],
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair6.question',
-                'answer' => 'store.faq.cleaning.pair6.answer',
-            ],
-            [
-                'question' => 'store.faq.cleaning.pair7.question',
-                'answer' => 'store.faq.cleaning.pair7.answer',
+                'question' => 'How far in advance can I make a booking?',
+                'answer' => 'You can make a booking up to 30 days in advance. Some services may have different booking windows.'
             ],
         ],
     ];
 
     const PAYMENT = [
-        'title' => 'store.faq.payment.title',
+        'title' => 'Payment',
         'pairs' => [
             [
-                'question' => 'store.faq.payment.pair1.question',
-                'answer' => 'store.faq.payment.pair1.answer',
+                'question' => 'What payment methods do you accept?',
+                'answer' => 'We accept credit cards, PayPal, and other secure online payment methods.'
             ],
             [
-                'question' => 'store.faq.payment.pair2.question',
-                'answer' => 'store.faq.payment.pair2.answer',
+                'question' => 'Is my payment information secure?',
+                'answer' => 'Yes, we use industry-standard encryption to secure your payment information.'
             ],
             [
-                'question' => 'store.faq.payment.pair3.question',
-                'answer' => [
-                    'store.faq.payment.pair3.answer.p1',
-                    'store.faq.payment.pair3.answer.p2',
-                    'store.faq.payment.pair3.answer.p3',
-                    'store.faq.payment.pair3.answer.p4',
-                    'store.faq.payment.pair3.answer.p5',
-                    'store.faq.payment.pair3.answer.p6',
-                ],
+                'question' => 'Do you offer payment plans?',
+                'answer' => 'We offer payment plans for select products and services. Please check the product details for payment plan availability.'
             ],
             [
-                'question' => 'store.faq.payment.pair4.question',
-                'answer' => 'store.faq.payment.pair4.answer',
-            ],
-            [
-                'question' => 'store.faq.payment.pair5.question',
-                'answer' => 'store.faq.payment.pair5.answer',
+                'question' => 'Can I change my payment method after making a purchase?',
+                'answer' => 'Yes, you can update your payment method in your account settings.'
             ],
         ],
     ];

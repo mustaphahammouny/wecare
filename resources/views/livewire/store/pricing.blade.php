@@ -6,8 +6,8 @@
             <div wire:ignore class="row wow fadeInUp" data-wow-delay="100ms">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="main-title text-center mb30">
-                        <h2>Membership Plans</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                        <h2>@lang('Our pricings')</h2>
+                        <p>@lang('Discover the perfect plan tailored to your needs.')</p>
                     </div>
                 </div>
             </div>
