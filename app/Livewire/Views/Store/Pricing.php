@@ -16,7 +16,7 @@ class Pricing extends Component
 
     public function boot(PricingService $pricingService)
     {
-        $this->pricings = $pricingService->get(['min_duration' => 6, 'max_duration' => 8]);
+        $this->pricings = $pricingService->get(['min_duration' => 7, 'max_duration' => 8]);
     }
 
     public function render()

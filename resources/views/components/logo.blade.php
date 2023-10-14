@@ -1,5 +1,3 @@
-@props(['width' => 200])
-
 <a class="header-logo" wire:navigate href="{{ route('home') }}">
-    <img width="{{ $width }}" src="{{ Vite::image('logo.png') }}">
+    <img width="{{ $attributes['width'] ?? 200 }}" src="{{ Vite::image('logo.png') }}" {{ $attributes }}>
 </a>

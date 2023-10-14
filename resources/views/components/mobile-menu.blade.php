@@ -1,7 +1,7 @@
 <div id="page" class="mobilie_header_nav stylehome1">
     <div class="mobile-menu">
         <div class="header innerpage-style">
-            <div class="menu_and_widgets">
+            <div class="menu_and_widgets mt-2">
                 <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
                     <a class="menubar" href="#menu">
                         <img src="{{ Vite::image('mobile-dark-nav-icon.svg') }}">

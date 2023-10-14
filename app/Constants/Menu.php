@@ -9,6 +9,7 @@ abstract class Menu
         ['title' => 'Pricing', 'route' => 'pricing'],
         ['title' => 'About', 'route' => 'about'],
         ['title' => 'Faq', 'route' => 'faq'],
+        ['title' => 'Contact', 'route' => 'contact'],
     ];
 
     const CLIENT_MENU = [

@@ -3,36 +3,36 @@
         <div class="row">
             <div class="col-sm-6 col-lg-3">
                 <div class="footer-widget light-style mb-4 mb-lg-5">
-                    <a class="footer-logo" href="{{ route('home') }}">
-                        <img class="mb40" width="200px" src="{{ Vite::image('logo.png') }}">
-                    </a>
+                    <x-logo class="mb40" />
                     <div class="contact-info mb25">
-                        <p class="text mb5">Address</p>
-                        <h6 class="info-phone"><a href="%2b(0)-123-050-945-02.html">329 Queensberry Street, North
-                                Melbourne VIC 3051, Australia.</a></h6>
+                        <p class="text mb5">@lang('Address')</p>
+                        <h6 class="info-phone">
+                            <a href="%2b(0)-123-050-945-02.html">
+                                @lang('App 5 Avenue Agdal Rabat, Morocco.')
+                            </a>
+                        </h6>
                     </div>
                     <div class="contact-info mb25">
-                        <p class="text mb5">Total Free Customer Care</p>
-                        <h6 class="info-phone"><a href="%2b(0)-123-050-945-02.html">+(0) 123 050 945 02</a></h6>
+                        <p class="text mb5">@lang('Phone')</p>
+                        <h6 class="info-phone">
+                            <a href="%2b(0)-123-050-945-02.html">
+                                +212 123 456 789
+                            </a>
+                        </h6>
                     </div>
                     <div class="contact-info">
-                        <p class="text mb5">Nee Live Support?</p>
-                        <h6 class="info-mail"><a href="mailto:hi@homez.com">hi@homez.com</a></h6>
+                        <p class="text mb5">@lang('Email')</p>
+                        <h6 class="info-mail">
+                            <a href="mailto:support@wecare.com">
+                                support@wecare.com
+                            </a>
+                        </h6>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                 <div class="footer-widget mb-4 mb-lg-5 ps-0 ps-lg-5">
                     <livewire:components.services-links />
-                    <div class="link-style1 light-style mb-4">
-                        <h6 class="mb20">Discover</h6>
-                        <ul class="ps-0">
-                            <li><a href="#">Miami</a></li>
-                            <li><a href="#">Los Angeles</a></li>
-                            <li><a href="#">Chicago</a></li>
-                            <li><a href="#">New York</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-3">
@@ -40,13 +40,13 @@
                     <div class="link-style1 light-style mb-3">
                         <h6 class="mb25">@lang('Quick Links')</h6>
                         <ul class="ps-0">
-                            <li><a href="#">@lang('Terms of Use')</a></li>
-                            <li><a href="#">@lang('Privacy Policy')</a></li>
-                            <li><a href="#">@lang('Pricing Plans')</a></li>
-                            <li><a href="#">@lang('Our Services')</a></li>
-                            <li><a href="#">@lang('Contact Support')</a></li>
-                            <li><a href="#">@lang('Careers')</a></li>
-                            <li><a href="#">@lang('FAQs')</a></li>
+                            @foreach (\App\Constants\Menu::STORE_MENU as $menu)
+                                <li>
+                                    <a wire:navigate href="{{ route($menu['route']) }}">
+                                        @lang($menu['title'])
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="footer-widget mb-4 mb-lg-5">
                     <div class="mailchimp-widget mb30">
-                        <h6 class="title mb30">Keep Yourself Up to Date</h6>
+                        <h6 class="title mb30">@lang('Keep Yourself Up to Date')</h6>
                         <div class="mailchimp-style1 at-home4 white-version">
                             <input type="email" class="form-control" placeholder="Your Email">
                             <button class="btn" type="submit"><span class="flaticon-send"></span></button>
@@ -106,10 +106,11 @@
                 <div class="social-widget text-center text-sm-end">
                     <div class="social-style1 light-style">
                         <a class="me-2 fw600 fz15" href="#">@lang('Follow us')</a>
-                        <a href="#"><i class="fab fa-facebook-f list-inline-item"></i></a>
-                        <a href="#"><i class="fab fa-twitter list-inline-item"></i></a>
-                        <a href="#"><i class="fab fa-instagram list-inline-item"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in list-inline-item"></i></a>
+                        @foreach (\App\Constants\General::SOCIALS as $social)
+                            <a href="{{ $social['url'] }}">
+                                <i class="fab {{ $social['icon'] }} list-inline-item"></i>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>

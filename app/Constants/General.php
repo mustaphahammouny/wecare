@@ -21,4 +21,11 @@ abstract class General
         'fr' => ['title' => 'French', 'flag' => 'fr', 'dir' => 'ltr',],
         'ar' => ['title' => 'Arabic', 'flag' => 'ma', 'dir' => 'rtl',],
     ];
+
+    const SOCIALS = [
+        ['icon' => 'fa-facebook-f', 'url' => '#'],
+        ['icon' => 'fa-twitter', 'url' => '#'],
+        ['icon' => 'fa-instagram', 'url' => '#'],
+        ['icon' => 'fa-linkedin-in', 'url' => '#'],
+    ];
 }
