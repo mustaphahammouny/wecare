@@ -2,7 +2,7 @@
     <h6 class="mb25">@lang('Services')</h6>
     <div class="link-list">
         @foreach ($services as $service)
-            <a href="#">@lang($service->title)</a>
+            <a href="{{ route('booking', $service->slug) }}" wire:navigate>@lang($service->title)</a>
         @endforeach
     </div>
 </div>

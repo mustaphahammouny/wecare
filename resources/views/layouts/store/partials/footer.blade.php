@@ -7,7 +7,7 @@
                     <div class="contact-info mb25">
                         <p class="text mb5">@lang('Address')</p>
                         <h6 class="info-phone">
-                            <a href="%2b(0)-123-050-945-02.html">
+                            <a href="#">
                                 @lang('App 5 Avenue Agdal Rabat, Morocco.')
                             </a>
                         </h6>
@@ -15,7 +15,7 @@
                     <div class="contact-info mb25">
                         <p class="text mb5">@lang('Phone')</p>
                         <h6 class="info-phone">
-                            <a href="%2b(0)-123-050-945-02.html">
+                            <a href="tel:+212 123 456 789">
                                 +212 123 456 789
                             </a>
                         </h6>
@@ -64,7 +64,7 @@
                         <h5 class="title mb10">@lang('Apps')</h5>
                         <div class="row">
                             <div class="col-auto">
-                                <a href="#">
+                                <a href="{{ route('home') }}">
                                     <div class="app-info light-style d-flex align-items-center mb10">
                                         <div class="flex-shrink-0">
                                             <i class="fab fa-apple fz30 text-white"></i>
@@ -77,7 +77,7 @@
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="#">
+                                <a href="{{ route('home') }}">
                                     <div class="app-info light-style d-flex align-items-center mb10">
                                         <div class="flex-shrink-0">
                                             <i class="fab fa-google-play fz30 text-white"></i>
@@ -99,7 +99,7 @@
         <div class="row">
             <div class="col-sm-6 my-auto">
                 <div class="text-center text-lg-start">
-                    <p class="copyright-text ff-heading mb-0">© {{ config('app.name') }} {{ date('Y') }} - @lang('All rights reserved')</p>
+                    <p class="copyright-text ff-heading mb-0">© {{ config('app.name') }} {{ date('Y') }} - @lang('All rights reserved.')</p>
                 </div>
             </div>
             <div class="col-sm-6">

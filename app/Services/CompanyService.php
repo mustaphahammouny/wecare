@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Data\CompanyData;
 use App\Data\CompanyFilter;
-use App\Models\Company;
 use App\Repositories\CompanyRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;
