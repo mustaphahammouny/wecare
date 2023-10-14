@@ -18,7 +18,7 @@
         <div class="btn-group dropup w-100">
             <button type="button" class="ud-btn btn-thm dropdown-toggle w-100" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                {{ __('store.booking.details') }}
+                @lang('Booking details')
             </button>
             <ul class="dropdown-menu w-100">
                 <livewire:components.basket :state="$state" :key="$current" />

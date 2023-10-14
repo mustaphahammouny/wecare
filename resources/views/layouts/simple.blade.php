@@ -40,11 +40,11 @@
         <div id="page" class="mobilie_header_nav stylehome1">
             <div class="mobile-menu">
                 <div class="header innerpage-style">
-                    <div class="menu_and_widgets mt-2">
+                    <div class="menu_and_widgets pt-1">
                         <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-                            <x-logo width="130" />
-
                             <x-locale />
+
+                            <x-logo width="130" />
                             
                             @if (Auth::check())
                                 <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
