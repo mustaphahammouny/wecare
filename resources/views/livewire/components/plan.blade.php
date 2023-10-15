@@ -17,21 +17,21 @@
 
         <x-alert-error name="form.plan" />
 
-        @if (!empty($planOptions))
+        @if (!empty($frequencies))
             <div class="row mt20">
-                @foreach ($planOptions as $planOption)
-                    <div wire:key="{{ $planOption->value }}" class="switch-style1">
+                @foreach ($frequencies as $frequency)
+                    <div wire:key="{{ $frequency->value }}" class="switch-style1">
                         <div class="form-check form-switch mb20">
-                            <input wire:model="form.plan_option" type="radio" class="form-check-input"
-                                value="{{ $planOption->value }}" id="plan-option-{{ $planOption->value }}">
-                            <label class="form-check-label" for="plan-option-{{ $planOption->value }}">
-                                <span>{{ $planOption->title() }}</span>
+                            <input wire:model="form.frenquecy" type="radio" class="form-check-input"
+                                value="{{ $frequency->value }}" id="plan-option-{{ $frequency->value }}">
+                            <label class="form-check-label" for="plan-option-{{ $frequency->value }}">
+                                <span>{{ $frequency->title() }}</span>
                             </label>
                         </div>
                     </div>
                 @endforeach
 
-                <x-alert-error name="form.plan_option" />
+                <x-alert-error name="form.frenquecy" />
             </div>
         @endif
 

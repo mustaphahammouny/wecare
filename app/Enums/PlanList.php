@@ -34,9 +34,9 @@ enum PlanList: int
         return match ($this) {
             self::Once => [],
             self::Regular => [
-                PlanOptionList::Weekly,
-                PlanOptionList::Biweekly,
-                PlanOptionList::Monthly,
+                FrequencyList::Weekly,
+                FrequencyList::Biweekly,
+                FrequencyList::Monthly,
             ],
         };
     }

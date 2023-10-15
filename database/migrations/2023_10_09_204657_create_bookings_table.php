@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('phone');
             $table->text('address');
             $table->unsignedTinyInteger('plan');
-            $table->unsignedTinyInteger('plan_option')->nullable();
+            $table->unsignedTinyInteger('frequency')->nullable();
             $table->unsignedTinyInteger('duration');
             $table->timestamp('service_at');
             $table->decimal('total');

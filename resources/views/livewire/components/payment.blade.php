@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <x-alert-error name="form.plan_option" />
+            <x-alert-error name="form.frenquecy" />
         </div>
 
         <div class="d-flex justify-content-between mb20">

@@ -3,7 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Enums\PlanList;
-use App\Enums\PlanOptionList;
+use App\Enums\FrequencyList;
 use App\Livewire\Forms\PlanForm;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -44,9 +44,9 @@ class Plan extends Component
         $plan = PlanList::from($this->form->plan);
 
         if ($plan == PlanList::Regular) {
-            $this->form->plan_option = PlanOptionList::Weekly->value;
+            $this->form->frenquecy = FrequencyList::Weekly->value;
         } else {
-            $this->form->plan_option = null;
+            $this->form->frenquecy = null;
         }
 
         $this->form->validate();
@@ -54,14 +54,14 @@ class Plan extends Component
 
     public function render()
     {
-        $planOptions = [];
+        $frequencies = [];
 
         if ($this->form->plan) {
-            $planOptions = PlanList::from($this->form->plan)->options();
+            $frequencies = PlanList::from($this->form->plan)->options();
         }
 
         return view('livewire.components.plan')->with([
-            'planOptions' => $planOptions,
+            'planOptions' => $frequencies,
         ]);
     }
 
@@ -69,7 +69,7 @@ class Plan extends Component
     {
         $this->state['plan'] = $this->form->plan;
 
-        $this->state['plan_option'] = $this->form->plan_option ?? null;
+        $this->state['frenquecy'] = $this->form->frenquecy ?? null;
 
         $this->state['extras'] = collect($this->state['service']['extras'])
             ->whereIn('id', $this->form->extras)

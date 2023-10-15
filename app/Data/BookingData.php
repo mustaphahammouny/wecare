@@ -2,10 +2,8 @@
 
 namespace App\Data;
 
-use App\Enums\CityList;
 use App\Enums\PlanList;
-use App\Enums\PlanOptionList;
-use App\Enums\PropertyList;
+use App\Enums\FrequencyList;
 use App\Enums\StatusList;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -22,12 +20,12 @@ class BookingData extends Data
     public function __construct(
         public int $userId,
         public int $serviceId,
+        public int $cityId,
         public float $servicePrice,
-        public CityList $city,
         public string $phone,
         public string $address,
         public PlanList $plan,
-        public PlanOptionList|Optional $planOption,
+        public FrequencyList|Optional $frequency,
         public array|Optional $extras,
         public int $duration,
         public float $total,
@@ -38,9 +36,8 @@ class BookingData extends Data
 
     public static function prepareForPipeline(Collection $properties) : Collection
     {
-        $properties->put('city', CityList::from($properties->get('city')));
         $properties->put('plan', PlanList::from($properties->get('plan')));
-        $properties->put('plan_option', PlanOptionList::tryFrom($properties->get('plan_option')));        
+        $properties->put('frequency', FrequencyList::tryFrom($properties->get('frequency')));        
 
         $dateTime = $properties->get('date') . ' ' . $properties->get('time');
         $serviceAt = Carbon::createFromFormat('d/m/Y H', $dateTime);

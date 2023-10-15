@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum PlanOptionList: int
+enum FrequencyList: int
 {
     case Weekly = 1;
     case Biweekly = 2;

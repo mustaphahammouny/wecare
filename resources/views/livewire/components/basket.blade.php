@@ -22,8 +22,8 @@
                             <span>{{ $state['service']['title'] }}</span>
                         </p>
                         <p class="text mb-0">
-                            @if ($state['plan_option'])
-                                {{ \App\Enums\PlanOptionList::from($state['plan_option'])->title() }}
+                            @if ($state['frenquecy'])
+                                {{ \App\Enums\FrequencyList::from($state['frenquecy'])->title() }}
                             @else
                                 {{ \App\Enums\PlanList::from($state['plan'])->title() }}
                             @endif

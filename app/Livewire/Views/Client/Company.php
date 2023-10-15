@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Views\Client;
 
-use App\Data\CompanyData;
 use App\Data\CompanyFilter;
 use App\Livewire\Forms\CompanyForm;
 use App\Models\Company as CompanyModel;
@@ -36,9 +35,7 @@ class Company extends Component
         $this->form->validate();
 
         try {
-            $companyData = CompanyData::from($this->form->all());
-
-            $companyService->updateOrCreate($companyData);
+            $companyService->updateOrCreate($this->form->toData());
 
             Session::flash('success', 'Saved!');
 

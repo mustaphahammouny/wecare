@@ -23,14 +23,14 @@ class BookingSeeder extends Seeder
                 $service = $services->random();
                 $city = $cities->random();
                 $plan = Arr::random(PlanList::cases());
-                $planOption = null;
+                $frequency = null;
                 $pricing = Pricing::where('plan', $plan)
                     ->inRandomOrder()
                     ->first();
-                $duration = random_int($pricing->min_duration, $pricing->max_duration);
+                $duration = random_int($service->min_duration, $service->max_duration);
 
                 if ($plan == PlanList::Regular) {
-                    $planOption = Arr::random($plan->options());
+                    $frequency = Arr::random($plan->options());
                 }
 
                 return [
@@ -38,7 +38,7 @@ class BookingSeeder extends Seeder
                     'city_id' => $city->id,
                     'service_price' => $pricing->price,
                     'plan' => $plan->value,
-                    'plan_option' => $planOption?->value,
+                    'frenquecy' => $frequency?->value,
                     'duration' => $duration,
                     'total' => $pricing->price * $duration,
                 ];

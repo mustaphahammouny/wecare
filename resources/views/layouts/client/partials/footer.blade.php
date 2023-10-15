@@ -7,11 +7,17 @@
                 </div>
             </div>
             <div class="col-auto">
-                <div class="footer_bottom_right_widgets text-center text-lg-end">
-                    <p class="mb-0">
-                        <a href="#">@lang('Privacy policies')</a> -
-                        <a href="#">@lang('Terms of use')</a>
-                    </p>
+                <div class="footer_bottom_right_widgets">
+                    <div class="social-widget text-center text-sm-end">
+                        <div class="social-style1 light-style">
+                            <a class="me-2 fw600 fz15" href="#">@lang('Follow us')</a>
+                            @foreach (\App\Constants\General::SOCIALS as $social)
+                                <a href="{{ $social['url'] }}">
+                                    <i class="fab {{ $social['icon'] }} list-inline-item"></i>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
