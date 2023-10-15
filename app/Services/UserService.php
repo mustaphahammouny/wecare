@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Data\RegisterData;
 use App\Data\Userdata;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -13,6 +14,23 @@ class UserService
 {
     public function __construct(protected UserRepository $userRepository)
     {
+    }
+
+    public function store(RegisterData $registerData)
+    {
+        try {
+            DB::beginTransaction();
+
+            $user = $this->userRepository->store($registerData);
+
+            DB::commit();
+
+            return $user;
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            throw $e;
+        }
     }
 
     public function update(User $user, Userdata $Userdata)

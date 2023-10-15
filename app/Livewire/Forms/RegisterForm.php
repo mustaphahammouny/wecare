@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Data\RegisterData;
 use Livewire\Form;
 
 class RegisterForm extends Form
@@ -21,10 +22,15 @@ class RegisterForm extends Form
         return [
             'first_name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'min:8', 'confirmed', 'max:255'],
             'password_confirmation' => ['required'],
         ];
+    }
+
+    public function toData()
+    {
+        return RegisterData::from($this->all());    
     }
 
     // public function messages()

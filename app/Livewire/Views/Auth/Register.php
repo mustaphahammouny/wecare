@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Views\Auth;
 
+use App\Livewire\Views\Client\Services;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;

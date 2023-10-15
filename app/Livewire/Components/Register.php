@@ -3,7 +3,8 @@
 namespace App\Livewire\Components;
 
 use App\Livewire\Forms\RegisterForm;
-use App\Services\AuthService;
+use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -11,14 +12,14 @@ class Register extends Component
 {
     public RegisterForm $form;
 
-    public function register(AuthService $authService)
+    public function register(UserService $userService)
     {
         $this->form->validate();
-
+        
         try {
-            dd($this->form->all());
+            $user = $userService->store($this->form->toData());
 
-            $authService->login($this->form->all());
+            Auth::login($user);
 
             $this->dispatch('authenticated');
         } catch (\Exception $e) {

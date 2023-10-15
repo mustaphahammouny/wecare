@@ -26,7 +26,7 @@ class Login extends Component
         $this->form->validate();
 
         try {
-            $authService->login($this->form->all());
+            $authService->login($this->form->toData());
 
             $this->dispatch('authenticated');
         } catch (\Exception $e) {

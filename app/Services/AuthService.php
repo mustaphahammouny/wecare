@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Data\LoginData;
 use App\Enums\ProviderList;
 use App\Repositories\UserRepository;
 use Exception;
@@ -18,24 +19,24 @@ class AuthService
     {
     }
 
-    public function login(array $data): void
+    public function login(LoginData $loginData): void
     {
-        $this->ensureIsNotRateLimited($data['email']);
+        $this->ensureIsNotRateLimited($loginData->email);
 
         $credentials = [
-            'email' => $data['email'],
-            'password' => $data['password'],
+            'email' => $loginData->email,
+            'password' => $loginData->password,
         ];
 
-        if (!Auth::attempt($credentials, $data['remember'])) {
-            RateLimiter::hit($this->throttleKey($data['email']));
+        if (!Auth::attempt($credentials, $loginData->remember)) {
+            RateLimiter::hit($this->throttleKey($loginData->email));
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey($data['email']));
+        RateLimiter::clear($this->throttleKey($loginData->email));
 
         // session()->regenerate();
     }
