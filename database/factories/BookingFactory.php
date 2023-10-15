@@ -14,7 +14,7 @@ class BookingFactory extends Factory
             'user_id' => 1,
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'service_at' => Carbon::now()->subDays(rand(4, 10)),
+            'service_at' => Carbon::now()->addDays(rand(-10, 10)),
             'status' => fake()->randomElement(StatusList::cases()),
         ];
     }

@@ -6,10 +6,10 @@
                     <thead class="table-orange ">
                         <tr>
                             <th class="fz15 fw500" scope="col">@lang('Service')</th>
-                            <th class="fz15 fw500 text-center" scope="col">@lang('Plan')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Price')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Duration')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Total')</th>
+                            <th class="fz15 fw500 text-center" scope="col">@lang('Date')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Status')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Invoice')</th>
                         </tr>
@@ -19,15 +19,15 @@
                             <tr>
                                 <td>
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
-                                    @foreach ($booking->extras as $exta)
-                                        <span>{{ __($exta->title) }}</span>
-                                        <span class="text-muted">({{ $exta->pivot->formatted_exta_price }})</span>
+                                    @foreach ($booking->extras as $extra)
+                                        <span>{{ __($extra->title) }}</span>
+                                        <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
                                     @endforeach
                                 </td>
-                                <td class="text-center">{{ $booking->plan->title() }}</td>
                                 <td class="text-center">{{ $booking->formatted_service_price }}</td>
                                 <td class="text-center">{{ $booking->duration }}{{ __('h') }}</td>
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
+                                <td class="text-center">{{ $booking->service_at }}</td>
                                 <td class="text-center">
                                     <span class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
                                 </td>

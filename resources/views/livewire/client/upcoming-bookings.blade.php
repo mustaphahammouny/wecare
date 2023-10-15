@@ -18,9 +18,9 @@
                             <tr>
                                 <td>
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
-                                    @foreach ($booking->extras as $exta)
-                                        <span>{{ __($exta->title) }}</span>
-                                        <span class="text-muted">({{ $exta->pivot->formatted_extra_price }})</span>
+                                    @foreach ($booking->extras as $extra)
+                                        <span>{{ __($extra->title) }}</span>
+                                        <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
                                     @endforeach
                                 </td>
                                 <td class="text-center">{{ $booking->formatted_service_price }}</td>
