@@ -286,30 +286,4 @@
             </div>
         </div>
     </section>
-
-    <section>
-        <div id="section-join" class="cta-banner2 bgc-thm maxw1600 d-flex mx-auto bdrs24">
-            <div class="img-box-5">
-                <img class="img-1 spin-right" src="{{ Vite::image('home/element-1.png') }}">
-            </div>
-            <div class="img-box-6">
-                <img class="img-1 spin-left" src="{{ Vite::image('home/element-1.png') }}">
-            </div>
-            <div class="container my-auto">
-                <div class="row">
-                    <div class="col wow fadeInUp" data-wow-delay="500ms">
-                        <div class="cta-style2">
-                            <h2 class="cta-title fz40 fw700">Start Listing or Buying a Property With Realton</h2>
-                            <p class="cta-text">Talk to our experts or Browse through more properties.</p>
-                            <a class="ud-btn btn-dark py-3 px-4 rounded-pill fs-6" wire:navigate
-                                href="{{ route('home') }}">
-                                <i class="far fa-user-circle me-1"></i>
-                                Join us
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>

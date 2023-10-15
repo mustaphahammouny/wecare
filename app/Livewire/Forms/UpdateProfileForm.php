@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Data\UserData;
 use App\Models\User;
 use Livewire\Form;
 
@@ -13,7 +14,7 @@ class UpdateProfileForm extends Form
 
     public string $email;
 
-    public string $phone;
+    public ?string $phone;
 
     public function rules()
     {
@@ -33,6 +34,15 @@ class UpdateProfileForm extends Form
 
         $this->email = $user->email;
 
-        $this->phone = $user->phone ?? '';
+        $this->phone = $user->phone;
+    }
+
+    public function toData()
+    {
+        $data = array_filter($this->all(), function ($value) {
+            return $value !== null;
+        });
+
+        return UserData::from($data);
     }
 }

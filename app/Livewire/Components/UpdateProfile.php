@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components;
 
-use App\Data\Userdata;
 use App\Livewire\Forms\UpdateProfileForm;
 use App\Livewire\Views\Client\Profile;
 use App\Models\User;
@@ -32,9 +31,7 @@ class UpdateProfile extends Component
         $this->form->validate();
 
         try {
-            $Userdata = Userdata::from($this->form->all());
-
-            $userService->update($this->user, $Userdata);
+            $userService->update($this->user, $this->form->toData());
 
             Session::flash('success', 'Saved!');
 

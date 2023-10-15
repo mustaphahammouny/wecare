@@ -17,7 +17,7 @@ class CompanyForm extends Form
 
     public string $ice;
 
-    public string $address;
+    public ?string $address;
 
     public function rules()
     {
@@ -43,6 +43,10 @@ class CompanyForm extends Form
 
     public function toData()
     {
-        return CompanyData::from($this->all());    
+        $data = array_filter($this->all(), function ($value) {
+            return $value !== null;
+        });
+
+        return CompanyData::from($data);    
     }
 }
