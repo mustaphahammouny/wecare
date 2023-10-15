@@ -59,14 +59,14 @@ class BookingRepository
     {
         $user = User::find($bookingData->userId);
 
-        $booking->fill($bookingData->except('extras')->toArray());
+        $booking->fill($bookingData->except('extras', 'status')->toArray());
 
         if (!$user->phone) {
             $user->phone = $bookingData->phone;
             $user->save();
         }
 
-        $booking->status = StatusList::Scheduled;
+        $booking->status = $bookingData->status;
 
         $booking->save();
 

@@ -47,8 +47,6 @@ class Booking extends Component
     {
         $serviceFilter = ServiceFilter::from(['slug' => $this->slug]);
 
-        // $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
-        
         $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
         $this->state['plan'] = PlanList::Once->value;
         $this->state['phone'] = '0676991956';
@@ -92,41 +90,46 @@ class Booking extends Component
 
     private function store()
     {
-        dd('here');
+        // $servicePrice = $this->state['pricing']['service_price'];
+        // $duration = $this->state['pricing']['duration'];
+        // $extrasTotal = array_reduce(array_column($this->state['extras'], 'price'), fn ($carry, $item) => $carry += $item);
 
-        $servicePrice = $this->state['pricing']['service_price'];
-        $duration = $this->state['pricing']['duration'];
-        $extrasTotal = array_reduce(array_column($this->state['extras'], 'price'), fn ($carry, $item) => $carry += $item);
+        // $data = [
+        //     'user_id' => Auth::id(),
+        //     'service_id' => $this->state['service']['id'],
+        //     'service_price' => $servicePrice,
 
-        $data = [
-            'user_id' => Auth::id(),
-            'service_id' => $this->state['service']['id'],
-            'service_price' => $servicePrice,
-            'plan' => $this->state['plan'],
-            'frenquecy' => $this->state['frenquecy'],
-            'city' => $this->state['city'],
-            'phone' => $this->state['phone'],
-            'address' => $this->state['address'],
-            'date' => $this->state['date'],
-            'time' => $this->state['time'],
-            'duration' => $duration,
-            'total' => $servicePrice * $duration + $extrasTotal,
-        ];
 
-        $data['extras'] = array_reduce($this->state['extras'], function ($carry, $item) {
-            $carry[$item['id']] = ['extra_price' => $item['price']];
+        //     'total' => $servicePrice * $duration + $extrasTotal,
+        // ];
 
-            return $carry;
-        }, []);
+        // $extras = array_reduce($this->state['extras'], function ($carry, $item) {
+        //     $carry[$item['id']] = ['extra_price' => $item['price']];
 
-        $bookingData = BookingData::from($data);
+        //     return $carry;
+        // }, []);
 
         try {
+            $bookingData = BookingData::from([
+                'user_id' => Auth::id(),
+                'service_id' => $this->state['service']['id'],
+                'city_id' => $this->state['city'],
+                'plan' => $this->state['plan'],
+                // 'frenquecy' => $this->state['frenquecy'],
+                'duration' => $this->state['duration']['duration'],
+                'phone' => $this->state['phone'],
+                'address' => $this->state['address'],
+                'date' => $this->state['date'],
+                'time' => $this->state['time'],
+                'extras' => array_column($this->state['extras'], 'id'),
+            ]);
+
             $this->bookingService->store($bookingData);
 
             return $this->redirect(ThankYou::class, navigate: true);
         } catch (\Exception $e) {
-            Session::flash('error', $e->getMessage());
+            throw $e;
+            // Session::flash('error', $e->getMessage());
         }
     }
 

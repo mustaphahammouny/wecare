@@ -14,6 +14,7 @@ use App\Livewire\Views\Store\Contact;
 use App\Livewire\Views\Store\Faq;
 use App\Livewire\Views\Store\Home;
 use App\Livewire\Views\Store\Pricing;
+use App\Livewire\Views\Store\ThankYou;
 use Illuminate\Support\Facades\Route;
 
 Route::get('locale/{locale}/update', [LocaleController::class, 'update'])
@@ -30,6 +31,8 @@ Route::get('pricing', Pricing::class)->name('pricing');
 Route::get('contact', Contact::class)->name('contact');
 
 Route::get('booking/{slug}', Booking::class)->name('booking');
+
+Route::get('thank-you', ThankYou::class)->name('thank-you');
 
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::middleware(['guest'])->group(function () {

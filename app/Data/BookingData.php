@@ -21,23 +21,23 @@ class BookingData extends Data
         public int $userId,
         public int $serviceId,
         public int $cityId,
-        public float $servicePrice,
+        public PlanList $plan,
+        // public FrequencyList|Optional $frequency,
+        public int $duration,
         public string $phone,
         public string $address,
-        public PlanList $plan,
-        public FrequencyList|Optional $frequency,
-        public array|Optional $extras,
-        public int $duration,
-        public float $total,
         public Carbon $serviceAt,
+        public float|Optional $servicePrice,
+        public float|Optional $total,
         public StatusList|Optional $status,
+        public array|Optional $extras,
     ) {
     }
 
     public static function prepareForPipeline(Collection $properties) : Collection
     {
         $properties->put('plan', PlanList::from($properties->get('plan')));
-        $properties->put('frequency', FrequencyList::tryFrom($properties->get('frequency')));        
+        // $properties->put('frequency', FrequencyList::tryFrom($properties->get('frequency')));        
 
         $dateTime = $properties->get('date') . ' ' . $properties->get('time');
         $serviceAt = Carbon::createFromFormat('d/m/Y H', $dateTime);

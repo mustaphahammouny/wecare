@@ -28,7 +28,7 @@ class ServiceRepository
 
     public function find($id): Service
     {
-        return Service::with(['extras', 'pricings'])
+        return Service::with(['extras'])
             ->findOrFail($id);
     }
 

@@ -4,10 +4,6 @@ import "./bootstrap";
 import InformationComponent from "./components/information";
 import DateComponent from "./components/date";
 
-// Views
-import HomeComponent from "./components/home";
-import ServicesComponent from "./components/services";
-
 // Event
 import Event from "./event";
 
@@ -20,8 +16,6 @@ class App {
     static components = {
         "components.information": InformationComponent,
         "components.date": DateComponent,
-        "views.store.home": HomeComponent,
-        "views.client.services": ServicesComponent,
     };
 
     static init() {
