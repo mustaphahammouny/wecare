@@ -4,6 +4,7 @@ namespace App\Livewire\Views\Store;
 
 use App\Data\BookingData;
 use App\Data\ServiceFilter;
+use App\Enums\PlanList;
 use App\Livewire\Components\Authenticate;
 use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
@@ -34,7 +35,7 @@ class Booking extends Component
 
     protected $steps = [
         Information::class,
-        Plan::class,
+        // Plan::class,
         Duration::class,
         Date::class,
         Time::class,
@@ -51,6 +52,7 @@ class Booking extends Component
         // $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
         
         $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
+        $this->state['plan'] = PlanList::Once->value;
         $this->state['phone'] = '0676991956';
         $this->state['city'] = 1;
         $this->state['address'] = 'Your address here please';

@@ -43,10 +43,10 @@ class Plan extends Component
     {
         $plan = PlanList::from($this->form->plan);
 
+        $this->form->frenquecy = null;
+        
         if ($plan == PlanList::Regular) {
             $this->form->frenquecy = FrequencyList::Weekly->value;
-        } else {
-            $this->form->frenquecy = null;
         }
 
         $this->form->validate();
@@ -61,7 +61,7 @@ class Plan extends Component
         }
 
         return view('livewire.components.plan')->with([
-            'planOptions' => $frequencies,
+            'frequencies' => $frequencies,
         ]);
     }
 

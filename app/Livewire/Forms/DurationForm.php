@@ -8,6 +8,8 @@ class DurationForm extends Form
 {
     public ?int $duration = null;
 
+    public array $extras;
+
     public function rules()
     {
         return [
@@ -18,5 +20,7 @@ class DurationForm extends Form
     public function fillProps(array $state)
     {
         $this->duration = $state['duration']['duration'] ?? null;
+
+        $this->extras = array_column($state['extras'] ?? [], 'id');
     }
 }

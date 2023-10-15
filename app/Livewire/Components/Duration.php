@@ -41,7 +41,7 @@ class Duration extends Component
         }
     }
 
-    public function updatedFormDuration()
+    public function updated()
     {
         $this->fillState();
 
@@ -68,5 +68,9 @@ class Duration extends Component
     {
         $this->state['duration'] = collect($this->durations)
             ->first(fn ($duration) => $duration['duration'] == $this->form->duration);
+
+        $this->state['extras'] = collect($this->state['service']['extras'])
+            ->whereIn('id', $this->form->extras)
+            ->toArray();
     }
 }

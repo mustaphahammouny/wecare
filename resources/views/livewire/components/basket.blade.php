@@ -1,8 +1,6 @@
 <div class="ps-widget bgc-white bdrs12 default-box-shadow2 p10 mb30 overflow-hidden position-relative">
     <h4 class="title fz17 my-4 text-center">@lang('Your basket')</h4>
-    @if (!isset($state['phone']))
-        <x-empty-basket />
-    @else
+    @isset($state['phone'])
         <div class="row">
             <div class="col-md-12">
                 <x-walkscore icon="flaticon-call">
@@ -22,11 +20,11 @@
                             <span>{{ $state['service']['title'] }}</span>
                         </p>
                         <p class="text mb-0">
-                            @if ($state['frenquecy'])
+                            @isset($state['frenquecy'])
                                 {{ \App\Enums\FrequencyList::from($state['frenquecy'])->title() }}
                             @else
                                 {{ \App\Enums\PlanList::from($state['plan'])->title() }}
-                            @endif
+                            @endisset
                         </p>
                     </x-walkscore>
 
@@ -43,5 +41,7 @@
                 </div>
             @endisset
         </div>
-    @endif
+    @else
+        <x-empty-basket />
+    @endisset
 </div>
