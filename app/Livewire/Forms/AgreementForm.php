@@ -4,19 +4,19 @@ namespace App\Livewire\Forms;
 
 use Livewire\Form;
 
-class PaymentForm extends Form
+class AgreementForm extends Form
 {
-    public bool $agreed = false;
+    public bool $agreement = false;
 
     public function rules()
     {
         return [
-            'agreed' => ['required', 'boolean'],
+            'agreement' => ['required', 'accepted'],
         ];
     }
 
     public function fillProps(array $state)
     {
-        $this->agreed = $state['agreed'] ?? false;
+        $this->agreement = $state['agreement'] ?? false;
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Components;
 
-use App\Livewire\Forms\PaymentForm;
+use App\Livewire\Forms\AgreementForm;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
-class Payment extends Component
+class Agreement extends Component
 {
-    public PaymentForm $form;
+    public AgreementForm $form;
 
     #[Locked]
     public array $state;
@@ -22,6 +22,6 @@ class Payment extends Component
 
     public function render()
     {
-        return view('livewire.components.payment');
+        return view('livewire.components.agreement');
     }
 }

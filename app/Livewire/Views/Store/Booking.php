@@ -9,7 +9,7 @@ use App\Livewire\Components\Authenticate;
 use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
 use App\Livewire\Components\Duration;
-use App\Livewire\Components\Payment;
+use App\Livewire\Components\Agreement;
 use App\Livewire\Components\Plan;
 use App\Livewire\Components\Time;
 use App\Services\BookingService;
@@ -40,7 +40,7 @@ class Booking extends Component
         Date::class,
         Time::class,
         Authenticate::class,
-        Payment::class,
+        Agreement::class,
     ];
 
     protected BookingService $bookingService;
