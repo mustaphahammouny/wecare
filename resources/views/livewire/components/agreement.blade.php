@@ -15,7 +15,7 @@
         </div>
 
         <div class="d-flex justify-content-between mb20">
-            <x-btn-click wire:click="$parent.previous('payment')" title="Previous" icon="far fa-chevron-left" />
+            <x-btn-click wire:click="$parent.previous('agreement')" title="Previous" icon="far fa-chevron-left" />
             <x-btn-submit title="Book" position="end" icon="far fa-chevron-right" />
         </div>
     </form>

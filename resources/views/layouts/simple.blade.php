@@ -25,11 +25,7 @@
                             <div class="d-flex align-items-center">
                                 <x-locale />
 
-                                @if (Auth::check())
-                                    <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
-                                @else
-                                    <x-a title="Sign in" route="auth.login" icon="far fa-user-circle" />
-                                @endif
+                                <livewire:components.btn-auth />
                             </div>
                         </div>
                     </div>
@@ -45,12 +41,8 @@
                             <x-locale />
 
                             <x-logo width="130" />
-                            
-                            @if (Auth::check())
-                                <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
-                            @else
-                                <x-a title="Sign in" route="auth.login" icon="far fa-user-circle" />
-                            @endif
+
+                            <livewire:components.btn-auth />
                         </div>
                     </div>
                 </div>

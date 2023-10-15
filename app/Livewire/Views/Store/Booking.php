@@ -10,7 +10,6 @@ use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
 use App\Livewire\Components\Duration;
 use App\Livewire\Components\Agreement;
-use App\Livewire\Components\Plan;
 use App\Livewire\Components\Time;
 use App\Services\BookingService;
 use App\Services\ServiceService;
@@ -35,7 +34,6 @@ class Booking extends Component
 
     protected $steps = [
         Information::class,
-        // Plan::class,
         Duration::class,
         Date::class,
         Time::class,
