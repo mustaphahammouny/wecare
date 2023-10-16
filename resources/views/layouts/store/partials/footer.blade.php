@@ -8,23 +8,23 @@
                         <p class="text mb5">@lang('Address')</p>
                         <h6 class="info-phone">
                             <a href="#">
-                                @lang('App 5 Avenue Agdal Rabat, Morocco.')
+                                @lang(\App\Constants\General::INFO['address'])
                             </a>
                         </h6>
                     </div>
                     <div class="contact-info mb25">
                         <p class="text mb5">@lang('Phone')</p>
                         <h6 class="info-phone">
-                            <a href="tel:+212 123 456 789">
-                                +212 123 456 789
+                            <a href="tel:{{ \App\Constants\General::INFO['phone'] }}">
+                                {{ \App\Constants\General::INFO['phone'] }}
                             </a>
                         </h6>
                     </div>
                     <div class="contact-info">
                         <p class="text mb5">@lang('Email')</p>
                         <h6 class="info-mail">
-                            <a href="mailto:support@wecare.com">
-                                support@wecare.com
+                            <a href="mailto:{{ \App\Constants\General::INFO['email'] }}">
+                                {{ \App\Constants\General::INFO['email'] }}
                             </a>
                         </h6>
                     </div>

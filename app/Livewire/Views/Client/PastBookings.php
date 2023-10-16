@@ -3,10 +3,12 @@
 namespace App\Livewire\Views\Client;
 
 use App\Data\BookingFilter;
+use App\Models\Booking;
 use App\Services\BookingService;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,6 +18,21 @@ class PastBookings extends Component
 {
     use WithPagination;
     use AuthorizesRequests;
+
+    public function download(BookingService $bookingService, Booking $booking)
+    {
+        $this->authorize('download', $booking);
+
+        try {
+            $pdf = $bookingService->download($booking);
+
+            return response()->streamDownload(fn () => print($pdf['content']), $pdf['name']);
+        } catch (\Exception $e) {
+            Session::flash('error', $e->getMessage());
+
+            return $this->redirect(self::class, navigate: true);
+        }
+    }
 
     public function render(BookingService $bookingService)
     {

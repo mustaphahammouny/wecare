@@ -52,6 +52,13 @@ class Booking extends Model
         );
     }
 
+    protected function number(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => '#INV_' . str_pad($attributes['id'], 10, '0', STR_PAD_LEFT),
+        );
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

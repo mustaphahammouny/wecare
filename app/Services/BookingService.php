@@ -4,11 +4,14 @@ namespace App\Services;
 
 use App\Data\BookingData;
 use App\Data\BookingFilter;
+use App\Data\PricingFilter;
 use App\Enums\StatusList;
+use App\Models\Booking;
 use App\Models\Extra;
 use App\Repositories\BookingRepository;
 use App\Repositories\ExtraRepository;
 use App\Repositories\PricingRepository;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -31,7 +34,8 @@ class BookingService
         try {
             DB::beginTransaction();
 
-            $pricing = $this->pricingRepository->first(['duration' => $bookingData->duration]);
+            $pricingFilter = PricingFilter::from(['duration' => $bookingData->duration]);
+            $pricing = $this->pricingRepository->first($pricingFilter);
             $extras = $this->extraRepository->findIn($bookingData->extras);
             $extrasTotal = $extras->sum('price');
             
@@ -54,6 +58,22 @@ class BookingService
         } catch (Exception $e) {
             DB::rollBack();
 
+            throw $e;
+        }
+    }
+
+    public function download(Booking $booking)
+    {
+        try {
+            $booking = $this->bookingRepository->find($booking->id);
+
+            $pdf = Pdf::loadView('pdf.invoice', compact('booking'))->output();
+
+            return [
+                'name' => "{$booking->number}.pdf",
+                'content' => $pdf,
+            ];
+        } catch (Exception $e) {
             throw $e;
         }
     }

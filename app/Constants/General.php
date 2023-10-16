@@ -4,6 +4,13 @@ namespace App\Constants;
 
 abstract class General
 {
+    const INFO = [
+        'name' => 'WeCare',
+        'phone' => '+212 123 456 789',
+        'email' => 'support@wecare.com',
+        'address' => 'App 5 Avenue Agdal Rabat, Morocco.',
+    ];
+
     const TAX = 0.2;
 
     const PER_PAGE = 5;
