@@ -4,10 +4,11 @@ namespace App\Data;
 
 use Spatie\LaravelData\Data;
 
-class CityFilter extends Data
+class PricingFilter extends Data
 {
     public function __construct(
-        public ?string $name,
+        public ?int $plan,
+        public ?int $duration,
     ) {
     }
 }

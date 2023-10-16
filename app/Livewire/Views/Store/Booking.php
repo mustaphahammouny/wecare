@@ -49,9 +49,6 @@ class Booking extends Component
 
         $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
         $this->state['plan'] = PlanList::Once->value;
-        $this->state['phone'] = '0676991956';
-        $this->state['city'] = 1;
-        $this->state['address'] = 'Your address here please';
 
         $this->bookingService = $bookingService;
     }

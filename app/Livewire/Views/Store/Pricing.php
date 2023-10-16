@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Views\Store;
 
+use App\Data\PricingFilter;
+use App\Enums\PlanList;
 use App\Services\PricingService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
@@ -16,7 +18,9 @@ class Pricing extends Component
 
     public function boot(PricingService $pricingService)
     {
-        $this->pricings = $pricingService->get(['min_duration' => 7, 'max_duration' => 8]);
+        $pricingFilter = PricingFilter::from(['plan' => PlanList::Once->value]);
+
+        $this->pricings = $pricingService->get($pricingFilter);
     }
 
     public function render()

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Data\PricingFilter;
 use App\Livewire\Forms\DurationForm;
 use App\Services\PricingService;
 use Livewire\Attributes\Locked;
@@ -23,9 +24,9 @@ class Duration extends Component
 
         $this->form->fillProps($this->state);
 
-        $pricings = $pricingService->get([
-            'plan' => $this->state['plan'],
-        ]);
+        $pricingFilter = PricingFilter::from(['plan' => $this->state['plan']]);
+
+        $pricings = $pricingService->get($pricingFilter);
 
         $service = $this->state['service'];
 
