@@ -14,9 +14,9 @@
                 <input wire:model="form.remember" type="checkbox">
                 <span class="checkmark"></span>
             </label>
-            <a class="fz14 ff-heading" wire:navigate href="{{ route('auth.password.request') }}">
+            {{-- <a class="fz14 ff-heading" wire:navigate href="{{ route('auth.password.request') }}">
                 @lang('Forgot your password?')
-            </a>
+            </a> --}}
         </div>
         <div class="d-grid mb20">
             <x-btn-submit title="Sign in" />

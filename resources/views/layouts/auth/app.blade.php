@@ -12,7 +12,7 @@
         {{ $scripts ?? '' }}
     </x-slot>
 
-    <div class="wrapper ovh">
+    <div class="wrapper ovh bg-auth">
         <div class="body_content">
             <section class="our-compare pt60 pb60">
                 <div class="container">
