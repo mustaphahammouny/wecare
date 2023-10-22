@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="table-style1 table-responsive">
                 <table class="table table-borderless align-middle">
-                    <thead class="table-orange ">
+                    <thead>
                         <tr>
                             <th class="fz15 fw500" scope="col">@lang('Service')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Price')</th>

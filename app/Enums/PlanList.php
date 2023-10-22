@@ -28,34 +28,4 @@ enum PlanList: int
 
         return Vite::image("plans/{$media}");
     }
-
-    public function options(): array
-    {
-        return match ($this) {
-            self::Once => [],
-            self::Regular => [
-                FrequencyList::Weekly,
-                FrequencyList::Biweekly,
-                FrequencyList::Monthly,
-            ],
-        };
-    }
-
-    public function benefits(): array
-    {
-        return match ($this) {
-            self::Once => [
-                ['title' => 'Payment online after the session', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'Free cancellation', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'Favourite pro guaranteed', 'icon' => 'fa-xmark bgc-danger'],
-                ['title' => 'Pause your booking anytime', 'icon' => 'fa-xmark bgc-danger'],
-            ],
-            self::Regular => [
-                ['title' => 'Payment online after the session', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'Free cancellation', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'Favourite pro guaranteed', 'icon' => 'fa-check bgc-success'],
-                ['title' => 'Pause your booking anytime', 'icon' => 'fa-check bgc-success'],
-            ],
-        };
-    }
 }

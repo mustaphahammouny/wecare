@@ -36,7 +36,7 @@ class BtnAuth extends Component
         if (Auth::check()) {
             $this->title = Auth::user()->full_name;
 
-            $this->route = 'client.services';
+            $this->route = Auth::user()->role->route();
         }
     }
 }

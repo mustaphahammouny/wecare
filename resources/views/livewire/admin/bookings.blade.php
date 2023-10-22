@@ -6,12 +6,13 @@
                     <thead>
                         <tr>
                             <th class="fz15 fw500" scope="col">@lang('Service')</th>
+                            <th class="fz15 fw500 text-center" scope="col">@lang('Client')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Price')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Duration')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Total')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Date')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Status')</th>
-                            <th class="fz15 fw500 text-center" scope="col">@lang('Invoice')</th>
+                            <th class="fz15 fw500 text-center" scope="col">@lang('Action')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +25,7 @@
                                         <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
                                     @endforeach
                                 </td>
+                                <td class="text-center">{{ $booking->user->full_name }}</td>
                                 <td class="text-center">{{ $booking->formatted_service_price }}</td>
                                 <td class="text-center">{{ $booking->duration }}{{ __('h') }}</td>
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
@@ -32,13 +34,8 @@
                                     <span class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
                                 </td>
                                 <td class="text-center">
-                                    @if ($booking->invoice)
-                                        <x-btn-click wire:click="download({{ $booking->id }})" title="Download" position="start"
-                                            icon="far fa-download" />
-                                    @else
-                                        <x-btn-click wire:click="download({{ $booking->id }})" title="Generate" position="start"
-                                            icon="far fa-file-invoice" />
-                                    @endif
+                                    <x-btn-click wire:click="download({{ $booking->id }})" title="Edit"
+                                        position="start" icon="far fa-edit" />
                                 </td>
                             </tr>
                         @empty

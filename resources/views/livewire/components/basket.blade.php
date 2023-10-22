@@ -19,13 +19,6 @@
                         <p class="dark-color fw600 mb-0">
                             <span>{{ $state['service']['title'] }}</span>
                         </p>
-                        <p class="text mb-0">
-                            @isset($state['frenquecy'])
-                                {{ \App\Enums\FrequencyList::from($state['frenquecy'])->title() }}
-                            @else
-                                {{ \App\Enums\PlanList::from($state['plan'])->title() }}
-                            @endisset
-                        </p>
                     </x-walkscore>
 
                     <div class="ms-4">

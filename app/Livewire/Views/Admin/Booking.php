@@ -7,9 +7,9 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
-class Bookings extends Component
+class Booking extends Component
 {
-    public function render(BookingService $bookingService)
+    public function render()
     {
         return view('livewire.admin.bookings')
             ->title('Bookings')

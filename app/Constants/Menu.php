@@ -23,6 +23,7 @@ abstract class Menu
     const ADMIN_MENU = [
         ['title' => 'Dashboard', 'route' => 'admin.dashboard', 'icon' => 'far fa-dashboard'],
         ['title' => 'Bookings', 'route' => 'admin.bookings', 'icon' => 'far fa-calendar-days'],
+        ['title' => 'Contacts', 'route' => 'admin.contacts', 'icon' => 'far fa-address-book'],
         ['title' => 'Clients', 'route' => 'admin.clients', 'icon' => 'far fa-users'],
         ['title' => 'Services', 'route' => 'admin.services', 'icon' => 'far fa-list'],
         ['title' => 'Cities', 'route' => 'admin.cities', 'icon' => 'far fa-map'],

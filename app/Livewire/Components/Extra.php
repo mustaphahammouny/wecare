@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Components;
 
-use App\Enums\PlanList;
-use App\Enums\FrequencyList;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
