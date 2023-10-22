@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Constants\General;
 use App\Data\ServiceFilter;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,6 +13,13 @@ class ServiceRepository
     {
         return $this->findBy($serviceFilter)
             ->get();
+    }
+
+    public function paginate(?ServiceFilter $serviceFilter)
+    {
+        return $this->findBy($serviceFilter)
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
     public function first(ServiceFilter $serviceFilter): Service

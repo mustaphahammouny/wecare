@@ -16,6 +16,11 @@ class ServiceService
         return $this->serviceRepository->get($serviceFilter);
     }
 
+    public function paginate(ServiceFilter $serviceFilter = null)
+    {
+        return $this->serviceRepository->paginate($serviceFilter);
+    }
+
     public function first(ServiceFilter $serviceFilter)
     {
         return $this->serviceRepository->first($serviceFilter);
