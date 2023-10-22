@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Views\Admin\Bookings;
+use App\Livewire\Views\Admin\Cities;
+use App\Livewire\Views\Admin\Clients;
 use App\Livewire\Views\Admin\Dashboard;
 use App\Livewire\Views\Auth\ForgotPassword;
 use App\Livewire\Views\Auth\Login;
@@ -7,7 +10,8 @@ use App\Livewire\Views\Auth\Register;
 use App\Livewire\Views\Client\Company;
 use App\Livewire\Views\Client\PastBookings;
 use App\Livewire\Views\Client\Profile;
-use App\Livewire\Views\Client\Services;
+use App\Livewire\Views\Client\Services as ClientServices;
+use App\Livewire\Views\Admin\Services as AdminServices;
 use App\Livewire\Views\Client\UpcomingBookings;
 use App\Livewire\Views\Store\About;
 use App\Livewire\Views\Store\Booking;
@@ -47,7 +51,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
 Route::prefix('client')->name('client.')->group(function () {
     Route::middleware(['auth', 'role:client'])->group(function () {
-        Route::get('services', Services::class)->name('services');
+        Route::get('services', ClientServices::class)->name('services');
 
         Route::get('upcoming-bookings', UpcomingBookings::class)->name('upcoming-bookings');
 
@@ -62,5 +66,13 @@ Route::prefix('client')->name('client.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('dashboard', Dashboard::class)->name('dashboard');
+
+        Route::get('bookings', Bookings::class)->name('bookings');
+
+        Route::get('clients', Clients::class)->name('clients');
+
+        Route::get('services', AdminServices::class)->name('services');
+
+        Route::get('cities', Cities::class)->name('cities');
     });
 });

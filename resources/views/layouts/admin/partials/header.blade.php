@@ -59,7 +59,7 @@
                     <x-logo width="130" />
 
                     @if (Auth::check())
-                        <x-a :title="Auth::user()->full_name" route="client.services" icon="far fa-user-circle" />
+                        <x-a :title="Auth::user()->full_name" :route="Auth::user()->role->route()" icon="far fa-user-circle" />
                     @else
                         <x-a title="Sign in" route="auth.login" icon="far fa-user-circle" />
                     @endif
