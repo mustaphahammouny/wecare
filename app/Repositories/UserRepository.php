@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Constants\General;
 use App\Data\RegisterData;
 use App\Data\UserData;
 use App\Data\UserFilter;
@@ -10,6 +11,13 @@ use App\Models\User;
 
 class UserRepository
 {
+    public function paginate(?UserFilter $userFilter)
+    {
+        return $this->findBy($userFilter)
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
+    }
+
     public function first(UserFilter $userFilter): ?User
     {
         return $this->findBy($userFilter)->first();
@@ -54,6 +62,9 @@ class UserRepository
     {
         return User::when($userFilter->email ?? false, function ($query, $email) {
             $query->where('email', $email);
-        });
+        })
+            ->when($userFilter->role ?? false, function ($query, $role) {
+                $query->where('role', $role->value);
+            });
     }
 }
