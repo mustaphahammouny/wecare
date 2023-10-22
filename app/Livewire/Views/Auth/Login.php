@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Views\Auth;
 
-use App\Livewire\Views\Client\Services;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,7 +13,9 @@ class Login extends Component
     #[On('authenticated')]
     public function authenticated()
     {
-        return $this->redirect(Services::class, navigate: true);
+        $role = Auth::user()->role;
+
+        return $this->redirect($role->component(), navigate: true);
     }
 
     public function render()

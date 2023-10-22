@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Views\Admin\Dashboard;
 use App\Livewire\Views\Auth\ForgotPassword;
 use App\Livewire\Views\Auth\Login;
 use App\Livewire\Views\Auth\Register;
@@ -45,7 +46,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 
 Route::prefix('client')->name('client.')->group(function () {
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'role:client'])->group(function () {
         Route::get('services', Services::class)->name('services');
 
         Route::get('upcoming-bookings', UpcomingBookings::class)->name('upcoming-bookings');
@@ -55,5 +56,11 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('company', Company::class)->name('company');
 
         Route::get('profile', Profile::class)->name('profile');
+    });
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('dashboard', Dashboard::class)->name('dashboard');
     });
 });

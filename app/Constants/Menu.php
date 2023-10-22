@@ -19,4 +19,8 @@ abstract class Menu
         ['title' => 'Company', 'route' => 'client.company', 'icon' => 'far fa-building'],
         ['title' => 'Profile', 'route' => 'client.profile', 'icon' => 'flaticon-user'],
     ];
+
+    const ADMIN_MENU = [
+        ['title' => 'Dashboard', 'route' => 'admin.dashboard', 'icon' => 'far fa-list'],
+    ];
 }

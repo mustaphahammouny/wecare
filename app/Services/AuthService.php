@@ -3,12 +3,9 @@
 namespace App\Services;
 
 use App\Data\LoginData;
-use App\Enums\ProviderList;
 use App\Repositories\UserRepository;
-use Exception;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -37,38 +34,11 @@ class AuthService
         }
 
         RateLimiter::clear($this->throttleKey($loginData->email));
-
-        // session()->regenerate();
-    }
-
-    public function loginWithSocials(ProviderList $provider, array $data)
-    {
-        try {
-            DB::beginTransaction();
-
-            $user = $this->userRepository->first(['email' => $data['email']]);
-
-            if (!$user) {
-                $user = $this->userRepository->store($data, $provider);
-            }
-
-            DB::commit();
-
-            Auth::login($user);
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
-        }
     }
 
     public function logout(): void
     {
         Auth::guard('web')->logout();
-
-        // session()->invalidate();
-
-        // session()->regenerateToken();
     }
 
     private function ensureIsNotRateLimited(string $email): void
@@ -89,7 +59,7 @@ class AuthService
         ]);
     }
 
-    private function throttleKey($email): string
+    private function throttleKey(string $email): string
     {
         return Str::transliterate(Str::lower($email) . '|' . request()->ip());
     }

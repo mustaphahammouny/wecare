@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Data\RegisterData;
 use App\Data\UserData;
 use App\Data\UserFilter;
+use App\Enums\RoleList;
 use App\Models\User;
 
 class UserRepository
@@ -19,6 +20,8 @@ class UserRepository
         $user = new User();
 
         $user->fill($registerData->toArray());
+
+        $user->role = RoleList::Client->value;
 
         $user->save();
 

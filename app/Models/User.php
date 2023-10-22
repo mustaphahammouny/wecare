@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\RoleList;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -36,8 +37,20 @@ class User extends Authenticatable
         );
     }
 
+    protected function role(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => RoleList::from($attributes['role']),
+        );
+    }
+
     public function company(): HasOne
     {
         return $this->hasOne(Company::class);
+    }
+
+    public function hasRole(RoleList $role): bool
+    {
+        return $this->role === $role;
     }
 }

@@ -10,6 +10,8 @@ import Event from "./event";
 // Helper
 import MobileMenu from "./helpers/mobile-menu";
 
+import.meta.glob(["../images/**", "../fonts/**"]);
+
 class App {
     static dir = $('meta[name="dir"]').attr("content");
 
