@@ -15,4 +15,9 @@ class CityService
     {
         return $this->cityRepository->get($cityFilter);
     }
+
+    public function paginate(CityFilter $cityFilter = null)
+    {
+        return $this->cityRepository->paginate($cityFilter);
+    }
 }

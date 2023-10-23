@@ -23,6 +23,11 @@ class UserRepository
         return $this->findBy($userFilter)->first();
     }
 
+    public function count(?UserFilter $userFilter): int
+    {
+        return $this->findBy($userFilter)->count();
+    }
+
     public function store(RegisterData $registerData)
     {
         $user = new User();

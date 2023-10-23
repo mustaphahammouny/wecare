@@ -28,6 +28,12 @@ class ServiceRepository
             ->first();
     }
 
+    public function count(?ServiceFilter $serviceFilter = null): int
+    {
+        return $this->findBy($serviceFilter)
+            ->count();
+    }
+
     public function firstOrFail(ServiceFilter $serviceFilter): Service
     {
         return $this->findBy($serviceFilter)

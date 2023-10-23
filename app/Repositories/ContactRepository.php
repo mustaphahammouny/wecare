@@ -16,6 +16,12 @@ class ContactRepository
             ->paginate(General::PER_PAGE);
     }
 
+    public function count(?ContactFilter $contactFilter = null): int
+    {
+        return $this->findBy($contactFilter)
+            ->count();
+    }
+
     public function store(ContactData $contactData)
     {
         $contact = new Contact();

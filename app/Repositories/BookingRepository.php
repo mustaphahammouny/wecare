@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use App\Constants\General;
 use App\Data\BookingData;
-use App\Enums\StatusList;
 use App\Data\BookingFilter;
+use App\Enums\StatusList;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,21 +14,32 @@ class BookingRepository
 {
     public function get(?BookingFilter $bookingFilter): Collection
     {
-        return $this->findBy($bookingFilter)
+        return $this->findBy($bookingFilter, ['service', 'extras'])
             ->get();
     }
 
     public function paginate(?BookingFilter $bookingFilter)
     {
-        return $this->findBy($bookingFilter)
+        return $this->findBy($bookingFilter, ['service', 'extras'])
             ->orderBy('created_at', 'desc')
             ->paginate(General::PER_PAGE);
     }
 
-    public function find($id): Booking
+    public function find(int $id): Booking
     {
         return Booking::with(['user.company', 'service', 'extras'])
             ->findOrFail($id);
+    }
+
+    public function countByStatuses(?BookingFilter $bookingFilter = null): array
+    {
+        $bookings = $this->findBy($bookingFilter);
+
+        foreach (StatusList::cases() as $status) {
+            $bookings = $bookings->selectRaw('COUNT(CASE WHEN status = "' . $status->value . '" THEN 1 ELSE null END) AS ' . strtolower($status->name));
+        }
+
+        return $bookings->first()->toArray();
     }
 
     public function store(BookingData $bookingData): Booking
@@ -38,9 +49,9 @@ class BookingRepository
         return $this->persist($booking, $bookingData);
     }
 
-    private function findBy(?BookingFilter $bookingFilter)
+    private function findBy(?BookingFilter $bookingFilter, array $with = [])
     {
-        return Booking::with(['service', 'extras'])
+        return Booking::with($with)
             ->when($bookingFilter->userId ?? false, function ($query, $userId) {
                 $query->where('user_id', $userId);
             })

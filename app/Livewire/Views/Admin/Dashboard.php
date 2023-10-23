@@ -2,12 +2,28 @@
 
 namespace App\Livewire\Views\Admin;
 
+use App\Enums\StatusList;
+use App\Services\DashboardService;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
 class Dashboard extends Component
 {
+    #[Locked]
+    public array $statuses;
+
+    #[Locked]
+    public array $counts;
+
+    public function mount(DashboardService $dashboardService)
+    {
+        $this->statuses = StatusList::cases();
+
+        $this->counts = $dashboardService->counts();
+    }
+
     public function render()
     {
         return view('livewire.admin.dashboard')

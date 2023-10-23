@@ -32,4 +32,25 @@ enum StatusList: int
             self::Completed => 'badge rounded-pill bg-success fz13',  
         };
     }
+
+    public function background(): string
+    {
+        return match($this) 
+        {
+            self::Scheduled => 'bg-primary',   
+            self::Canceled => 'bg-danger',   
+            self::Refunded => 'bg-secondary',  
+            self::Completed => 'bg-success',  
+        };
+    }
+
+    static public function fromString($status): self
+    {
+        return match ($status) {
+            'scheduled' => self::Scheduled,
+            'canceled' => self::Canceled,
+            'refunded' => self::Refunded,
+            'completed' => self::Completed,
+        };
+    }
 }

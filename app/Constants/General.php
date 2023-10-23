@@ -4,13 +4,6 @@ namespace App\Constants;
 
 abstract class General
 {
-    const INFO = [
-        'name' => 'WeCare',
-        'phone' => '+212 123 456 789',
-        'email' => 'support@wecare.com',
-        'address' => 'App 5 Avenue Agdal Rabat, Morocco.',
-    ];
-
     const TAX = 0.2;
 
     const PER_PAGE = 5;
@@ -22,6 +15,13 @@ abstract class General
     const VALID_DATE_FORMAT = 'Y-m-d';
 
     const VALID_DATETIME_FORMAT = 'Y-m-d\\TH:i:sP';
+
+    const INFO = [
+        'name' => 'WeCare',
+        'phone' => '+212 123 456 789',
+        'email' => 'support@wecare.com',
+        'address' => 'App 5 Avenue Agdal Rabat, Morocco.',
+    ];
 
     const LOCALES = [
         'en' => ['title' => 'English', 'flag' => 'gb', 'dir' => 'ltr',],
