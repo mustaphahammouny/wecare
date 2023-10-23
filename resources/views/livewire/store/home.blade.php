@@ -91,7 +91,7 @@
                                 <div class="text-start ms-2 ">
                                     <h5 class="card-title text-dark fz30 fw700 mb-4">@lang($service->title)</h5>
                                     <a class="ud-btn btn-thm py-3 px-4 rounded-pill fs-6" wire:navigate
-                                        href="{{ route('booking', $service->slug) }}">
+                                        href="{{ route('booking', ['slug' => $service->slug]) }}">
                                         <i class="far fa-calendar me-1"></i>
                                         @lang('Book now')
                                     </a>

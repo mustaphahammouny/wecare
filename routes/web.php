@@ -2,6 +2,7 @@
 
 use App\Livewire\Views\Admin\Bookings;
 use App\Livewire\Views\Admin\Cities;
+use App\Livewire\Views\Admin\City;
 use App\Livewire\Views\Admin\Clients;
 use App\Livewire\Views\Admin\Contacts;
 use App\Livewire\Views\Admin\Dashboard;
@@ -77,5 +78,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('services', AdminServices::class)->name('services');
 
         Route::get('cities', Cities::class)->name('cities');
+        Route::get('city/{id?}', City::class)->name('city');
     });
 });

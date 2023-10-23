@@ -1,6 +1,6 @@
-@props(['title', 'route', 'icon' => null, 'position' => 'start'])
+@props(['title', 'route', 'param' => [], 'icon' => null, 'position' => 'start'])
 
-<a wire:navigate class="ud-btn btn-thm px-4 rounded-pill fs-6" href="{{ route($route) }}">
+<a wire:navigate class="ud-btn btn-thm px-4 rounded-pill fs-6 {{ $attributes['class'] }}" href="{{ route($route, $param) }}">
     @if ($icon && $position === 'start')
         <i class="{{ $icon }} me-1"></i>
     @endif
