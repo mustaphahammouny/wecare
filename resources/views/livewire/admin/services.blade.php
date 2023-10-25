@@ -1,6 +1,10 @@
 <div class="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
     <div class="row">
         <div class="col-12">
+            <div class="text-end">
+                <x-a route="admin.service" title="Create" position="start" icon="far fa-plus" />
+            </div>
+
             <div class="table-style1 table-responsive">
                 <table class="table table-borderless align-middle">
                     <thead>
@@ -27,9 +31,13 @@
                                 <td class="text-center">
                                     <x-is-active :active="$service->active" />
                                 </td>
-                                <td class="text-center">
-                                    <x-btn-click wire:click="download({{ $service->id }})" title="Edit"
-                                        position="start" icon="far fa-edit" />
+                                <td class="text-center text-nowrap">
+                                    <div class="d-inline-flex">
+                                        <x-a route="admin.service" :param="['id' => $service->id]" title="Edit" position="start"
+                                            icon="far fa-edit" class="me-2" />
+                                        <x-btn-click wire:click="delete({{ $service->id }})" title="Delete"
+                                            position="start" icon="far fa-trash" />
+                                    </div>
                                 </td>
                             </tr>
                         @empty
