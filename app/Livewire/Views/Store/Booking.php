@@ -4,7 +4,6 @@ namespace App\Livewire\Views\Store;
 
 use App\Data\BookingData;
 use App\Data\ServiceFilter;
-use App\Enums\PlanList;
 use App\Livewire\Components\Authenticate;
 use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
@@ -48,7 +47,6 @@ class Booking extends Component
         $serviceFilter = ServiceFilter::from(['slug' => $this->slug]);
 
         $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
-        $this->state['plan'] = PlanList::Once->value;
 
         $this->bookingService = $bookingService;
     }
@@ -87,32 +85,11 @@ class Booking extends Component
 
     private function store()
     {
-        // $servicePrice = $this->state['pricing']['service_price'];
-        // $duration = $this->state['pricing']['duration'];
-        // $extrasTotal = array_reduce(array_column($this->state['extras'], 'price'), fn ($carry, $item) => $carry += $item);
-
-        // $data = [
-        //     'user_id' => Auth::id(),
-        //     'service_id' => $this->state['service']['id'],
-        //     'service_price' => $servicePrice,
-
-
-        //     'total' => $servicePrice * $duration + $extrasTotal,
-        // ];
-
-        // $extras = array_reduce($this->state['extras'], function ($carry, $item) {
-        //     $carry[$item['id']] = ['extra_price' => $item['price']];
-
-        //     return $carry;
-        // }, []);
-
         try {
             $bookingData = BookingData::from([
                 'user_id' => Auth::id(),
                 'service_id' => $this->state['service']['id'],
                 'city_id' => $this->state['city'],
-                'plan' => $this->state['plan'],
-                // 'frenquecy' => $this->state['frenquecy'],
                 'duration' => $this->state['duration']['duration'],
                 'phone' => $this->state['phone'],
                 'address' => $this->state['address'],
@@ -125,8 +102,7 @@ class Booking extends Component
 
             return $this->redirect(ThankYou::class, navigate: true);
         } catch (\Exception $e) {
-            throw $e;
-            // Session::flash('error', $e->getMessage());
+            Session::flash('error', $e->getMessage());
         }
     }
 

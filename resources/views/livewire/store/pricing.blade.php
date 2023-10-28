@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 wow fadeInUp" data-wow-delay="300ms">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 wow fadeInUp justify-content-center" data-wow-delay="300ms">
                 @foreach ($pricings as $pricing)
                     <div class="col">
                         <div class="pricing_packages">

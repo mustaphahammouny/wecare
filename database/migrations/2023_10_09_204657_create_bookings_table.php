@@ -25,8 +25,6 @@ return new class extends Migration
             $table->decimal('service_price');
             $table->string('phone');
             $table->text('address');
-            $table->unsignedTinyInteger('plan');
-            $table->unsignedTinyInteger('frequency')->nullable();
             $table->unsignedTinyInteger('duration');
             $table->timestamp('service_at');
             $table->decimal('total');

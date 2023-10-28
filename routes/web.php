@@ -7,6 +7,8 @@ use App\Livewire\Views\Admin\City;
 use App\Livewire\Views\Admin\Clients;
 use App\Livewire\Views\Admin\Contacts;
 use App\Livewire\Views\Admin\Dashboard;
+use App\Livewire\Views\Admin\Pricing as AdminPricing;
+use App\Livewire\Views\Admin\Pricings;
 use App\Livewire\Views\Admin\Service;
 use App\Livewire\Views\Auth\ForgotPassword;
 use App\Livewire\Views\Auth\Login;
@@ -80,6 +82,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('services', AdminServices::class)->name('services');
         Route::get('service/{id?}', Service::class)->name('service');
+
+        Route::get('pricings', Pricings::class)->name('pricings');
+        Route::get('pricing/{id?}', AdminPricing::class)->name('pricing');
 
         Route::get('cities', Cities::class)->name('cities');
         Route::get('city/{id?}', City::class)->name('city');

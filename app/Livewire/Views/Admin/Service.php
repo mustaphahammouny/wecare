@@ -49,7 +49,7 @@ class Service extends Component
 
     public function render()
     {
-        return view('livewire.admin.Service')
+        return view('livewire.admin.service')
             ->title('Service');
     }
 }

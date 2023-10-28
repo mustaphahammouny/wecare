@@ -24,14 +24,17 @@ class Duration extends Component
 
         $this->form->fillProps($this->state);
 
-        $pricingFilter = PricingFilter::from(['plan' => $this->state['plan']]);
-
-        $pricings = $pricingService->get($pricingFilter);
+        $pricings = $pricingService->get();
 
         $service = $this->state['service'];
 
         for ($i = $service['min_duration']; $i <= $service['max_duration']; $i += $service['step_duration']) {
             $pricing = $pricings->first(fn ($pricing) => $i >= $pricing->min_duration && $i <= $pricing->max_duration);
+            
+            if (!$pricing) {
+                continue;
+            }
+
             $this->durations[] = [
                 'id' => $pricing->id,
                 'duration' => $i,

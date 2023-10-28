@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::create('pricings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('plan');
             $table->unsignedTinyInteger('min_duration');
             $table->unsignedTinyInteger('max_duration');
             $table->decimal('price');

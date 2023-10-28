@@ -3,7 +3,6 @@
 namespace App\Livewire\Views\Store;
 
 use App\Data\PricingFilter;
-use App\Enums\PlanList;
 use App\Services\PricingService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
@@ -18,9 +17,7 @@ class Pricing extends Component
 
     public function boot(PricingService $pricingService)
     {
-        $pricingFilter = PricingFilter::from(['plan' => PlanList::Once->value]);
-
-        $this->pricings = $pricingService->get($pricingFilter);
+        $this->pricings = $pricingService->get();
     }
 
     public function render()

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\PlanList;
 use App\Enums\StatusList;
 use App\Support\Number;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -33,14 +32,6 @@ class Booking extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => Number::toPrice($attributes['total'])
-        );
-    }
-
-    protected function plan(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => PlanList::from($attributes['plan']),
-            // set: fn (CityList $city) => $city->value
         );
     }
 

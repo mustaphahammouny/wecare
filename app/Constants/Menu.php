@@ -26,6 +26,7 @@ abstract class Menu
         ['title' => 'Contacts', 'route' => 'admin.contacts', 'icon' => 'far fa-address-book'],
         ['title' => 'Clients', 'route' => 'admin.clients', 'icon' => 'far fa-users'],
         ['title' => 'Services', 'route' => 'admin.services', 'icon' => 'far fa-list'],
+        ['title' => 'Pricings', 'route' => 'admin.pricings', 'icon' => 'far fa-dollar-circle'],
         ['title' => 'Cities', 'route' => 'admin.cities', 'icon' => 'far fa-map'],
     ];
 }
