@@ -31,11 +31,12 @@
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
                                 <td class="text-center">{{ $booking->service_at }}</td>
                                 <td class="text-center">
-                                    <span class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
+                                    <span
+                                        class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
                                 </td>
                                 <td class="text-center">
-                                    <x-btn-click wire:click="download({{ $booking->id }})" title="Edit"
-                                        position="start" icon="far fa-edit" />
+                                    <x-a route="admin.booking" :param="['id' => $booking->id]" title="Edit" position="start"
+                                        icon="far fa-edit" class="me-2" />
                                 </td>
                             </tr>
                         @empty

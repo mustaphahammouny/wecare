@@ -49,6 +49,15 @@ class BookingRepository
         return $this->persist($booking, $bookingData);
     }
 
+    public function updateStatus(Booking $booking, StatusList $status): Booking
+    {
+        $booking->update([
+            'status' => $status,
+        ]);
+
+        return $booking;
+    }
+
     private function findBy(?BookingFilter $bookingFilter, array $with = [])
     {
         return Booking::with($with)

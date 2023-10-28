@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Views\Admin\Booking as AdminBooking;
 use App\Livewire\Views\Admin\Bookings;
 use App\Livewire\Views\Admin\Cities;
 use App\Livewire\Views\Admin\City;
@@ -71,6 +72,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('dashboard', Dashboard::class)->name('dashboard');
 
         Route::get('bookings', Bookings::class)->name('bookings');
+        Route::get('booking/{id}', AdminBooking::class)->name('booking');
 
         Route::get('contacts', Contacts::class)->name('contacts');
 

@@ -29,6 +29,11 @@ class BookingService
         return $this->bookingRepository->paginate($bookingFilter);
     }
 
+    public function find(int $id)
+    {
+        return $this->bookingRepository->find($id);
+    }
+
     public function store(BookingData $bookingData)
     {
         try {
@@ -38,13 +43,13 @@ class BookingService
             $pricing = $this->pricingRepository->first($pricingFilter);
             $extras = $this->extraRepository->findIn($bookingData->extras);
             $extrasTotal = $extras->sum('price');
-            
+
             $extras = $extras->reduce(function (array $carry, Extra $extra) {
                 $carry[$extra->id] = ['extra_price' => $extra->price];
-                
+
                 return $carry;
             }, []);
-            
+
             $bookingData->servicePrice = $pricing->price;
             $bookingData->total = $pricing->price * $bookingData->duration + $extrasTotal;
             $bookingData->extras = $extras;
@@ -74,6 +79,23 @@ class BookingService
                 'content' => $pdf,
             ];
         } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function updateStatus(Booking $booking, StatusList $status)
+    {
+        try {
+            DB::beginTransaction();
+
+            $this->bookingRepository->updateStatus($booking, $status);
+
+            DB::commit();
+
+            return $booking;
+        } catch (Exception $e) {
+            DB::rollBack();
+
             throw $e;
         }
     }

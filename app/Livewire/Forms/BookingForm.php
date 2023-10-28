@@ -2,50 +2,22 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\CompanyData;
-use App\Models\Company;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Locked;
+use App\Models\Booking;
 use Livewire\Form;
 
 class BookingForm extends Form
 {
     public int $status;
 
-    public string $name;
-
-    public string $ice;
-
-    public ?string $address;
-
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:255'],
-            'ice' => ['required', 'string'],
-            'address' => ['nullable', 'string', 'min:3'],
+            'status' => ['required', 'integer'],
         ];
     }
 
-    public function fillProps(?Company $company)
+    public function fillProps(Booking $booking)
     {
-        $this->user_id = Auth::id();
-
-        if ($company) {
-            $this->name = $company->name;
-
-            $this->ice = $company->ice;
-
-            $this->address = $company->address;
-        }
-    }
-
-    public function toData()
-    {
-        $data = array_filter($this->all(), function ($value) {
-            return $value !== null;
-        });
-
-        return CompanyData::from($data);    
+        $this->status = $booking->status->value;
     }
 }
