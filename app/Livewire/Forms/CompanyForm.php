@@ -43,10 +43,6 @@ class CompanyForm extends Form
 
     public function toData()
     {
-        $data = array_filter($this->all(), function ($value) {
-            return $value !== null;
-        });
-
-        return CompanyData::from($data);    
+        return CompanyData::from($this->all());    
     }
 }

@@ -25,6 +25,16 @@
                     <x-input wire:model="form.step_duration" placeholder="Step duration" />
                 </div>
 
+                <div class="mb15">
+                    <x-input wire:model="form.image" type="file" placeholder="Image" />
+
+                    @if ($service?->firstMedia)
+                        <div class="mt15" style="max-width: 200px">
+                            <img class="img-fluid rounded" src="{{ $service->firstMedia->getUrl() }}">
+                        </div>
+                    @endif
+                </div>
+
                 <div class="switch-style1 mb15">
                     <div class="form-check form-switch mb20">
                         <input wire:model="form.active" type="checkbox" class="form-check-input" id="active">

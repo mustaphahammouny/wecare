@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components;
 
-use App\Enums\PlanList;
 use App\Support\Number;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;

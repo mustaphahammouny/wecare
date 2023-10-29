@@ -44,7 +44,7 @@ class ServiceRepository
 
     public function find($id): Service
     {
-        return Service::with(['extras'])
+        return Service::with(['firstMedia'])
             ->findOrFail($id);
     }
 
@@ -78,7 +78,7 @@ class ServiceRepository
 
     private function persist(Service $service, ServiceData $serviceData): Service
     {
-        $service->fill($serviceData->toArray());
+        $service->fill($serviceData->except('image')->toArray());
 
         $service->slug = Str::slug($service->title);
 

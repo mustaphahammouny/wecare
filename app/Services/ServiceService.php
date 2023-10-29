@@ -48,7 +48,12 @@ class ServiceService
             if ($service) {
                 $service = $this->serviceRepository->update($service, $serviceData);
             } else {
-                $service = $this->serviceRepository->store($serviceData);
+                $service = $this->serviceRepository->store($serviceData);                
+            }
+
+            if ($serviceData->image) {
+                $service->clearMediaCollection();
+                $service->addMedia($serviceData->image)->toMediaCollection();
             }
 
             DB::commit();

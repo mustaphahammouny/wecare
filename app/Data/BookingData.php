@@ -9,7 +9,6 @@ use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
-use Spatie\LaravelData\Optional;
 
 #[MapInputName(SnakeCaseMapper::class)]
 #[MapName(SnakeCaseMapper::class)]
@@ -23,10 +22,10 @@ class BookingData extends Data
         public string $phone,
         public string $address,
         public Carbon $serviceAt,
-        public float|Optional $servicePrice,
-        public float|Optional $total,
-        public StatusList|Optional $status,
-        public array|Optional $extras,
+        public ?float $servicePrice,
+        public ?float $total,
+        public ?StatusList $status,
+        public ?array $extras,
     ) {
     }
 

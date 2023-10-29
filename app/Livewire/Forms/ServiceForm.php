@@ -11,12 +11,14 @@ class ServiceForm extends Form
     public string $title;
 
     public int $min_duration;
-    
+
     public int $max_duration;
-    
+
     public int $step_duration;
-    
-    public bool $active;
+
+    public $image = null;
+
+    public bool $active = false;
 
     public function rules()
     {
@@ -25,6 +27,7 @@ class ServiceForm extends Form
             'min_duration' => ['required', 'integer', 'min:1'],
             'max_duration' => ['required', 'integer', 'min:1'],
             'step_duration' => ['required', 'integer', 'min:1'],
+            'image' => ['nullable', 'image'],
             'active' => ['required', 'boolean'],
         ];
     }
@@ -42,6 +45,6 @@ class ServiceForm extends Form
 
     public function toData()
     {
-        return ServiceData::from($this->all());    
+        return ServiceData::from($this->all());
     }
 }

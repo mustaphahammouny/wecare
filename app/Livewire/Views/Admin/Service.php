@@ -9,16 +9,20 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('layouts.admin.app')]
 class Service extends Component
 {
+    use WithFileUploads;
+    
     public ServiceForm $form;
 
     #[Locked]
     public ?int $id = null;
 
-    protected ?ServiceModel $service = null;
+    #[Locked]
+    public ?ServiceModel $service = null;
 
     public function boot(ServiceService $serviceService)
     {

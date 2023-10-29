@@ -9,6 +9,7 @@
                 <table class="table table-borderless align-middle">
                     <thead>
                         <tr>
+                            <th class="fz15 fw500" scope="col"></th>
                             <th class="fz15 fw500" scope="col">@lang('Title')</th>
                             <th class="fz15 fw500" scope="col">@lang('Slug')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Min duration')</th>
@@ -21,6 +22,11 @@
                     <tbody>
                         @forelse ($services as $service)
                             <tr>
+                                <td>
+                                    <div style="max-width: 100px">
+                                        <img class="img-fluid rounded" src="{{ $service->firstMedia?->getUrl() }}" alt="Service Image">
+                                    </div>
+                                </td>
                                 <td>
                                     <h6 class="mb-0">{{ $service->title }}</h6>
                                 </td>

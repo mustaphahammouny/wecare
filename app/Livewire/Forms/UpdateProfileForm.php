@@ -39,10 +39,6 @@ class UpdateProfileForm extends Form
 
     public function toData()
     {
-        $data = array_filter($this->all(), function ($value) {
-            return $value !== null;
-        });
-
-        return UserData::from($data);
+        return UserData::from($this->all());
     }
 }
