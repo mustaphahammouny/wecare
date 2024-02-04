@@ -88,6 +88,8 @@ class BookingRepository
 
         $booking->status = $bookingData->status;
 
+        dd($booking);
+
         $booking->save();
 
         $booking->extras()->sync($bookingData->extras);
