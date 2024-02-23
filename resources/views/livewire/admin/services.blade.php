@@ -6,7 +6,7 @@
             </div>
 
             <div class="table-style1 table-responsive">
-                <table class="table table-borderless align-middle">
+                <table class="table table-borderless align-middle text-nowrap">
                     <thead>
                         <tr>
                             <th class="fz15 fw500" scope="col"></th>

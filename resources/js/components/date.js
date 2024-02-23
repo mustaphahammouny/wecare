@@ -6,11 +6,9 @@ class Date {
     };
 
     static init () {
-        const startDate = moment().add(1, 'days').format('DD/MM//YYYY');
-
         Datepicker.init({
             ...this.datePicker,
-            startDate,
+            startDate: '+2d',
         });
 
         $(this.datePicker.id).on('changeDate', function() {

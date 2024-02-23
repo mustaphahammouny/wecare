@@ -3,7 +3,7 @@ import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
 
 class Datepicker {
     static init(param) {
-        $(param.id).datepicker({
+        return $(param.id).datepicker({
             format: 'dd/mm/yyyy',
             weekStart: 1,
             todayHighlight: true,

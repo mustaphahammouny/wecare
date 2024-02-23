@@ -2,8 +2,10 @@ import 'bootstrap-select';
 import 'bootstrap-select/sass/bootstrap-select.scss';
 
 class Selectpicker {
-    static init (param) {
-        $(param.id).selectpicker();
+    static init(param) {
+        $.fn.selectpicker.Constructor.BootstrapVersion = '5';
+
+        return $(param.id).selectpicker();
     }
 }
 

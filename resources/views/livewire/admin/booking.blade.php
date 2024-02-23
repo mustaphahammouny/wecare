@@ -4,8 +4,9 @@
         <div class="col-12 col-md-8">
             <form wire:submit="save" class="form-style1">
                 <div class="mb15">
-                    <div class="form-group">
-                        <select wire:model="form.status" class="form-control @error('form.status') border-danger is-invalid @enderror">
+                    <div wire:ignore class="form-group">
+                        <select id="select-status" data-placeholder="{{ __('Status') }}" class="form-control">
+                            <option></option>
                             @foreach ($statuses as $status)
                                 <option value="{{ $status->value }}" @selected($form->status == $status->value)>
                                     @lang($status->title())

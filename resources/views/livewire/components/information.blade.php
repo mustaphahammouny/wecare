@@ -9,15 +9,15 @@
 
         <div class="mb15">
             <div wire:ignore class="form-group">
-                <div class="bootselect-multiselect">
-                    <select id="select-city" title="{{ __('City') }}">
-                        @foreach ($cities as $city)
-                            <option value="{{ $city->id }}" @selected($form->city == $city->id)>
-                                @lang($city->name)
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                <select id="select-city" data-placeholder="{{ __('City') }}"
+                    class="form-select">
+                    <option></option>
+                    @foreach ($cities as $city)
+                        <option value="{{ $city->id }}" @selected($form->city == $city->id)>
+                            @lang($city->name)
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mt-2">

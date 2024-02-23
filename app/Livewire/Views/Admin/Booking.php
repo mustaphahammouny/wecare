@@ -9,6 +9,7 @@ use App\Services\BookingService;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
@@ -27,13 +28,19 @@ class Booking extends Component
     public function boot(BookingService $bookingService)
     {
         $this->booking = $bookingService->find($this->id);
-        
+
         $this->statuses = StatusList::cases();
     }
 
     public function mount()
     {
         $this->form->fillProps($this->booking);
+    }
+
+    #[On('status-updated')]
+    public function statusUpdated($status)
+    {
+        $this->form->status = $status;
     }
 
     public function save(BookingService $bookingService)

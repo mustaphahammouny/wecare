@@ -9284,8 +9284,11 @@ input:focus-visible {
     position: relative;
 }
 .table-style1 .table thead tr {
-    background-color: var(--red-color);
+    // background-color: var(--red-color);
     overflow: hidden;
+}
+.table-style1 .table thead th {
+    background-color: var(--red-color) !important;
 }
 .table-style1 .table th {
     color: #ffffff;

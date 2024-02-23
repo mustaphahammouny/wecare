@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Livewire\Views\Admin\Booking as AdminBooking;
 use App\Livewire\Views\Admin\Bookings;
 use App\Livewire\Views\Admin\Cities;

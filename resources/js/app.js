@@ -3,6 +3,7 @@ import "./bootstrap";
 // Components
 import InformationComponent from "./components/information";
 import DateComponent from "./components/date";
+import BookingComponent from "./components/booking";
 
 // Event
 import Event from "./event";
@@ -18,6 +19,7 @@ class App {
     static components = {
         "components.information": InformationComponent,
         "components.date": DateComponent,
+        "views.admin.booking": BookingComponent,
     };
 
     static init() {

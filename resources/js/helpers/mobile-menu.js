@@ -4,10 +4,10 @@ import 'mmenu-js/src/mmenu';
 class MobileMenu {
     static init() {
         if ($('#menu').length == 0) {
-            return
+            return;
         }
 
-        new Mmenu(
+        return new Mmenu(
             '#menu',
             {
                 navbar: {

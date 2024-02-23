@@ -3,7 +3,7 @@ import "owl.carousel/src/scss/owl.carousel.scss";
 
 class Carousel {
     static init(param) {
-        $(param.id).owlCarousel({
+        return $(param.id).owlCarousel({
             loop: true,
             items: 1,
             margin: 0,
@@ -19,7 +19,7 @@ class Carousel {
     }
 
     static initTestemonial(param) {
-        $(param.id).owlCarousel({
+        return $(param.id).owlCarousel({
             loop: true,
             margin: 50,
             center: false,
