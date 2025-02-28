@@ -23,8 +23,6 @@
                         </div>
                         <div class="col-auto">
                             <div class="d-flex align-items-center">
-                                <x-locale />
-
                                 <livewire:components.btn-auth />
                             </div>
                         </div>
@@ -38,8 +36,6 @@
                 <div class="header innerpage-style">
                     <div class="menu_and_widgets pt-1">
                         <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-                            <x-locale />
-
                             <x-logo width="130" />
 
                             <livewire:components.btn-auth />

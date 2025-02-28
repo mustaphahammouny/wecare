@@ -9,12 +9,11 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapInputName(SnakeCaseMapper::class)]
 #[MapName(SnakeCaseMapper::class)]
-class PricingData extends Data
+class DurationData extends Data
 {
     public function __construct(
-        public int $minDuration,
-        public int $maxDuration,
-        public float $price,
-    ) {
-    }
+        public int $min,
+        public int $max,
+        public float $hourlyPrice,
+    ) {}
 }

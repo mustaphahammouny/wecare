@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use App\Support\Number;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Booking extends Model
 {
@@ -19,6 +20,7 @@ class Booking extends Model
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'status' => BookingStatus::class,
     ];
 
     protected function formattedServicePrice(): Attribute
@@ -32,14 +34,6 @@ class Booking extends Model
     {
         return Attribute::make(
             get: fn (mixed $value, array $attributes) => Number::toPrice($attributes['total'])
-        );
-    }
-
-    protected function status(): Attribute
-    {
-        return Attribute::make(
-            get: fn (mixed $value, array $attributes) => StatusList::from($attributes['status']),
-            set: fn (StatusList $status) => $status->value
         );
     }
 
@@ -70,5 +64,10 @@ class Booking extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function invoice(): HasOne
+    {
+        return $this->hasOne(Invoice::class);
     }
 }

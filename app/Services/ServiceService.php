@@ -11,28 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceService
 {
-    public function __construct(protected ServiceRepository $serviceRepository)
+    public function __construct(protected ServiceRepository $serviceRepository) {}
+
+    public function get(?ServiceFilter $serviceFilter = null, array $with = [])
     {
+        return $this->serviceRepository->get($serviceFilter, $with);
     }
 
-    public function get(ServiceFilter $serviceFilter = null)
+    public function paginate(?ServiceFilter $serviceFilter = null, array $with = [])
     {
-        return $this->serviceRepository->get($serviceFilter);
+        return $this->serviceRepository->paginate($serviceFilter, $with);
     }
 
-    public function paginate(ServiceFilter $serviceFilter = null)
+    public function first(ServiceFilter $serviceFilter, array $with = [])
     {
-        return $this->serviceRepository->paginate($serviceFilter);
+        return $this->serviceRepository->first($serviceFilter, $with);
     }
 
-    public function first(ServiceFilter $serviceFilter)
+    public function firstOrFail(ServiceFilter $serviceFilter, array $with = [])
     {
-        return $this->serviceRepository->first($serviceFilter);
-    }
-
-    public function firstOrFail(ServiceFilter $serviceFilter)
-    {
-        return $this->serviceRepository->firstOrFail($serviceFilter);
+        return $this->serviceRepository->firstOrFail($serviceFilter, $with);
     }
 
     public function find(int $id)
@@ -48,7 +46,7 @@ class ServiceService
             if ($service) {
                 $service = $this->serviceRepository->update($service, $serviceData);
             } else {
-                $service = $this->serviceRepository->store($serviceData);                
+                $service = $this->serviceRepository->store($serviceData);
             }
 
             if ($serviceData->image) {

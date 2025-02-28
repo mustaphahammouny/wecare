@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
         $this->call(CitySeeder::class);
         $this->call(ServiceSeeder::class);
         $this->call(ExtraSeeder::class);
-        $this->call(PricingSeeder::class);
         $this->call(BookingSeeder::class);
         $this->call(ContactSeeder::class);
     }
 
     private function clear(): void
     {
+        $re = File::cleanDirectory(storage_path('app/public'));
+
         $excludeTables = ['migrations'];
         $tables = DB::select('SHOW TABLES');
 

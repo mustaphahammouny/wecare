@@ -8,7 +8,7 @@
                         value="{{ $duration['duration'] }}">
                         <span class="mt-1">{{ $duration['duration'] }}@lang('h')</span>
                         <br />
-                        <span class="fz10">{{ $duration['hourly_price'] }}</span>
+                        <span class="fz10">{{ $duration['formatted_hourly_price'] }}</span>
                     </x-btn-radio>
                 </div>
             @endforeach

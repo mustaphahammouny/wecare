@@ -12,9 +12,9 @@
                             <th class="fz15 fw500" scope="col"></th>
                             <th class="fz15 fw500" scope="col">@lang('Title')</th>
                             <th class="fz15 fw500" scope="col">@lang('Slug')</th>
-                            <th class="fz15 fw500 text-center" scope="col">@lang('Min duration')</th>
+                            {{-- <th class="fz15 fw500 text-center" scope="col">@lang('Min duration')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Max duration')</th>
-                            <th class="fz15 fw500 text-center" scope="col">@lang('Step duration')</th>
+                            <th class="fz15 fw500 text-center" scope="col">@lang('Step duration')</th> --}}
                             <th class="fz15 fw500 text-center" scope="col">@lang('Status')</th>
                             <th class="fz15 fw500 text-center" scope="col">@lang('Action')</th>
                         </tr>
@@ -31,9 +31,9 @@
                                     <h6 class="mb-0">{{ $service->title }}</h6>
                                 </td>
                                 <td>{{ $service->slug }}</td>
-                                <td class="text-center">{{ $service->min_duration }}@lang('h')</td>
+                                {{-- <td class="text-center">{{ $service->min_duration }}@lang('h')</td>
                                 <td class="text-center">{{ $service->max_duration }}@lang('h')</td>
-                                <td class="text-center">{{ $service->step_duration }}@lang('h')</td>
+                                <td class="text-center">{{ $service->step_duration }}@lang('h')</td> --}}
                                 <td class="text-center">
                                     <x-is-active :active="$service->active" />
                                 </td>

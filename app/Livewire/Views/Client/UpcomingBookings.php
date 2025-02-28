@@ -22,7 +22,7 @@ class UpcomingBookings extends Component
         return view('livewire.client.upcoming-bookings')
             ->title('Upcoming bookings')
             ->with([
-                'bookings' => $bookingService->paginate($bookingFilter),
+                'bookings' => $bookingService->paginate($bookingFilter, ['service', 'extras']),
             ]);
     }
 }

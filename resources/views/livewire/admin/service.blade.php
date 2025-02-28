@@ -14,18 +14,6 @@
                 </div>
 
                 <div class="mb15">
-                    <x-input wire:model="form.min_duration" placeholder="Min duration" />
-                </div>
-
-                <div class="mb15">
-                    <x-input wire:model="form.max_duration" placeholder="Max duration" />
-                </div>
-
-                <div class="mb15">
-                    <x-input wire:model="form.step_duration" placeholder="Step duration" />
-                </div>
-
-                <div class="mb15">
                     <x-input wire:model="form.image" type="file" placeholder="Image" />
 
                     @if ($service?->firstMedia)
@@ -43,6 +31,18 @@
                         </label>
                     </div>
                 </div>
+
+                {{-- <div class="mb15">
+                    <x-input wire:model="form.min_duration" placeholder="Min duration" />
+                </div>
+
+                <div class="mb15">
+                    <x-input wire:model="form.max_duration" placeholder="Max duration" />
+                </div>
+
+                <div class="mb15">
+                    <x-input wire:model="form.step_duration" placeholder="Step duration" />
+                </div> --}}
 
                 <div class="d-flex justify-content-end my20">
                     <x-btn-submit title="Save" position="start" icon="far fa-save" />

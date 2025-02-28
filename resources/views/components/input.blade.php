@@ -1,12 +1,12 @@
-@props(['label' => null, 'alert' => false])
+@props(['alert' => false])
 
 <div class="form-group">
-    @if ($label)
-        <label class="form-label fw600 dark-color">@lang($label)</label>
+    @if (Arr::has($attributes, 'placeholder'))
+        <label class="form-label fw600 dark-color">@lang(Arr::get($attributes, 'placeholder'))</label>
     @endif
 
     <input class="form-control @error($attributes['wire:model']) border-danger is-invalid @enderror"
-        placeholder="{{ __($attributes['placeholder']) }}" {{ $attributes }} />
+        placeholder="{{ __(Arr::get($attributes, 'placeholder')) }}" {{ $attributes }} />
 
     @if ($alert)
         <div class="mt-2">

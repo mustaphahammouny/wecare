@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum StatusList: int
+enum BookingStatus: int
 {
     case Scheduled = 1;
     case Canceled = 2;

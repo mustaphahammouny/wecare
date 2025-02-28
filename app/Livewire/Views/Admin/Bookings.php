@@ -14,7 +14,7 @@ class Bookings extends Component
         return view('livewire.admin.bookings')
             ->title('Bookings')
             ->with([
-                'bookings' => $bookingService->paginate(),
+                'bookings' => $bookingService->paginate(with: ['service', 'extras', 'user']),
             ]);
     }
 }

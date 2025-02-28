@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Constants\Menu;
 use App\Data\UserFilter;
-use App\Enums\RoleList;
-use App\Enums\StatusList;
+use App\Enums\Role;
+use App\Enums\BookingStatus;
 use App\Repositories\BookingRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\ContactRepository;
@@ -26,7 +26,7 @@ class DashboardService
     public function counts()
     {
         $menu = collect(Menu::ADMIN_MENU);
-        $userFilter = UserFilter::from(['role' => RoleList::Client]);
+        $userFilter = UserFilter::from(['role' => Role::Client]);
 
         $general['clients']['count'] = $this->userRepository->count($userFilter);
         $general['services']['count'] = $this->serviceRepository->count();
@@ -42,7 +42,7 @@ class DashboardService
         foreach ($bookings as $key => $count) {
             $bookings[$key] = [
                 'count' => $count,
-                'status' => StatusList::fromString($key),
+                'status' => BookingStatus::fromString($key),
             ];
         }
 

@@ -26,7 +26,7 @@ class PastBookings extends Component
         try {
             $pdf = $bookingService->download($booking);
 
-            return response()->streamDownload(fn () => print($pdf['content']), $pdf['name']);
+            return response()->streamDownload(fn() => print($pdf['content']), $pdf['name']);
         } catch (\Exception $e) {
             Session::flash('error', $e->getMessage());
 
@@ -44,7 +44,7 @@ class PastBookings extends Component
         return view('livewire.client.past-bookings')
             ->title('Past bookings')
             ->with([
-                'bookings' => $bookingService->paginate($bookingFilter),
+                'bookings' => $bookingService->paginate($bookingFilter, ['service', 'extras']),
             ]);
     }
 }

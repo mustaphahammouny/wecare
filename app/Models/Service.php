@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -30,6 +31,21 @@ class Service extends Model implements HasMedia
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function durations(): HasMany
+    {
+        return $this->hasMany(Duration::class);
+    }
+
+    public function minDuration(): HasOne
+    {
+        return $this->durations()->one()->ofMany('min', 'min');
+    }
+
+    public function maxDuration(): HasOne
+    {
+        return $this->durations()->one()->ofMany('max', 'max');
     }
 
     public function firstMedia(): MorphOne

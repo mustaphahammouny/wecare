@@ -2,7 +2,7 @@
 
 namespace App\Data;
 
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use Carbon\Carbon;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Attributes\MapName;
@@ -17,7 +17,7 @@ class BookingFilter extends Data
         public ?int $userId,
         public ?Carbon $start,
         public ?Carbon $end,
-        public ?StatusList $status,
+        public ?BookingStatus $status,
     ) {
     }
 }

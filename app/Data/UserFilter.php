@@ -2,13 +2,13 @@
 
 namespace App\Data;
 
-use App\Enums\RoleList;
+use App\Enums\Role;
 use Spatie\LaravelData\Data;
 
 class UserFilter extends Data
 {
     public function __construct(
-        public ?RoleList $role,
+        public ?Role $role,
         public ?string $email,
     ) {
     }

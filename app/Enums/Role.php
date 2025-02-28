@@ -5,7 +5,7 @@ namespace App\Enums;
 use App\Livewire\Views\Admin\Dashboard;
 use App\Livewire\Views\Client\Services;
 
-enum RoleList: int
+enum Role: int
 {
     case Admin = 1;
     case Client = 2;

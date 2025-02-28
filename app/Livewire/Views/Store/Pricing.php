@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Views\Store;
 
-use App\Data\PricingFilter;
-use App\Services\PricingService;
+use App\Models\Service;
+use App\Services\ServiceService;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -13,11 +13,20 @@ use Livewire\Component;
 class Pricing extends Component
 {
     #[Locked]
-    public Collection $pricings;
+    public Collection $services;
 
-    public function boot(PricingService $pricingService)
+    public function price(Service $service)
     {
-        $this->pricings = $pricingService->get();
+        if ($service->minDuration->hourly_price == $service->maxDuration->hourly_price) {
+            return $service->minDuration->formatted_hourly_price;
+        }
+
+        return "{$service->maxDuration->formatted_hourly_price} - {$service->minDuration->formatted_hourly_price}";
+    }
+
+    public function boot(ServiceService $serviceService)
+    {
+        $this->services = $serviceService->get(with: ['minDuration', 'maxDuration']);
     }
 
     public function render()

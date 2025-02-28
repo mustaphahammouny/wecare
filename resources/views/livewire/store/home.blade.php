@@ -20,57 +20,6 @@
         </div>
     </section>
 
-    {{-- <section class="mx-auto maxw1600 bgc-thm-light bdrs24">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms"
-                    style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
-                    <div class="main-title text-center">
-                        <h2 class="title fz40 fw700">@lang('Easy steps for everyone')</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-4 wow fadeInLeft" data-wow-delay="00ms"
-                    style="visibility: visible; animation-delay: 0ms; animation-name: fadeInLeft;">
-                    <div class="iconbox-style3 active text-center">
-                        <div class="icon"><img src="{{ Vite::image('home/1.png') }}" alt="">
-                        </div>
-                        <div class="iconbox-content">
-                            <h4 class="title">Buy a property</h4>
-                            <p class="text">Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies
-                                auctor.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="300ms"
-                    style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
-                    <div class="iconbox-style3 active text-center">
-                        <div class="icon"><img src="{{ Vite::image('home/2.png') }}" alt="">
-                        </div>
-                        <div class="iconbox-content">
-                            <h4 class="title">Sell a property</h4>
-                            <p class="text">Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies
-                                auctor.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 wow fadeInRight" data-wow-delay="300ms"
-                    style="visibility: visible; animation-delay: 300ms; animation-name: fadeInRight;">
-                    <div class="iconbox-style3 active text-center">
-                        <div class="icon"><img src="{{ Vite::image('home/3.png') }}" alt="">
-                        </div>
-                        <div class="iconbox-content">
-                            <h4 class="title">Rent a property</h4>
-                            <p class="text">Nullam sollicitudin blandit eros eu pretium. Nullam maximus ultricies
-                                auctor.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <section class="px40">
         <div class="container">
             <div class="row">
@@ -123,10 +72,10 @@
                                     <h5 class="title">@lang('Booked Cooking Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
                                     <p class="text">“@lang('I signed up for a cooking class through this app, and it
-                                        exceeded my expectations. The instructor was not only a skilled chef but also an
-                                        excellent teacher. I learned valuable cooking techniques and tried delicious
-                                        recipes. The app made it easy to connect with the instructor and access class
-                                        materials. I can\'t wait to take more classes!')”</p>
+                                                                            exceeded my expectations. The instructor was not only a skilled chef but also an
+                                                                            excellent teacher. I learned valuable cooking techniques and tried delicious
+                                                                            recipes. The app made it easy to connect with the instructor and access class
+                                                                            materials. I can\'t wait to take more classes!')”</p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
@@ -149,9 +98,9 @@
                                     <h5 class="title">@lang('Booked Coaching Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
                                     <p class="text">“@lang('I had an incredible experience with the coaching service on this
-                                        app. The coach was not only knowledgeable but also a great motivator. Their
-                                        guidance and support were instrumental in helping me achieve my goals. I highly
-                                        recommend this service to anyone looking for personal growth and development.')”
+                                                                            app. The coach was not only knowledgeable but also a great motivator. Their
+                                                                            guidance and support were instrumental in helping me achieve my goals. I highly
+                                                                            recommend this service to anyone looking for personal growth and development.')”
                                     </p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
@@ -175,10 +124,10 @@
                                     <h5 class="title">@lang('Booked Cleaning Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
                                     <p class="text">“@lang('I recently booked a cleaning service through this app, and I
-                                        couldn\'t be happier with the results. The cleaner was punctual, professional,
-                                        and left my home spotless. It was so convenient to schedule the service through
-                                        the app, and the whole process was seamless. I\'ll definitely be using this
-                                        service again for regular cleanings.')”</p>
+                                                                            couldn\'t be happier with the results. The cleaner was punctual, professional,
+                                                                            and left my home spotless. It was so convenient to schedule the service through
+                                                                            the app, and the whole process was seamless. I\'ll definitely be using this
+                                                                            service again for regular cleanings.')”</p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>

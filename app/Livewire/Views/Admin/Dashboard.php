@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Views\Admin;
 
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use App\Services\DashboardService;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -19,7 +19,7 @@ class Dashboard extends Component
 
     public function mount(DashboardService $dashboardService)
     {
-        $this->statuses = StatusList::cases();
+        $this->statuses = BookingStatus::cases();
 
         $this->counts = $dashboardService->counts();
     }

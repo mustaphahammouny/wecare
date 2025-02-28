@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Views\Admin;
 
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use App\Livewire\Forms\BookingForm;
 use App\Models\Booking as BookingModel;
 use App\Services\BookingService;
@@ -29,7 +29,7 @@ class Booking extends Component
     {
         $this->booking = $bookingService->find($this->id);
 
-        $this->statuses = StatusList::cases();
+        $this->statuses = BookingStatus::cases();
     }
 
     public function mount()
@@ -48,7 +48,7 @@ class Booking extends Component
         $this->form->validate();
 
         try {
-            $status = StatusList::from($this->form->status);
+            $status = BookingStatus::from($this->form->status);
 
             $bookingService->updateStatus($this->booking, $status);
 

@@ -11,22 +11,22 @@ use Illuminate\Support\Str;
 
 class ServiceRepository
 {
-    public function get(?ServiceFilter $serviceFilter): Collection
+    public function get(?ServiceFilter $serviceFilter, array $with = []): Collection
     {
-        return $this->findBy($serviceFilter)
+        return $this->findBy($serviceFilter, $with)
             ->get();
     }
 
-    public function paginate(?ServiceFilter $serviceFilter)
+    public function paginate(?ServiceFilter $serviceFilter, array $with = [])
     {
-        return $this->findBy($serviceFilter)
+        return $this->findBy($serviceFilter, $with)
             ->orderBy('created_at', 'desc')
             ->paginate(General::PER_PAGE);
     }
 
-    public function first(ServiceFilter $serviceFilter): Service
+    public function first(ServiceFilter $serviceFilter, array $with = []): Service
     {
-        return $this->findBy($serviceFilter)
+        return $this->findBy($serviceFilter, $with)
             ->first();
     }
 
@@ -36,15 +36,15 @@ class ServiceRepository
             ->count();
     }
 
-    public function firstOrFail(ServiceFilter $serviceFilter): Service
+    public function firstOrFail(ServiceFilter $serviceFilter, array $with = []): Service
     {
-        return $this->findBy($serviceFilter)
+        return $this->findBy($serviceFilter, $with)
             ->firstOrFail();
     }
 
-    public function find($id): Service
+    public function find(int $id, array $with = []): Service
     {
-        return Service::with(['firstMedia'])
+        return Service::with(['firstMedia', ...$with])
             ->findOrFail($id);
     }
 
@@ -65,9 +65,9 @@ class ServiceRepository
         return $service->delete();
     }
 
-    private function findBy(?ServiceFilter $serviceFilter)
+    private function findBy(?ServiceFilter $serviceFilter, array $with = [])
     {
-        return Service::with(['extras'])
+        return Service::with($with)
             ->when($serviceFilter->slug ?? false, function ($query, $slug) {
                 $query->where('slug', $slug);
             })

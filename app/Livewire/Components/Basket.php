@@ -36,9 +36,9 @@ class Basket extends Component
     private function updateTotal()
     {
         if (isset($this->state['duration'])) {
-            $optionsTotal = array_reduce(array_column($this->state['extras'], 'price'), fn ($carry, $item) => $carry += $item);
+            $optionsTotal = array_reduce(array_column($this->state['extras'], 'price'), fn($carry, $item) => $carry += $item);
 
-            $total = $this->state['duration']['price'] * $this->state['duration']['duration'] + $optionsTotal;
+            $total = $this->state['duration']['hourly_price'] * $this->state['duration']['duration'] + $optionsTotal;
 
             $this->total = Number::toPrice($total);
         }

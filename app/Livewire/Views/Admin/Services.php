@@ -29,7 +29,7 @@ class Services extends Component
         return view('livewire.admin.services')
             ->title('Services')
             ->with([
-                'services' => $serviceService->paginate(),
+                'services' => $serviceService->paginate(with: ['firstMedia']),
             ]);
     }
 }

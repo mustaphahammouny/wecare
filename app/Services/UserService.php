@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Data\RegisterData;
 use App\Data\Userdata;
 use App\Data\UserFilter;
-use App\Enums\RoleList;
+use App\Enums\Role;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Exception;
@@ -24,7 +24,7 @@ class UserService
             $userFilter = UserFilter::from([]);
         }
 
-        $userFilter->role = RoleList::Client;
+        $userFilter->role = Role::Client;
 
         return $this->userRepository->paginate($userFilter);
     }

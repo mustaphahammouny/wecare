@@ -17,9 +17,6 @@
                 <div class="col-6 col-lg-auto">
                     <div class="text-center text-lg-end">
                         <ul class="mb0 d-flex align-items-center justify-content-center justify-content-sm-end p-0">
-                            <li class="dropdown-locale">
-                                <x-locale />
-                            </li>
                             <li class="user_setting">
                                 <div class="dropdown">
                                     <button class="ud-btn btn-thm text-white rounded-pill fs-6" href="#"

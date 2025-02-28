@@ -11,24 +11,42 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         $services = [
-            ['title' => 'Cleaning', 'media' => 'cleaning.ltr.png', 'min' => 2, 'max' => 8, 'step' => 2],
-            ['title' => 'Ironing', 'media' => 'ironing.ltr.png', 'min' => 1, 'max' => 4, 'step' => 1],
-            ['title' => 'Cooking', 'media' => 'cooking.ltr.png', 'min' => 2, 'max' => 8, 'step' => 1],
-            ['title' => 'Teaching', 'media' => 'teaching.ltr.png', 'min' => 2, 'max' => 8, 'step' => 2],
-            ['title' => 'Coaching', 'media' => 'coaching.ltr.png', 'min' => 1, 'max' => 2, 'step' => 1],
-            ['title' => 'Haircut', 'media' => 'haircut.ltr.png', 'min' => 1, 'max' => 2, 'step' => 1],
-            ['title' => 'Beautifying', 'media' => 'beautifying.ltr.png', 'min' => 2, 'max' => 4, 'step' => 1],
+            ['title' => 'Cleaning', 'media' => 'cleaning.ltr.png', 'durations' => [
+                ['min' => 2, 'max' => 4, 'hourly_price' => 20],
+                ['min' => 5, 'max' => 6, 'hourly_price' => 18],
+                ['min' => 7, 'max' => 8, 'hourly_price' => 16],
+            ]],
+            ['title' => 'Ironing', 'media' => 'ironing.ltr.png', 'durations' => [
+                ['min' => 1, 'max' => 2, 'hourly_price' => 20],
+                ['min' => 3, 'max' => 4, 'hourly_price' => 18],
+            ]],
+            ['title' => 'Cooking', 'media' => 'cooking.ltr.png', 'durations' => [
+                ['min' => 2, 'max' => 4, 'hourly_price' => 20],
+                ['min' => 5, 'max' => 6, 'hourly_price' => 18],
+            ]],
+            ['title' => 'Teaching', 'media' => 'teaching.ltr.png', 'durations' => [
+                ['min' => 2, 'max' => 4, 'hourly_price' => 30],
+                ['min' => 5, 'max' => 6, 'hourly_price' => 25],
+            ]],
+            ['title' => 'Coaching', 'media' => 'coaching.ltr.png', 'durations' => [
+                ['min' => 1, 'max' => 2, 'hourly_price' => 20],
+            ]],
+            ['title' => 'Haircut', 'media' => 'haircut.ltr.png', 'durations' => [
+                ['min' => 1, 'max' => 2, 'hourly_price' => 20],
+            ]],
+            ['title' => 'Beautifying', 'media' => 'beautifying.ltr.png', 'durations' => [
+                ['min' => 2, 'max' => 3, 'hourly_price' => 20],
+            ]],
         ];
 
         foreach ($services as $service) {
             $serviceModel = Service::create([
                 'slug' => Str::slug($service['title']),
                 'title' => $service['title'],
-                'min_duration' => $service['min'],
-                'max_duration' => $service['max'],
-                'step_duration' => $service['step'],
                 'active' => true,
             ]);
+
+            $serviceModel->durations()->createMany($service['durations']);
 
             $serviceModel->addMedia(resource_path("images/services/{$service['media']}"))
                 ->preservingOriginal()

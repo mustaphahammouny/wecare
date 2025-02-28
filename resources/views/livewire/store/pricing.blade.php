@@ -11,28 +11,32 @@
                     </div>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 wow fadeInUp justify-content-center" data-wow-delay="300ms">
-                @foreach ($pricings as $pricing)
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 wow fadeInUp justify-content-center"
+                data-wow-delay="300ms">
+                @foreach ($services as $service)
                     <div class="col">
                         <div class="pricing_packages">
                             <div class="heading mb30">
+                                <h1 class="text-center">{{ $service->title }}</h1>
                                 <h4 class="package_title py-2">
-                                    @lang('from') {{ $pricing->min_duration }}
-                                    @lang('to') {{ $pricing->max_duration }} @lang('hours')
+                                    @lang('from') {{ $service->minDuration->min }}
+                                    @lang('to') {{ $service->maxDuration->max }} @lang('hours')
                                 </h4>
                                 <p class="text mb-0">
                                     @lang('Cost')
                                 </p>
-                                <h1 class="text1">{{ $pricing->formatted_price }}</h1>
+                                <h4 class="text1">
+                                    {{ $this->price($service) }}
+                                </h4>
                                 <p class="text">@lang('Per hour')</p>
                                 <img class="price-icon" src="images/icon/pricing-icon-1.svg" alt="">
                             </div>
                             <div class="details">
                                 <div class="d-grid">
-                                    <a wire:navigate href="{{ route('auth.login') }}"
+                                    <a wire:navigate href="{{ route('booking', ['slug' => $service->slug]) }}"
                                         class="ud-btn btn-thm-border text-thm">
-                                        @lang('Sign in now')
-                                        <i class="fal fa-arrow-right-long ms-1"></i>
+                                        <i class="far fa-calendar me-1"></i>
+                                        @lang('Book now')
                                     </a>
                                 </div>
                             </div>

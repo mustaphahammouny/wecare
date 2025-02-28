@@ -32,13 +32,8 @@
                                     <span class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
                                 </td>
                                 <td class="text-center">
-                                    @if ($booking->invoice)
-                                        <x-btn-click wire:click="download({{ $booking->id }})" title="Download" position="start"
-                                            icon="far fa-download" />
-                                    @else
-                                        <x-btn-click wire:click="download({{ $booking->id }})" title="Generate" position="start"
-                                            icon="far fa-file-invoice" />
-                                    @endif
+                                    <x-btn-click wire:click="download({{ $booking->id }})" title="Download"
+                                        position="start" icon="far fa-download" />
                                 </td>
                             </tr>
                         @empty

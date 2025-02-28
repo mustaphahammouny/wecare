@@ -14,11 +14,9 @@ class ServiceData extends Data
 {
     public function __construct(
         public string $title,
-        public int $minDuration,
-        public int $maxDuration,
-        public int $stepDuration,
         public ?UploadedFile $image,
         public bool $active,
-    ) {
-    }
+        /** @var Duration[] */
+        public array $durations,
+    ) {}
 }

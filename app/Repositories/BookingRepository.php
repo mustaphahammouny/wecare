@@ -5,37 +5,37 @@ namespace App\Repositories;
 use App\Constants\General;
 use App\Data\BookingData;
 use App\Data\BookingFilter;
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class BookingRepository
 {
-    public function get(?BookingFilter $bookingFilter): Collection
+    public function get(?BookingFilter $bookingFilter, array $with = []): Collection
     {
-        return $this->findBy($bookingFilter, ['service', 'extras'])
+        return $this->findBy($bookingFilter, $with)
             ->get();
     }
 
-    public function paginate(?BookingFilter $bookingFilter)
+    public function paginate(?BookingFilter $bookingFilter, array $with = [])
     {
-        return $this->findBy($bookingFilter, ['service', 'extras'])
+        return $this->findBy($bookingFilter, $with)
             ->orderBy('created_at', 'desc')
             ->paginate(General::PER_PAGE);
     }
 
-    public function find(int $id): Booking
+    public function find(int $id, array $with = []): Booking
     {
-        return Booking::with(['user.company', 'service', 'extras'])
+        return Booking::with($with)
             ->findOrFail($id);
     }
 
-    public function countByStatuses(?BookingFilter $bookingFilter = null): array
+    public function countByStatuses(?BookingFilter $bookingFilter, array $with = []): array
     {
-        $bookings = $this->findBy($bookingFilter);
+        $bookings = $this->findBy($bookingFilter, $with);
 
-        foreach (StatusList::cases() as $status) {
+        foreach (BookingStatus::cases() as $status) {
             $bookings = $bookings->selectRaw('COUNT(CASE WHEN status = "' . $status->value . '" THEN 1 ELSE null END) AS ' . strtolower($status->name));
         }
 
@@ -49,7 +49,7 @@ class BookingRepository
         return $this->persist($booking, $bookingData);
     }
 
-    public function updateStatus(Booking $booking, StatusList $status): Booking
+    public function updateStatus(Booking $booking, BookingStatus $status): Booking
     {
         $booking->update([
             'status' => $status,

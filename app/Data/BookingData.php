@@ -2,7 +2,7 @@
 
 namespace App\Data;
 
-use App\Enums\StatusList;
+use App\Enums\BookingStatus;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Attributes\MapInputName;
@@ -24,7 +24,7 @@ class BookingData extends Data
         public Carbon $serviceAt,
         public ?float $servicePrice,
         public ?float $total,
-        public ?StatusList $status,
+        public ?BookingStatus $status,
         public ?array $extras,
     ) {
     }

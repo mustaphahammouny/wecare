@@ -4,29 +4,29 @@ namespace App\Services;
 
 use App\Data\BookingData;
 use App\Data\BookingFilter;
-use App\Data\PricingFilter;
-use App\Enums\StatusList;
+use App\Data\DurationFilter;
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Models\Extra;
 use App\Repositories\BookingRepository;
 use App\Repositories\ExtraRepository;
-use App\Repositories\PricingRepository;
+use App\Repositories\ServiceRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class BookingService
 {
     public function __construct(
+        protected ServiceRepository $serviceRepository,
         protected BookingRepository $bookingRepository,
-        protected ExtraRepository $extraRepository,
-        protected PricingRepository $pricingRepository
-    ) {
-    }
+        protected ExtraRepository $extraRepository
+    ) {}
 
-    public function paginate(BookingFilter $bookingFilter = null)
+    public function paginate(?BookingFilter $bookingFilter = null, array $with = [])
     {
-        return $this->bookingRepository->paginate($bookingFilter);
+        return $this->bookingRepository->paginate($bookingFilter, $with);
     }
 
     public function find(int $id)
@@ -39,8 +39,13 @@ class BookingService
         try {
             DB::beginTransaction();
 
-            $pricingFilter = PricingFilter::from(['duration' => $bookingData->duration]);
-            $pricing = $this->pricingRepository->first($pricingFilter);
+            $service = $this->serviceRepository->find($bookingData->serviceId, [
+                'durations' => fn($query) => $query->where('min', '<=', $bookingData->duration)
+                    ->where('max', '>=', $bookingData->duration)
+                    ->limit(1)
+            ]);
+
+            $duration = $service->durations->first();
             $extras = $this->extraRepository->findIn($bookingData->extras);
             $extrasTotal = $extras->sum('price');
 
@@ -50,10 +55,10 @@ class BookingService
                 return $carry;
             }, []);
 
-            $bookingData->servicePrice = $pricing->price;
-            $bookingData->total = $pricing->price * $bookingData->duration + $extrasTotal;
+            $bookingData->servicePrice = $duration->hourly_price;
+            $bookingData->total = $duration->hourly_price * $bookingData->duration + $extrasTotal;
             $bookingData->extras = $extras;
-            $bookingData->status = StatusList::Scheduled;
+            $bookingData->status = BookingStatus::Scheduled;
 
             $booking = $this->bookingRepository->store($bookingData);
 
@@ -83,7 +88,7 @@ class BookingService
         }
     }
 
-    public function updateStatus(Booking $booking, StatusList $status)
+    public function updateStatus(Booking $booking, BookingStatus $status)
     {
         try {
             DB::beginTransaction();

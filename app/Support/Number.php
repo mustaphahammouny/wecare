@@ -2,9 +2,6 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\App;
-use Rmunate\Utilities\SpellNumber;
-
 class Number
 {
     public static function format($number)
@@ -14,7 +11,7 @@ class Number
 
     public static function toPrice($number)
     {
-        return self::format($number) . __('MAD');
+        return self::format($number) . __('€');
     }
 
     public static function toPercentage($number)
@@ -27,15 +24,8 @@ class Number
         return self::toPrice($number) . '/' . __('h');
     }
 
-    public static function toLetters($number)
+    public static function toDuration($number)
     {
-        $locale = App::getLocale();
-        $number = str_replace('.00', '', $number) + 0;
-        
-        return SpellNumber::value($number)
-            ->locale($locale)
-            ->currency(__('dirhams'))
-            ->fraction(__('cents'))
-            ->toMoney();
+        return $number . __('h');
     }
 }

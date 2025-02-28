@@ -6,7 +6,7 @@ use App\Constants\General;
 use App\Data\RegisterData;
 use App\Data\UserData;
 use App\Data\UserFilter;
-use App\Enums\RoleList;
+use App\Enums\Role;
 use App\Models\User;
 
 class UserRepository
@@ -34,7 +34,7 @@ class UserRepository
 
         $user->fill($registerData->toArray());
 
-        $user->role = RoleList::Client->value;
+        $user->role = Role::Client->value;
 
         $user->save();
 

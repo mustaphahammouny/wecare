@@ -46,7 +46,9 @@ class Booking extends Component
     {
         $serviceFilter = ServiceFilter::from(['slug' => $this->slug]);
 
-        $this->state['service'] = $serviceService->firstOrFail($serviceFilter)->toArray();
+        $this->state['service'] = $serviceService
+            ->firstOrFail($serviceFilter, ['durations', 'extras'])
+            ->toArray();
 
         $this->bookingService = $bookingService;
     }

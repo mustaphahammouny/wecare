@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Components;
 
-use App\Data\PricingFilter;
 use App\Livewire\Forms\DurationForm;
-use App\Services\PricingService;
+use App\Support\Number;
+use Illuminate\Support\Arr;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -18,29 +18,29 @@ class Duration extends Component
     #[Locked]
     public array $durations;
 
-    public function mount(PricingService $pricingService, array $state)
+    public function mount(array $state)
     {
         $this->state = $state;
 
         $this->form->fillProps($this->state);
 
-        $pricings = $pricingService->get();
+        $durations = $this->state['service']['durations'];
+        $min = min(array_column($durations, 'min'));
+        $max = max(array_column($durations, 'max'));
 
-        $service = $this->state['service'];
+        for ($i = $min; $i <= $max; $i++) {
+            $duration = Arr::first($durations, fn($duration) => $i >= $duration['min'] && $i <= $duration['max']);
 
-        for ($i = $service['min_duration']; $i <= $service['max_duration']; $i += $service['step_duration']) {
-            $pricing = $pricings->first(fn ($pricing) => $i >= $pricing->min_duration && $i <= $pricing->max_duration);
-            
-            if (!$pricing) {
+            if (!$duration) {
                 continue;
             }
 
             $this->durations[] = [
-                'id' => $pricing->id,
+                'id' => $duration['id'],
                 'duration' => $i,
-                'price' => $pricing->price,
-                'formatted_price' => $pricing->formatted_price,
-                'hourly_price' => $pricing->hourly_price,
+                'hourly_price' => $duration['hourly_price'],
+                'formatted_duration' => Number::toDuration($i),
+                'formatted_hourly_price' => Number::toHourlyPrice(($duration['hourly_price'])),
             ];
         }
     }
@@ -71,7 +71,7 @@ class Duration extends Component
     private function fillState()
     {
         $this->state['duration'] = collect($this->durations)
-            ->first(fn ($duration) => $duration['duration'] == $this->form->duration);
+            ->first(fn($duration) => $duration['duration'] == $this->form->duration);
 
         $this->state['extras'] = collect($this->state['service']['extras'])
             ->whereIn('id', $this->form->extras)

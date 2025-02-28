@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\RoleList;
+use App\Enums\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class EnsureUserHasRole
 {
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        $role = RoleList::fromString($role);
+        $role = Role::fromString($role);
 
         if (!$request->user()->hasRole($role)) {
             return redirect()->route(Auth::user()->role->route());
