@@ -2,65 +2,81 @@
 
 namespace App\Services;
 
-use App\Data\BookingData;
-use App\Data\BookingFilter;
-use App\Data\DurationFilter;
+use App\Constants\General;
 use App\Enums\BookingStatus;
 use App\Models\Booking;
+use App\Models\Duration;
 use App\Models\Extra;
-use App\Repositories\BookingRepository;
-use App\Repositories\ExtraRepository;
-use App\Repositories\ServiceRepository;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BookingService
 {
-    public function __construct(
-        protected ServiceRepository $serviceRepository,
-        protected BookingRepository $bookingRepository,
-        protected ExtraRepository $extraRepository
-    ) {}
-
-    public function paginate(?BookingFilter $bookingFilter = null, array $with = [])
+    public function paginate(array $filter = [])
     {
-        return $this->bookingRepository->paginate($bookingFilter, $with);
+        return Booking::query()
+            ->with([])
+            ->when(
+                Arr::get($filter, 'user_id'),
+                fn($query, $userId) => $query->where('user_id', $userId)
+            )
+            ->when(
+                Arr::get($filter, 'start'),
+                fn($query, $start) => $query->whereDate('service_at', '>=', $start)
+            )
+            ->when(
+                Arr::get($filter, 'end'),
+                fn($query, $end) => $query->whereDate('service_at', '<=', $end)
+            )
+            ->when(
+                Arr::get($filter, 'status'),
+                fn($query, $status) => $query->where('status', $status->value)
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
-    public function find(int $id)
+    public function store(array $data): Booking
     {
-        return $this->bookingRepository->find($id);
-    }
+        /** @var User */
+        $user = Auth::user();
 
-    public function store(BookingData $bookingData)
-    {
+        $duration = Duration::query()
+            ->withWhereHas(
+                'service',
+                fn($query) => $query
+                    ->withWhereHas(
+                        'extras',
+                        fn($query) => $query->whereIn(Arr::get($data, 'extras'))
+                    )
+                    ->where('id', Arr::get($data, 'service_id'))
+            )
+            ->where('min', '<=', Arr::get($data, 'duration'))
+            ->where('max', '>=', Arr::get($data, 'duration'))
+            ->first();
+
+        $extras = $duration->service->extras->map(fn(Extra $extra) => [
+            'title' => $extra->title,
+            'price' => $extra->price,
+        ]);
+
+        $extrasTotal = $duration->service->extras->sum('price');
+
         try {
             DB::beginTransaction();
 
-            $service = $this->serviceRepository->find($bookingData->serviceId, [
-                'durations' => fn($query) => $query->where('min', '<=', $bookingData->duration)
-                    ->where('max', '>=', $bookingData->duration)
-                    ->limit(1)
+            $booking = $user->bookings()->create([
+                'service_id' => $duration->service->id,
+                'city_id' => Arr::get($data, 'city_id'),
+                'total' => $duration->hourly_price * Arr::get($data, 'duration') + $extrasTotal,
+                'status' => BookingStatus::Scheduled,
             ]);
 
-            $duration = $service->durations->first();
-            $extras = $this->extraRepository->findIn($bookingData->extras);
-            $extrasTotal = $extras->sum('price');
-
-            $extras = $extras->reduce(function (array $carry, Extra $extra) {
-                $carry[$extra->id] = ['extra_price' => $extra->price];
-
-                return $carry;
-            }, []);
-
-            $bookingData->servicePrice = $duration->hourly_price;
-            $bookingData->total = $duration->hourly_price * $bookingData->duration + $extrasTotal;
-            $bookingData->extras = $extras;
-            $bookingData->status = BookingStatus::Scheduled;
-
-            $booking = $this->bookingRepository->store($bookingData);
+            $booking->extras()->createMany($extras);
 
             DB::commit();
 
@@ -72,11 +88,11 @@ class BookingService
         }
     }
 
-    public function download(Booking $booking)
+    public function download(Booking $booking): array
     {
-        try {
-            $booking = $this->bookingRepository->find($booking->id);
+        $booking->load(['user.company', 'service', 'extras']);
 
+        try {
             $pdf = Pdf::loadView('pdf.invoice', compact('booking'))->output();
 
             return [
@@ -88,19 +104,13 @@ class BookingService
         }
     }
 
-    public function updateStatus(Booking $booking, BookingStatus $status)
+    public function updateStatus(Booking $booking, BookingStatus $status): Booking
     {
         try {
-            DB::beginTransaction();
-
-            $this->bookingRepository->updateStatus($booking, $status);
-
-            DB::commit();
+            $booking = $booking->updateStatus($status);
 
             return $booking;
         } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }

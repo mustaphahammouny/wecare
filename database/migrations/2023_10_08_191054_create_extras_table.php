@@ -14,7 +14,6 @@ return new class extends Migration
                 ->constrained('services')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('slug')->unique();
             $table->string('title');
             $table->decimal('price');
             $table->text('description')->nullable();

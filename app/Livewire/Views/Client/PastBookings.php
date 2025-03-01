@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,17 @@ class PastBookings extends Component
 {
     use WithPagination;
     use AuthorizesRequests;
+
+    #[Computed]
+    public function bookings(BookingService $bookingService)
+    {
+        $bookingFilter = BookingFilter::from([
+            'user_id' => Auth::id(),
+            'end' => Carbon::now(),
+        ]);
+
+        return $bookingService->paginate($bookingFilter, ['service', 'extras']);
+    }
 
     public function download(BookingService $bookingService, Booking $booking)
     {
@@ -34,17 +46,9 @@ class PastBookings extends Component
         }
     }
 
-    public function render(BookingService $bookingService)
+    public function render()
     {
-        $bookingFilter = BookingFilter::from([
-            'user_id' => Auth::id(),
-            'end' => Carbon::now(),
-        ]);
-
         return view('livewire.client.past-bookings')
-            ->title('Past bookings')
-            ->with([
-                'bookings' => $bookingService->paginate($bookingFilter, ['service', 'extras']),
-            ]);
+            ->title('Past bookings');
     }
 }

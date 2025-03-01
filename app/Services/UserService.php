@@ -2,82 +2,59 @@
 
 namespace App\Services;
 
-use App\Data\RegisterData;
-use App\Data\Userdata;
-use App\Data\UserFilter;
+use App\Constants\General;
 use App\Enums\Role;
 use App\Models\User;
-use App\Repositories\UserRepository;
 use Exception;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    public function __construct(protected UserRepository $userRepository)
+    public function paginate(array $filter = [])
     {
+        return User::query()
+            ->where('role', Role::Client)
+            ->when(
+                Arr::get($filter, 'email'),
+                fn($query, $email) => $query->where('email', $email)
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
-    public function clients(UserFilter $userFilter = null)
+    public function store(array $data): User
     {
-        if (!$userFilter) {
-            $userFilter = UserFilter::from([]);
-        }
+        $user = new User;
 
-        $userFilter->role = Role::Client;
-
-        return $this->userRepository->paginate($userFilter);
+        return $this->persist($user, $data);
     }
 
-    public function store(RegisterData $registerData)
+    public function update(User $user, array $data): User
+    {
+        return $this->persist($user, $data);
+    }
+
+    public function updatePassword(User $user, string $password): User
+    {
+        return $this->persist($user, [
+            'password' => Hash::make($password),
+        ]);
+    }
+
+    private function persist(User $user, array $data): User
     {
         try {
-            DB::beginTransaction();
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+            }
 
-            $user = $this->userRepository->store($registerData);
+            $user->fill($data);
 
-            DB::commit();
+            $user->save();
 
             return $user;
         } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
-        }
-    }
-
-    public function update(User $user, Userdata $Userdata)
-    {
-        try {
-            DB::beginTransaction();
-
-            $booking = $this->userRepository->update($user, $Userdata);
-
-            DB::commit();
-
-            return $booking;
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
-        }
-    }
-
-    public function updatePassword(User $user, string $password)
-    {
-        try {
-            DB::beginTransaction();
-
-            $password = Hash::make($password);
-
-            $booking = $this->userRepository->updatePassword($user, $password);
-
-            DB::commit();
-
-            return $booking;
-        } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }

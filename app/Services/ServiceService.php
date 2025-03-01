@@ -2,74 +2,68 @@
 
 namespace App\Services;
 
-use App\Data\ServiceData;
-use App\Data\ServiceFilter;
+use App\Constants\General;
 use App\Models\Service;
-use App\Repositories\ServiceRepository;
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ServiceService
 {
-    public function __construct(protected ServiceRepository $serviceRepository) {}
-
-    public function get(?ServiceFilter $serviceFilter = null, array $with = [])
+    public function get()
     {
-        return $this->serviceRepository->get($serviceFilter, $with);
+        return Service::query()
+            ->where('active', true)
+            ->get();
     }
 
-    public function paginate(?ServiceFilter $serviceFilter = null, array $with = [])
+    public function paginate(array $filter = [])
     {
-        return $this->serviceRepository->paginate($serviceFilter, $with);
+        return Service::query()
+            ->when(
+                Arr::get($filter, 'slug'),
+                fn($query, $slug) => $query->where('slug', $slug)
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
-    public function first(ServiceFilter $serviceFilter, array $with = [])
+    public function store(array $data): Service
     {
-        return $this->serviceRepository->first($serviceFilter, $with);
+        $service = new Service;
+
+        return $this->persist($service, $data);
     }
 
-    public function firstOrFail(ServiceFilter $serviceFilter, array $with = [])
+    public function update(Service $service, array $data): Service
     {
-        return $this->serviceRepository->firstOrFail($serviceFilter, $with);
+        return $this->persist($service, $data);
     }
 
-    public function find(int $id)
-    {
-        return $this->serviceRepository->find($id);
-    }
-
-    public function updateOrCreate(?Service $service, ServiceData $serviceData)
+    public function delete(Service $service): Service
     {
         try {
-            DB::beginTransaction();
-
-            if ($service) {
-                $service = $this->serviceRepository->update($service, $serviceData);
-            } else {
-                $service = $this->serviceRepository->store($serviceData);
-            }
-
-            if ($serviceData->image) {
-                $service->clearMediaCollection();
-                $service->addMedia($serviceData->image)->toMediaCollection();
-            }
-
-            DB::commit();
+            $service->delete();
 
             return $service;
         } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }
 
-    public function delete(Service $service)
+    private function persist(Service $service, array $data)
     {
         try {
             DB::beginTransaction();
 
-            $this->serviceRepository->delete($service);
+            $service->fill($data);
+
+            $service->save();
+
+            if ($image = Arr::get($data, 'image')) {
+                $service->clearMediaCollection();
+                $service->addMedia($image)->toMediaCollection();
+            }
 
             DB::commit();
 

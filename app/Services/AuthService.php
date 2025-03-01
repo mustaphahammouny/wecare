@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Data\LoginData;
-use App\Repositories\UserRepository;
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -12,28 +11,21 @@ use Illuminate\Validation\ValidationException;
 
 class AuthService
 {
-    public function __construct(protected UserRepository $userRepository)
+    public function login(array $credentials): void
     {
-    }
+        $email = Arr::get($credentials, 'email');
 
-    public function login(LoginData $loginData): void
-    {
-        $this->ensureIsNotRateLimited($loginData->email);
+        $this->ensureIsNotRateLimited($email);
 
-        $credentials = [
-            'email' => $loginData->email,
-            'password' => $loginData->password,
-        ];
-
-        if (!Auth::attempt($credentials, $loginData->remember)) {
-            RateLimiter::hit($this->throttleKey($loginData->email));
+        if (!Auth::attempt(Arr::except($credentials, 'remember'), Arr::get($credentials, 'remember'))) {
+            RateLimiter::hit($this->throttleKey($email));
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey($loginData->email));
+        RateLimiter::clear($this->throttleKey($email));
     }
 
     public function logout(): void

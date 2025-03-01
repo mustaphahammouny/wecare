@@ -2,36 +2,38 @@
 
 namespace App\Services;
 
+use App\Constants\General;
 use App\Data\ContactData;
 use App\Data\ContactFilter;
-use App\Repositories\ContactRepository;
+use App\Models\Contact;
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ContactService
 {
-    public function __construct(protected ContactRepository $contactRepository)
+    public function paginate(array $filter = [])
     {
+        return Contact::query()
+            ->when(
+                Arr::get($filter, 'email'),
+                fn($query, $email) => $query->where('email', 'like', "%$email%")
+            )
+            ->when(
+                Arr::get($filter, 'full_name'),
+                fn($query, $fullName) => $query->where('full_name', 'like', "%$fullName%")
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
-    public function paginate(ContactFilter $contactFilter = null)
-    {
-        return $this->contactRepository->paginate($contactFilter);
-    }
-
-    public function store(ContactData $contactData)
+    public function store(array $data): Contact
     {
         try {
-            DB::beginTransaction();
+            $contact = Contact::query()->create($data);
 
-            $booking = $this->contactRepository->store($contactData);
-
-            DB::commit();
-
-            return $booking;
+            return $contact;
         } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }

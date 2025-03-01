@@ -194,11 +194,11 @@
                         <tr>
                             <td>{{ $extra->title }}</td>
                             <td>@lang('Unity')</td>
-                            <td>{{ \App\Support\Number::format($extra->pivot->extra_price * (1 - \App\Constants\General::TAX)) }}
+                            <td>{{ \App\Support\Number::format($extra->price * (1 - \App\Constants\General::TAX)) }}
                             </td>
                             <td class="text-center">1</td>
                             <td class="text-end">
-                                {{ \App\Support\Number::format($extra->pivot->extra_price * (1 - \App\Constants\General::TAX)) }}
+                                {{ \App\Support\Number::format($extra->price * (1 - \App\Constants\General::TAX)) }}
                             </td>
                         </tr>
                     @endforeach

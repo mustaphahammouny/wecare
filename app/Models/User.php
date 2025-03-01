@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Enums\Role;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,20 +32,25 @@ class User extends Authenticatable
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => "{$attributes['first_name']} {$attributes['last_name']}",
+            get: fn(mixed $value, array $attributes) => "{$attributes['first_name']} {$attributes['last_name']}",
         );
     }
 
     protected function role(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Role::from($attributes['role']),
+            get: fn(mixed $value, array $attributes) => Role::from($attributes['role']),
         );
     }
 
     public function company(): HasOne
     {
         return $this->hasOne(Company::class);
+    }
+
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
     }
 
     public function hasRole(Role $role): bool

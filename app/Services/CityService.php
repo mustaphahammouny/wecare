@@ -2,68 +2,61 @@
 
 namespace App\Services;
 
-use App\Data\CityData;
-use App\Data\CityFilter;
+use App\Constants\General;
 use App\Models\City;
-use App\Repositories\CityRepository;
 use Exception;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class CityService
 {
-    public function __construct(protected CityRepository $cityRepository)
+    public function get()
     {
+        return City::query()->get();
     }
 
-    public function get(CityFilter $cityFilter = null)
+    public function paginate(array $filter = [])
     {
-        return $this->cityRepository->get($cityFilter);
+        return City::query()
+            ->when(
+                Arr::get($filter, 'name'),
+                fn($query, $name) => $query->where('name', $name)
+            )
+            ->orderBy('created_at', 'desc')
+            ->paginate(General::PER_PAGE);
     }
 
-    public function paginate(CityFilter $cityFilter = null)
+    public function store(array $data): City
     {
-        return $this->cityRepository->paginate($cityFilter);
+        $city = new City;
+
+        return $this->persist($city, $data);
     }
 
-    public function find(int $id)
+    public function update(City $city, array $data): City
     {
-        return $this->cityRepository->find($id);
+        return $this->persist($city, $data);
     }
 
-    public function updateOrCreate(?City $city, CityData $cityData)
+    public function delete(City $city): City
     {
         try {
-            DB::beginTransaction();
-
-            if ($city) {
-                $city = $this->cityRepository->update($city, $cityData);
-            } else {
-                $city = $this->cityRepository->store($cityData);
-            }
-
-            DB::commit();
+            $city->delete();
 
             return $city;
         } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }
 
-    public function delete(City $city)
+    private function persist(City $city, array $data)
     {
         try {
-            DB::beginTransaction();
+            $city->fill($data);
 
-            $this->cityRepository->delete($city);
-
-            DB::commit();
+            $city->save();
 
             return $city;
         } catch (Exception $e) {
-            DB::rollBack();
-
             throw $e;
         }
     }

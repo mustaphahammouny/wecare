@@ -2,33 +2,30 @@
 
 namespace App\Services;
 
-use App\Data\CompanyData;
-use App\Data\CompanyFilter;
-use App\Repositories\CompanyRepository;
+use App\Models\Company;
+use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CompanyService
 {
-    public function __construct(protected CompanyRepository $companyRepository)
+    public function updateOrCreate(array $data)
     {
-    }
+        /** @var User */
+        $user = Auth::user();
 
-    public function first(CompanyFilter $companyFilter)
-    {
-        return $this->companyRepository->first($companyFilter);
-    }
-
-    public function updateOrCreate(CompanyData $companyData)
-    {
         try {
             DB::beginTransaction();
 
-            $booking = $this->companyRepository->updateOrCreate($companyData);
+            $company = Company::query()
+                ->updateOrCreate([
+                    'user_id' => $user->id,
+                ], $data);
 
             DB::commit();
 
-            return $booking;
+            return $company;
         } catch (Exception $e) {
             DB::rollBack();
 

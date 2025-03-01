@@ -3,41 +3,42 @@
 namespace App\Services;
 
 use App\Constants\Menu;
-use App\Data\UserFilter;
 use App\Enums\Role;
 use App\Enums\BookingStatus;
-use App\Repositories\BookingRepository;
-use App\Repositories\CityRepository;
-use App\Repositories\ContactRepository;
-use App\Repositories\ServiceRepository;
-use App\Repositories\UserRepository;
+use App\Models\Booking;
+use App\Models\City;
+use App\Models\Contact;
+use App\Models\Service;
+use App\Models\User;
 
 class DashboardService
 {
-    public function __construct(
-        protected BookingRepository $bookingRepository,
-        protected ServiceRepository $serviceRepository,
-        protected CityRepository $cityRepository,
-        protected UserRepository $userRepository,
-        protected ContactRepository $contactRepository
-    ) {
-    }
-
     public function counts()
     {
         $menu = collect(Menu::ADMIN_MENU);
-        $userFilter = UserFilter::from(['role' => Role::Client]);
 
-        $general['clients']['count'] = $this->userRepository->count($userFilter);
-        $general['services']['count'] = $this->serviceRepository->count();
-        $general['cities']['count'] = $this->cityRepository->count();
-        $general['contacts']['count'] = $this->contactRepository->count();
+        $general['clients']['count'] = User::query()
+            ->where('role', Role::Client)
+            ->count();
+
+        $general['services']['count'] = Service::query()->count();
+
+        $general['cities']['count'] = City::query()->count();
+
+        $general['contacts']['count'] = Contact::query()->count();
 
         foreach ($general as $key => $count) {
             $general[$key] = array_merge($count, $menu->firstWhere('title', ucfirst($key)));
         }
 
-        $bookings = $this->bookingRepository->countByStatuses();
+
+        $bookingQuery = Booking::query();
+
+        foreach (BookingStatus::cases() as $status) {
+            $bookingQuery->selectRaw('COUNT(CASE WHEN status = "' . $status->value . '" THEN 1 ELSE null END) AS ' . strtolower($status->name));
+        }
+
+        $bookings = $bookingQuery->toBase()->first();
 
         foreach ($bookings as $key => $count) {
             $bookings[$key] = [

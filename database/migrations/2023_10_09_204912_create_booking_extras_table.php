@@ -8,17 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('booking_extra', function (Blueprint $table) {
+        Schema::create('booking_extras', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id')
                 ->constrained('bookings')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('extra_id')
-                ->constrained('extras')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->decimal('extra_price');
+            $table->string('title');
+            $table->decimal('price');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -26,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('booking_extra');
+        Schema::dropIfExists('booking_extras');
     }
 };
