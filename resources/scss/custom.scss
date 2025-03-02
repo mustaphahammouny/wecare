@@ -107,7 +107,8 @@ div.category:hover .message {
     background-color: #ce4500;
 }
 
-.fc-daygrid-dot-event.fc-event-mirror, .fc-daygrid-dot-event:hover {
+.fc-daygrid-dot-event.fc-event-mirror,
+.fc-daygrid-dot-event:hover {
     background: rgba(235, 103, 83, 0.1);
     cursor: pointer;
 }
@@ -152,7 +153,18 @@ div.category:hover .message {
     overflow: auto;
 }
 
-.form-control[type=file]::file-selector-button {
+.bg-auth:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    opacity: 1; /* Ensure the overlay is fully visible */
+}
+
+.form-control[type="file"]::file-selector-button {
     min-height: 55px;
 }
 

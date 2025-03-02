@@ -13,8 +13,8 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.client.app')]
-#[Title('Past bookings')]
-class PastBookings extends Component
+#[Title('Completed bookings')]
+class CompletedBookings extends Component
 {
     protected BookingService $bookingService;
 
@@ -28,7 +28,6 @@ class PastBookings extends Component
     {
         return $this->bookingService->paginate([
             'user_id' => Auth::id(),
-            'end' => now(),
             'status' => BookingStatus::Completed,
         ]);
     }
@@ -50,6 +49,6 @@ class PastBookings extends Component
 
     public function render()
     {
-        return view('livewire.client.past-bookings');
+        return view('livewire.client.completed-bookings');
     }
 }

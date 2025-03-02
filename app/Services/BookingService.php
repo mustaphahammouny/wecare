@@ -34,7 +34,7 @@ class BookingService
             )
             ->when(
                 Arr::get($filter, 'status'),
-                fn($query, $status) => $query->where('status', $status->value)
+                fn($query, $status) => $query->where('status', $status)
             )
             ->orderBy('created_at', 'desc')
             ->paginate(General::PER_PAGE);

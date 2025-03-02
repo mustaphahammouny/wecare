@@ -20,7 +20,7 @@
                                 <td>
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
                                     @foreach ($booking->extras as $extra)
-                                        <span>{{ __($extra->title) }}</span>
+                                        <span>@lang($extra->title)</span>
                                         <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
                                     @endforeach
                                 </td>

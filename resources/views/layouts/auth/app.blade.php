@@ -17,7 +17,7 @@
             <section class="our-compare pt60 pb60">
                 <div class="container">
                     <div class="row wow fadeInRight" data-wow-delay="300">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mx-auto">
                             {{ $slot }}
                         </div>
                     </div>

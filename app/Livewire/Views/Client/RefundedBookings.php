@@ -11,8 +11,8 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.client.app')]
-#[Title('Upcoming bookings')]
-class UpcomingBookings extends Component
+#[Title('Refunded bookings')]
+class RefundedBookings extends Component
 {
     protected BookingService $bookingService;
 
@@ -26,7 +26,7 @@ class UpcomingBookings extends Component
     {
         return $this->bookingService->paginate([
             'user_id' => Auth::id(),
-            'status' => BookingStatus::Scheduled,
+            'status' => BookingStatus::Refunded,
         ]);
     }
 

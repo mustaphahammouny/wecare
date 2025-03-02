@@ -23,7 +23,7 @@
         </div>
 
         <div class="d-grid mb20">
-            <x-btn-submit title="Sign up" />
+            <x-btn-submit icon="fa fa-sign-in" title="Sign up" />
         </div>
     </form>
 </div>

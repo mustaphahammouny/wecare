@@ -15,7 +15,9 @@ abstract class Menu
     const CLIENT_MENU = [
         ['title' => 'Services', 'route' => 'client.services', 'icon' => 'far fa-list'],
         ['title' => 'Upcoming bookings', 'route' => 'client.upcoming-bookings', 'icon' => 'far fa-calendar-days'],
-        ['title' => 'Past bookings', 'route' => 'client.past-bookings', 'icon' => 'far fa-file-invoice'],
+        ['title' => 'Cancelled bookings', 'route' => 'client.cancelled-bookings', 'icon' => 'far fa-xmark-circle'],
+        ['title' => 'Refunded bookings', 'route' => 'client.refunded-bookings', 'icon' => 'far fa-undo'],
+        ['title' => 'Completed bookings', 'route' => 'client.completed-bookings', 'icon' => 'far fa-file-invoice'],
         ['title' => 'Company', 'route' => 'client.company', 'icon' => 'far fa-building'],
         ['title' => 'Profile', 'route' => 'client.profile', 'icon' => 'flaticon-user'],
     ];
