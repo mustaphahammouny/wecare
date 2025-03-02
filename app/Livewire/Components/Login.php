@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use App\Livewire\Forms\LoginForm;
 use App\Services\AuthService;
+use Exception;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -16,10 +17,10 @@ class Login extends Component
         $this->form->validate();
 
         try {
-            $authService->login($this->form->toData());
+            $authService->login($this->form->all());
 
             $this->dispatch('authenticated');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Session::flash('error', $e->getMessage());
         }
     }

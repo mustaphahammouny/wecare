@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\ContactData;
 use Livewire\Form;
 
 class ContactForm extends Form
@@ -23,10 +22,5 @@ class ContactForm extends Form
             'subject' => ['required', 'string', 'min:3', 'max:255'],
             'message' => ['required', 'min:8', 'max:255'],
         ];
-    }
-
-    public function toData()
-    {
-        return ContactData::from($this->all());
     }
 }

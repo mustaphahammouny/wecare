@@ -12,7 +12,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($contacts as $contact)
+                        @forelse ($this->contacts as $contact)
                             <tr>
                                 <td><h6 class="mb-0">{{ $contact->full_name }}</h6></td>
                                 <td>{{ $contact->email }}</td>
@@ -32,7 +32,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $contacts->onEachSide(1)->links('components.pagination') }}
+            {{ $this->contacts->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

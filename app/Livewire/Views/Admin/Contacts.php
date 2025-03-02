@@ -12,10 +12,17 @@ use Livewire\Component;
 #[Title('Contacts')]
 class Contacts extends Component
 {
-    #[Computed]
-    public function contacts(ContactService $contactService)
+    protected ContactService $contactService;
+
+    public function boot(ContactService $contactService)
     {
-        return $contactService->paginate();
+        $this->contactService = $contactService;
+    }
+
+    #[Computed]
+    public function contacts()
+    {
+        return $this->contactService->paginate();
     }
 
     public function render()

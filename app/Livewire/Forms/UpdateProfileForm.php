@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\UserData;
 use App\Models\User;
 use Livewire\Form;
 
@@ -35,10 +34,5 @@ class UpdateProfileForm extends Form
         $this->email = $user->email;
 
         $this->phone = $user->phone;
-    }
-
-    public function toData()
-    {
-        return UserData::from($this->all());
     }
 }

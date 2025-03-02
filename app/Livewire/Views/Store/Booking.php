@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.simple')]
+#[Title('Booking')]
 class Booking extends Component
 {
     #[Locked]
@@ -110,7 +112,6 @@ class Booking extends Component
 
     public function render()
     {
-        return view('livewire.store.booking')
-            ->title('Booking');
+        return view('livewire.store.booking');
     }
 }

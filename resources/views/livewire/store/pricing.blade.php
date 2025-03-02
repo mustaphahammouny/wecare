@@ -13,7 +13,7 @@
             </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 wow fadeInUp justify-content-center"
                 data-wow-delay="300ms">
-                @foreach ($services as $service)
+                @foreach ($this->services as $service)
                     <div class="col">
                         <div class="pricing_packages">
                             <div class="heading mb30">

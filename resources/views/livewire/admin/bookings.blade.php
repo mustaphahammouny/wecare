@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($bookings as $booking)
+                        @forelse ($this->bookings as $booking)
                             <tr>
                                 <td>
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
@@ -35,7 +35,7 @@
                                         class="{{ $booking->status->badge() }}">{{ $booking->status->title() }}</span>
                                 </td>
                                 <td class="text-center">
-                                    <x-a route="admin.booking" :param="['id' => $booking->id]" title="Edit" position="start"
+                                    <x-a route="admin.booking" :param="['booking' => $booking->id]" title="Edit" position="start"
                                         icon="far fa-edit" class="me-2" />
                                 </td>
                             </tr>
@@ -52,7 +52,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $bookings->onEachSide(1)->links('components.pagination') }}
+            {{ $this->bookings->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

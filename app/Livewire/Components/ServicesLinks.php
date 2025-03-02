@@ -2,22 +2,23 @@
 
 namespace App\Livewire\Components;
 
-use App\Data\ServiceFilter;
 use App\Services\ServiceService;
-use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class ServicesLinks extends Component
 {
-    #[Locked]
-    public Collection $services;
+    protected ServiceService $serviceService;
 
     public function boot(ServiceService $serviceService)
     {
-        $serviceFilter = ServiceFilter::from(['active' => true]);
+        $this->serviceService = $serviceService;
+    }
 
-        $this->services = $serviceService->get($serviceFilter);
+    #[Computed]
+    public function services()
+    {
+        return $this->serviceService->paginate();
     }
 
     public function render()

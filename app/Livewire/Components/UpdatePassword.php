@@ -8,25 +8,32 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class UpdatePassword extends Component
 {
+    protected UserService $userService;
+
     public UpdatePasswordForm $form;
 
-    protected User $user;
-
-    public function boot()
+    public function boot(UserService $userService)
     {
-        $this->user = Auth::user();
+        $this->userService = $userService;
     }
 
-    public function save(UserService $userService)
+    #[Computed]
+    public function user()
+    {
+        return Auth::user();
+    }
+
+    public function save()
     {
         $this->form->validate();
 
         try {
-            $userService->updatePassword($this->user, $this->form->password);
+            $this->userService->updatePassword($this->user, $this->form->password);
 
             Session::flash('success', 'Saved!');
 

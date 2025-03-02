@@ -7,7 +7,7 @@
                     <div wire:ignore class="form-group">
                         <select id="select-status" data-placeholder="{{ __('Status') }}" class="form-control">
                             <option></option>
-                            @foreach ($statuses as $status)
+                            @foreach ($this->statuses as $status)
                                 <option value="{{ $status->value }}" @selected($form->status == $status->value)>
                                     @lang($status->title())
                                 </option>

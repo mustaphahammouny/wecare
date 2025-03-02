@@ -12,10 +12,17 @@ use Livewire\Component;
 #[Title('Clients')]
 class Clients extends Component
 {
-    #[Computed]
-    public function clients(UserService $userService)
+    protected UserService $userService;
+
+    public function boot(UserService $userService)
     {
-        return $userService->paginate();
+        $this->userService = $userService;
+    }
+
+    #[Computed]
+    public function clients()
+    {
+        return $this->userService->paginate();
     }
 
     public function render()

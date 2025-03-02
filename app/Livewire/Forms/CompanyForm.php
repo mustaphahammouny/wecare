@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\CompanyData;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
@@ -39,10 +38,5 @@ class CompanyForm extends Form
 
             $this->address = $company->address;
         }
-    }
-
-    public function toData()
-    {
-        return CompanyData::from($this->all());    
     }
 }

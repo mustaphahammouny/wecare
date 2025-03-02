@@ -2,27 +2,37 @@
 
 namespace App\Livewire\Views\Client;
 
-use App\Data\BookingFilter;
+use App\Enums\BookingStatus;
 use App\Services\BookingService;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.client.app')]
+#[Title('Upcoming bookings')]
 class UpcomingBookings extends Component
 {
-    public function render(BookingService $bookingService)
-    {
-        $bookingFilter = BookingFilter::from([
-            'user_id' => Auth::id(),
-            'start' => Carbon::now(),
-        ]);
+    protected BookingService $bookingService;
 
-        return view('livewire.client.upcoming-bookings')
-            ->title('Upcoming bookings')
-            ->with([
-                'bookings' => $bookingService->paginate($bookingFilter, ['service', 'extras']),
-            ]);
+    public function boot(BookingService $bookingService)
+    {
+        $this->bookingService = $bookingService;
+    }
+
+    #[Computed]
+    public function bookings()
+    {
+        return $this->bookingService->paginate([
+            'user_id' => Auth::id(),
+            'start' => now(),
+            'status' => BookingStatus::Scheduled,
+        ]);
+    }
+
+    public function render()
+    {
+        return view('livewire.client.upcoming-bookings');
     }
 }

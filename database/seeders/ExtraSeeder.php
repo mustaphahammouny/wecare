@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Extra;
 use App\Models\Service;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class ExtraSeeder extends Seeder
 {
@@ -20,7 +19,6 @@ class ExtraSeeder extends Seeder
             foreach ($services as $service) {
                 Extra::create([
                     'service_id' => $service->id,
-                    'slug' => Str::slug($service['title']),
                     'title' => $extra['title'],
                     'price' => $extra['price'],
                 ]);

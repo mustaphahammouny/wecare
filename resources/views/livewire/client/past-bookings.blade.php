@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($bookings as $booking)
+                        @forelse ($this->bookings as $booking)
                             <tr>
                                 <td>
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
@@ -49,7 +49,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $bookings->onEachSide(1)->links('components.pagination') }}
+            {{ $this->bookings->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

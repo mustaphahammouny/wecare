@@ -1,10 +1,6 @@
 <div class="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
     <h4 class="title fz17 mb30">
-        @if ($id)
-            @lang('Edit service')
-        @else
-            @lang('Create new service')
-        @endif
+        @lang($service ? 'Edit service' : 'Create new service')
     </h4>
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">

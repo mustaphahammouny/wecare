@@ -20,11 +20,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($services as $service)
+                        @forelse ($this->services as $service)
                             <tr>
                                 <td>
                                     <div style="max-width: 100px">
-                                        <img class="img-fluid rounded" src="{{ $service->firstMedia?->getUrl() }}" alt="Service Image">
+                                        <img class="img-fluid rounded" src="{{ $service->firstMedia?->getUrl() }}"
+                                            alt="Service Image">
                                     </div>
                                 </td>
                                 <td>
@@ -39,7 +40,7 @@
                                 </td>
                                 <td class="text-center text-nowrap">
                                     <div class="d-inline-flex">
-                                        <x-a route="admin.service" :param="['id' => $service->id]" title="Edit" position="start"
+                                        <x-a route="admin.service" :param="['service' => $service->id]" title="Edit" position="start"
                                             icon="far fa-edit" class="me-2" />
                                         <x-btn-click wire:click="delete({{ $service->id }})" title="Delete"
                                             position="start" icon="far fa-trash" />
@@ -59,7 +60,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $services->onEachSide(1)->links('components.pagination') }}
+            {{ $this->services->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

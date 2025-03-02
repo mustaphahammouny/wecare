@@ -14,14 +14,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($cities as $city)
+                        @forelse ($this->cities as $city)
                             <tr>
                                 <td>
                                     <h6 class="mb-0">{{ $city->name }}</h6>
                                 </td>
                                 <td class="text-center text-nowrap">
                                     <div class="d-inline-flex">
-                                        <x-a route="admin.city" :param="['id' => $city->id]" title="Edit" position="start"
+                                        <x-a route="admin.city" :param="['city' => $city->id]" title="Edit" position="start"
                                             icon="far fa-edit" class="me-2" />
                                         <x-btn-click wire:click="delete({{ $city->id }})" title="Delete"
                                             position="start" icon="far fa-trash" />
@@ -41,7 +41,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $cities->onEachSide(1)->links('components.pagination') }}
+            {{ $this->cities->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

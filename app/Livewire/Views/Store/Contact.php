@@ -6,9 +6,11 @@ use App\Livewire\Forms\ContactForm;
 use App\Services\ContactService;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.store.app')]
+#[Title('Contact')]
 class Contact extends Component
 {
     public ContactForm $form;
@@ -18,7 +20,7 @@ class Contact extends Component
         $this->form->validate();
 
         try {
-            $contactService->store($this->form->toData());
+            $contactService->store($this->form->all());
 
             Session::flash('success', 'Thank you for your trust, we will reach out soon!');
 
@@ -30,7 +32,6 @@ class Contact extends Component
 
     public function render()
     {
-        return view('livewire.store.contact')
-            ->title('Contact');
+        return view('livewire.store.contact');
     }
 }

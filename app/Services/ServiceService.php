@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceService
 {
-    public function get()
+    public function get(array $with = [])
     {
         return Service::query()
-            ->with(['firstMedia'])
+            ->with($with)
             ->where('active', true)
             ->get();
     }

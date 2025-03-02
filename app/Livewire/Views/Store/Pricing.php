@@ -4,16 +4,27 @@ namespace App\Livewire\Views\Store;
 
 use App\Models\Service;
 use App\Services\ServiceService;
-use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.store.app')]
+#[Title('Pricing')]
 class Pricing extends Component
 {
-    #[Locked]
-    public Collection $services;
+    protected ServiceService $serviceService;
+
+    public function boot(ServiceService $serviceService)
+    {
+        $this->serviceService = $serviceService;
+    }
+
+    #[Computed]
+    public function services()
+    {
+        return $this->serviceService->get(['minDuration', 'maxDuration']);
+    }
 
     public function price(Service $service)
     {
@@ -24,14 +35,8 @@ class Pricing extends Component
         return "{$service->maxDuration->formatted_hourly_price} - {$service->minDuration->formatted_hourly_price}";
     }
 
-    public function boot(ServiceService $serviceService)
-    {
-        $this->services = $serviceService->get(with: ['minDuration', 'maxDuration']);
-    }
-
     public function render()
     {
-        return view('livewire.store.pricing')
-            ->title('Pricing');
+        return view('livewire.store.pricing');
     }
 }

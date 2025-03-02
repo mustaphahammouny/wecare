@@ -14,16 +14,23 @@ use Livewire\Component;
 #[Title('Cities')]
 class Cities extends Component
 {
-    #[Computed]
-    public function cities(CityService $cityService)
+    protected CityService $cityService;
+
+    public function boot(CityService $cityService)
     {
-        return $cityService->paginate();
+        $this->cityService = $cityService;
     }
 
-    public function delete(CityService $cityService, City $city)
+    #[Computed]
+    public function cities()
+    {
+        return $this->cityService->paginate();
+    }
+
+    public function delete(City $city)
     {
         try {
-            $cityService->delete($city);
+            $this->cityService->delete($city);
 
             Session::flash('success', 'Deleted!');
 

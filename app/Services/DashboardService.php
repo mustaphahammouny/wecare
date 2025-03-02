@@ -38,7 +38,7 @@ class DashboardService
             $bookingQuery->selectRaw('COUNT(CASE WHEN status = "' . $status->value . '" THEN 1 ELSE null END) AS ' . strtolower($status->name));
         }
 
-        $bookings = $bookingQuery->toBase()->first();
+        $bookings = $bookingQuery->first()->toArray();
 
         foreach ($bookings as $key => $count) {
             $bookings[$key] = [

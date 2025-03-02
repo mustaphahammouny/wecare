@@ -2,33 +2,35 @@
 
 namespace App\Livewire\Views\Client;
 
-use App\Data\BookingFilter;
+use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Services\BookingService;
-use Carbon\Carbon;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 #[Layout('layouts.client.app')]
+#[Title('Past bookings')]
 class PastBookings extends Component
 {
-    use WithPagination;
-    use AuthorizesRequests;
+    protected BookingService $bookingService;
+
+    public function boot(BookingService $bookingService)
+    {
+        $this->bookingService = $bookingService;
+    }
 
     #[Computed]
-    public function bookings(BookingService $bookingService)
+    public function bookings()
     {
-        $bookingFilter = BookingFilter::from([
+        return $this->bookingService->paginate([
             'user_id' => Auth::id(),
-            'end' => Carbon::now(),
+            'end' => now(),
+            'status' => BookingStatus::Completed,
         ]);
-
-        return $bookingService->paginate($bookingFilter, ['service', 'extras']);
     }
 
     public function download(BookingService $bookingService, Booking $booking)
@@ -48,7 +50,6 @@ class PastBookings extends Component
 
     public function render()
     {
-        return view('livewire.client.past-bookings')
-            ->title('Past bookings');
+        return view('livewire.client.past-bookings');
     }
 }

@@ -31,7 +31,7 @@ class UpdateProfile extends Component
         $this->form->validate();
 
         try {
-            $userService->update($this->user, $this->form->toData());
+            $userService->update($this->user, $this->form->all());
 
             Session::flash('success', 'Saved!');
 

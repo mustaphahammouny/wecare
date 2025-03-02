@@ -11,7 +11,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($clients as $client)
+                        @forelse ($this->clients as $client)
                             <tr>
                                 <td><h6 class="mb-0">{{ $client->full_name }}</h6></td>
                                 <td>{{ $client->email }}</td>
@@ -30,7 +30,7 @@
         </div>
 
         <div wire:ignore class="col-12">
-            {{ $clients->onEachSide(1)->links('components.pagination') }}
+            {{ $this->clients->onEachSide(1)->links('components.pagination') }}
         </div>
     </div>
 </div>

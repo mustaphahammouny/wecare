@@ -5,9 +5,11 @@ namespace App\Livewire\Views\Auth;
 use App\Livewire\Views\Client\Services;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.auth.app')]
+#[Title('Sign up')]
 class Register extends Component
 {
     #[On('authenticated')]
@@ -18,7 +20,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.auth.register')
-            ->title('Sign up');
+        return view('livewire.auth.register');
     }
 }

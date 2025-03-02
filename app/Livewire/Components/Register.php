@@ -17,7 +17,7 @@ class Register extends Component
         $this->form->validate();
         
         try {
-            $user = $userService->store($this->form->toData());
+            $user = $userService->store($this->form->all());
 
             Auth::login($user);
 

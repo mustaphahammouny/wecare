@@ -32,10 +32,10 @@
             </div>
             <div class="row wow fadeInUp row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center"
                 data-wow-delay="300ms">
-                @foreach ($services as $service)
+                @foreach ($this->services as $service)
                     <div class="col mb-4">
                         <div class="card h-100 border-0 bdrs24" style="overflow: hidden;">
-                            <img src="{{ $service->getFirstMediaUrl() }}" class="card-img">
+                            <img src="{{ $service->firstMedia?->getUrl() }}" class="card-img">
                             <div class="card-img-overlay d-flex flex-column justify-content-center">
                                 <div class="text-start ms-2 ">
                                     <h5 class="card-title text-dark fz30 fw700 mb-4">@lang($service->title)</h5>
@@ -71,11 +71,7 @@
                                 <div class="testimonial-content">
                                     <h5 class="title">@lang('Booked Cooking Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
-                                    <p class="text">“@lang('I signed up for a cooking class through this app, and it
-                                                                            exceeded my expectations. The instructor was not only a skilled chef but also an
-                                                                            excellent teacher. I learned valuable cooking techniques and tried delicious
-                                                                            recipes. The app made it easy to connect with the instructor and access class
-                                                                            materials. I can\'t wait to take more classes!')”</p>
+                                    <p class="text">“@lang('I signed up for a cooking class through this app, and it exceeded my expectations. The instructor was not only a skilled chef but also an excellent teacher. I learned valuable cooking techniques and tried delicious recipes. The app made it easy to connect with the instructor and access class materials. I can\'t wait to take more classes!')”</p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
@@ -97,11 +93,7 @@
                                 <div class="testimonial-content">
                                     <h5 class="title">@lang('Booked Coaching Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
-                                    <p class="text">“@lang('I had an incredible experience with the coaching service on this
-                                                                            app. The coach was not only knowledgeable but also a great motivator. Their
-                                                                            guidance and support were instrumental in helping me achieve my goals. I highly
-                                                                            recommend this service to anyone looking for personal growth and development.')”
-                                    </p>
+                                    <p class="text">“@lang('I had an incredible experience with the coaching service on this app. The coach was not only knowledgeable but also a great motivator. Their guidance and support were instrumental in helping me achieve my goals. I highly recommend this service to anyone looking for personal growth and development.')”</p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
@@ -123,11 +115,7 @@
                                 <div class="testimonial-content">
                                     <h5 class="title">@lang('Booked Cleaning Service')</h5>
                                     <span class="icon fas fa-quote-left"></span>
-                                    <p class="text">“@lang('I recently booked a cleaning service through this app, and I
-                                                                            couldn\'t be happier with the results. The cleaner was punctual, professional,
-                                                                            and left my home spotless. It was so convenient to schedule the service through
-                                                                            the app, and the whole process was seamless. I\'ll definitely be using this
-                                                                            service again for regular cleanings.')”</p>
+                                    <p class="text">“@lang('I recently booked a cleaning service through this app, and I couldn\'t be happier with the results. The cleaner was punctual, professional, and left my home spotless. It was so convenient to schedule the service through the app, and the whole process was seamless. I\'ll definitely be using this service again for regular cleanings.')”</p>
                                     <div class="testimonial-review">
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>
                                         <a class="me-1" href="#"><i class="fas fa-star"></i></a>

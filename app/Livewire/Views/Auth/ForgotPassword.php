@@ -6,9 +6,11 @@ use App\Livewire\Forms\ForgotPasswordForm;
 use App\Livewire\Views\Client\Services;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.auth.app')]
+#[Title('Forgot Password')]
 class ForgotPassword extends Component
 {
     public ForgotPasswordForm $form;
@@ -28,7 +30,6 @@ class ForgotPassword extends Component
 
     public function render()
     {
-        return view('livewire.auth.forgot-password')
-            ->title('Forgot Password');
+        return view('livewire.auth.forgot-password');
     }
 }

@@ -14,16 +14,23 @@ use Livewire\Component;
 #[Title('Services')]
 class Services extends Component
 {
-    #[Computed]
-    public function services(ServiceService $serviceService)
+    protected ServiceService $serviceService;
+
+    public function boot(ServiceService $serviceService)
     {
-        return $serviceService->paginate();
+        $this->serviceService = $serviceService;
     }
 
-    public function delete(ServiceService $serviceService, Service $service)
+    #[Computed]
+    public function services()
+    {
+        return $this->serviceService->paginate();
+    }
+
+    public function delete(Service $service)
     {
         try {
-            $serviceService->delete($service);
+            $this->serviceService->delete($service);
 
             Session::flash('success', 'Deleted!');
 

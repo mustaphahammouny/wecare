@@ -2,38 +2,32 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\PricingData;
-use App\Models\Pricing;
+use App\Models\Duration;
 use Livewire\Form;
 
-class PricingForm extends Form
+class DurationForm extends Form
 {
-    public int $min_duration;
+    public int $min;
 
-    public int $max_duration;
+    public int $max;
 
-    public float $price;
+    public float $hourly_price;
 
     public function rules()
     {
         return [
-            'min_duration' => ['required', 'integer', 'min:1'],
-            'max_duration' => ['required', 'integer', 'min:1'],
-            'price' => ['required', 'numeric', 'min:1'],
+            'min' => ['required', 'integer', 'min:1'],
+            'max' => ['required', 'integer', 'min:1'],
+            'hourly_price' => ['required', 'numeric', 'min:1'],
         ];
     }
 
-    public function fillProps(?Pricing $pricing)
+    public function fillProps(?Duration $duration)
     {
-        if ($pricing) {
-            $this->min_duration = $pricing->min_duration;
-            $this->max_duration = $pricing->max_duration;
-            $this->price = $pricing->price;
+        if ($duration) {
+            $this->min = $duration->min;
+            $this->max = $duration->max;
+            $this->hourly_price = $duration->hourly_price;
         }
-    }
-
-    public function toData()
-    {
-        return PricingData::from($this->all());
     }
 }

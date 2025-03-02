@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-use App\Data\LoginData;
 use Livewire\Form;
 
 class LoginForm extends Form
@@ -19,10 +18,5 @@ class LoginForm extends Form
             'email' => ['required', 'email'],
             'password' => ['required'],
         ];
-    }
-
-    public function toData()
-    {
-        return LoginData::from($this->all());    
     }
 }

@@ -1,9 +1,9 @@
 <div>
     <div class="row wow fadeInUp row-cols-1 row-cols-lg-2 row-cols-xl-3 justify-content-center" data-wow-delay="300ms">
-        @foreach ($services as $service)
+        @foreach ($this->services as $service)
             <div class="col mb-4">
                 <div class="card h-100 border-0 bdrs24" style="overflow: hidden;">
-                    <img src="{{ $service->getFirstMediaUrl() }}" class="card-img" height="100%">
+                    <img src="{{ $service->firstMedia?->getUrl() }}" class="card-img" height="100%">
                     <div class="card-img-overlay d-flex flex-column justify-content-center">
                         <div class="text-start">
                             <h5 class="card-title text-dark text-nowrap fz30 fw700 mb-4">@lang($service->title)</h5>

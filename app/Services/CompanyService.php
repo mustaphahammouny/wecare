@@ -5,16 +5,23 @@ namespace App\Services;
 use App\Models\Company;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class CompanyService
 {
-    public function updateOrCreate(array $data)
+    public function first(array $filter = [])
     {
-        /** @var User */
-        $user = Auth::user();
+        return Company::query()
+            ->when(
+                Arr::get($filter, 'user_id'),
+                fn($query, $userId) => $query->where('user_id', $userId)
+            )
+            ->first();
+    }
 
+    public function updateOrCreate(User $user, array $data)
+    {
         try {
             DB::beginTransaction();
 

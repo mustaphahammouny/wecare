@@ -56,7 +56,7 @@ class Booking extends Model
 
     public function extras(): HasMany
     {
-        return $this->hasMany(Extra::class);
+        return $this->hasMany(BookingExtra::class);
     }
 
     public function city(): BelongsTo
