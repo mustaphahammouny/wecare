@@ -6,35 +6,31 @@ use App\Enums\BookingStatus;
 use App\Livewire\Forms\BookingForm;
 use App\Models\Booking as BookingModel;
 use App\Services\BookingService;
+use Exception;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
+#[Title('Booking')]
 class Booking extends Component
 {
     public BookingForm $form;
 
-    #[Locked]
-    public array $statuses;
-
-    #[Locked]
-    public ?int $id = null;
-
-    protected ?BookingModel $booking = null;
-
-    public function boot(BookingService $bookingService)
-    {
-        $this->booking = $bookingService->find($this->id);
-
-        $this->statuses = BookingStatus::cases();
-    }
+    public BookingModel $booking;
 
     public function mount()
     {
         $this->form->fillProps($this->booking);
+    }
+
+    #[Computed]
+    public function statuses(): array
+    {
+        return BookingStatus::cases();
     }
 
     #[On('status-updated')]
@@ -48,21 +44,18 @@ class Booking extends Component
         $this->form->validate();
 
         try {
-            $status = BookingStatus::from($this->form->status);
-
-            $bookingService->updateStatus($this->booking, $status);
+            $bookingService->updateStatus($this->booking, $this->form->status);
 
             Session::flash('success', 'Saved!');
 
             return $this->redirect(Bookings::class, navigate: true);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Session::flash('error', $e->getMessage());
         }
     }
 
     public function render()
     {
-        return view('livewire.admin.booking')
-            ->title('Booking');
+        return view('livewire.admin.booking');
     }
 }

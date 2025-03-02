@@ -7,25 +7,16 @@ use App\Models\City as CityModel;
 use App\Services\CityService;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
+#[Title('City')]
 class City extends Component
 {
     public CityForm $form;
 
-    #[Locked]
-    public ?int $id = null;
-
-    protected ?CityModel $city = null;
-
-    public function boot(CityService $cityService)
-    {
-        if ($this->id) {
-            $this->city = $cityService->find($this->id);
-        }
-    }
+    public ?CityModel $city = null;
 
     public function mount()
     {
@@ -37,7 +28,11 @@ class City extends Component
         $this->form->validate();
 
         try {
-            $cityService->updateOrCreate($this->city, $this->form->toData());
+            if ($this->city) {
+                $cityService->update($this->city, $this->form->all());
+            } else {
+                $cityService->store($this->form->all());
+            }
 
             Session::flash('success', 'Saved!');
 
@@ -49,7 +44,6 @@ class City extends Component
 
     public function render()
     {
-        return view('livewire.admin.city')
-            ->title('City');
+        return view('livewire.admin.city');
     }
 }

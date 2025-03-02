@@ -2,22 +2,24 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\BookingStatus;
 use App\Models\Booking;
+use Illuminate\Validation\Rule;
 use Livewire\Form;
 
 class BookingForm extends Form
 {
-    public int $status;
+    public BookingStatus $status;
 
     public function rules()
     {
         return [
-            'status' => ['required', 'integer'],
+            'status' => ['required', Rule::enum(BookingStatus::class)],
         ];
     }
 
     public function fillProps(Booking $booking)
     {
-        $this->status = $booking->status->value;
+        $this->status = $booking->status;
     }
 }

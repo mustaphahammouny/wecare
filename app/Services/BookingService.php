@@ -19,7 +19,7 @@ class BookingService
     public function paginate(array $filter = [])
     {
         return Booking::query()
-            ->with([])
+            ->with(['service', 'extras', 'user'])
             ->when(
                 Arr::get($filter, 'user_id'),
                 fn($query, $userId) => $query->where('user_id', $userId)

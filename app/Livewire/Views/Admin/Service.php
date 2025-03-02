@@ -7,29 +7,19 @@ use App\Models\Service as ServiceModel;
 use App\Services\ServiceService;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Locked;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('layouts.admin.app')]
+#[Title('City')]
 class Service extends Component
 {
     use WithFileUploads;
-    
+
     public ServiceForm $form;
 
-    #[Locked]
-    public ?int $id = null;
-
-    #[Locked]
     public ?ServiceModel $service = null;
-
-    public function boot(ServiceService $serviceService)
-    {
-        if ($this->id) {
-            $this->service = $serviceService->find($this->id);
-        }
-    }
 
     public function mount()
     {
@@ -41,7 +31,11 @@ class Service extends Component
         $this->form->validate();
 
         try {
-            $serviceService->updateOrCreate($this->service, $this->form->toData());
+            if ($this->service) {
+                $serviceService->update($this->service, $this->form->all());
+            } else {
+                $serviceService->store($this->form->all());
+            }
 
             Session::flash('success', 'Saved!');
 
@@ -53,7 +47,6 @@ class Service extends Component
 
     public function render()
     {
-        return view('livewire.admin.service')
-            ->title('Service');
+        return view('livewire.admin.service');
     }
 }

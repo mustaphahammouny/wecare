@@ -3,18 +3,23 @@
 namespace App\Livewire\Views\Admin;
 
 use App\Services\BookingService;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
+#[Title('Bookings')]
 class Bookings extends Component
 {
-    public function render(BookingService $bookingService)
+    #[Computed]
+    public function bookings(BookingService $bookingService)
     {
-        return view('livewire.admin.bookings')
-            ->title('Bookings')
-            ->with([
-                'bookings' => $bookingService->paginate(with: ['service', 'extras', 'user']),
-            ]);
+        return $bookingService->paginate();
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.bookings');
     }
 }

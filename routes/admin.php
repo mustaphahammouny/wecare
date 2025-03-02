@@ -16,16 +16,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('dashboard', Dashboard::class)->name('dashboard');
 
         Route::get('bookings', Bookings::class)->name('bookings');
-        Route::get('booking/{id}', Booking::class)->name('booking');
+        Route::get('booking/{booking}', Booking::class)->name('booking');
 
         Route::get('contacts', Contacts::class)->name('contacts');
 
         Route::get('clients', Clients::class)->name('clients');
 
         Route::get('services', Services::class)->name('services');
-        Route::get('service/{id?}', Service::class)->name('service');
+        Route::get('service/{service?}', Service::class)->name('service');
 
         Route::get('cities', Cities::class)->name('cities');
-        Route::get('city/{id?}', City::class)->name('city');
+        Route::get('city/{city?}', City::class)->name('city');
     });
 });

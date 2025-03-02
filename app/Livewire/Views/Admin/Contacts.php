@@ -3,18 +3,23 @@
 namespace App\Livewire\Views\Admin;
 
 use App\Services\ContactService;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
+#[Title('Contacts')]
 class Contacts extends Component
 {
-    public function render(ContactService $contactService)
+    #[Computed]
+    public function contacts(ContactService $contactService)
     {
-        return view('livewire.admin.contacts')
-            ->title('Contacts')
-            ->with([
-                'contacts' => $contactService->paginate(),
-            ]);
+        return $contactService->paginate();
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.contacts');
     }
 }

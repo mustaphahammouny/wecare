@@ -13,6 +13,7 @@ class ServiceService
     public function get()
     {
         return Service::query()
+            ->with(['firstMedia'])
             ->where('active', true)
             ->get();
     }
@@ -20,6 +21,7 @@ class ServiceService
     public function paginate(array $filter = [])
     {
         return Service::query()
+            ->with(['firstMedia'])
             ->when(
                 Arr::get($filter, 'slug'),
                 fn($query, $slug) => $query->where('slug', $slug)

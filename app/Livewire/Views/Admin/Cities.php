@@ -5,12 +5,21 @@ namespace App\Livewire\Views\Admin;
 use App\Models\City;
 use App\Services\CityService;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts.admin.app')]
+#[Title('Cities')]
 class Cities extends Component
 {
+    #[Computed]
+    public function cities(CityService $cityService)
+    {
+        return $cityService->paginate();
+    }
+
     public function delete(CityService $cityService, City $city)
     {
         try {
@@ -24,12 +33,8 @@ class Cities extends Component
         }
     }
 
-    public function render(CityService $cityService)
+    public function render()
     {
-        return view('livewire.admin.cities')
-            ->title('Cities')
-            ->with([
-                'cities' => $cityService->paginate(),
-            ]);
+        return view('livewire.admin.cities');
     }
 }
