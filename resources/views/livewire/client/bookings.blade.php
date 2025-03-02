@@ -20,10 +20,10 @@
                                     <h6 class="mb-0">{{ $booking->service->title }}</h6>
                                     @foreach ($booking->extras as $extra)
                                         <span>{{ __($extra->title) }}</span>
-                                        <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
+                                        <span class="text-muted">({{ $extra->formatted_price }})</span>
                                     @endforeach
                                 </td>
-                                <td class="text-center">{{ $booking->formatted_service_price }}</td>
+                                <td class="text-center">{{ $booking->formatted_hourly_price }}</td>
                                 <td class="text-center">{{ $booking->duration }}{{ __('h') }}</td>
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
                                 <td class="text-center">{{ $booking->service_at }}</td>

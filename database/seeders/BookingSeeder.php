@@ -25,7 +25,7 @@ class BookingSeeder extends Seeder
                 return [
                     'service_id' => $service->id,
                     'city_id' => $city->id,
-                    'service_price' => $duration->hourly_price,
+                    'hourly_price' => $duration->hourly_price,
                     'duration' => $hours,
                     'total' => $duration->hourly_price * $hours,
                 ];

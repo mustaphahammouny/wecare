@@ -23,10 +23,10 @@ class Booking extends Model
         'status' => BookingStatus::class,
     ];
 
-    protected function formattedServicePrice(): Attribute
+    protected function formattedHourlyPrice(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value, array $attributes) => Number::toPrice($attributes['service_price'])
+            get: fn(mixed $value, array $attributes) => Number::toPrice($attributes['hourly_price'])
         );
     }
 

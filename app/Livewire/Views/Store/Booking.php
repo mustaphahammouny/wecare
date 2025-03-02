@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Views\Store;
 
-use App\Data\BookingData;
-use App\Data\ServiceFilter;
 use App\Livewire\Components\Authenticate;
 use App\Livewire\Components\Information;
 use App\Livewire\Components\Date;
@@ -24,14 +22,9 @@ use Livewire\Component;
 #[Title('Booking')]
 class Booking extends Component
 {
-    #[Locked]
-    public $slug;
+    protected BookingService $bookingService;
 
-    #[Locked]
-    public $state = [];
-
-    #[Locked]
-    public $current = Information::class;
+    protected ServiceService $serviceService;
 
     protected $steps = [
         Information::class,
@@ -42,17 +35,28 @@ class Booking extends Component
         Agreement::class,
     ];
 
-    protected BookingService $bookingService;
+    #[Locked]
+    public string $slug;
+
+    #[Locked]
+    public array $state = [];
+
+    #[Locked]
+    public $current = Information::class;
 
     public function boot(ServiceService $serviceService, BookingService $bookingService)
     {
-        $serviceFilter = ServiceFilter::from(['slug' => $this->slug]);
-
-        $this->state['service'] = $serviceService
-            ->firstOrFail($serviceFilter, ['durations', 'extras'])
-            ->toArray();
+        $this->serviceService = $serviceService;
 
         $this->bookingService = $bookingService;
+    }
+
+    public function mount()
+    {
+        $this->state['service'] = $this->serviceService->first([
+            'slug' => $this->slug,
+        ])
+            ->toArray();
     }
 
     public function previous(string $current)
@@ -90,7 +94,7 @@ class Booking extends Component
     private function store()
     {
         try {
-            $bookingData = BookingData::from([
+            $this->bookingService->store([
                 'user_id' => Auth::id(),
                 'service_id' => $this->state['service']['id'],
                 'city_id' => $this->state['city'],
@@ -101,8 +105,6 @@ class Booking extends Component
                 'time' => $this->state['time'],
                 'extras' => array_column($this->state['extras'], 'id'),
             ]);
-
-            $this->bookingService->store($bookingData);
 
             return $this->redirect(ThankYou::class, navigate: true);
         } catch (\Exception $e) {

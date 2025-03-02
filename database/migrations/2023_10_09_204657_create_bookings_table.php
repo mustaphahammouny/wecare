@@ -22,12 +22,12 @@ return new class extends Migration
                 ->constrained('cities')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->decimal('service_price');
             $table->string('phone');
             $table->text('address');
             $table->unsignedTinyInteger('duration');
-            $table->timestamp('service_at');
+            $table->decimal('hourly_price');
             $table->decimal('total');
+            $table->timestamp('service_at');
             $table->unsignedTinyInteger('status');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();

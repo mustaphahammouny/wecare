@@ -183,11 +183,11 @@
                     <tr>
                         <td>{{ $booking->service->title }}</td>
                         <td>@lang('Hour')</td>
-                        <td>{{ \App\Support\Number::format($booking->service_price * (1 - \App\Constants\General::TAX)) }}
+                        <td>{{ \App\Support\Number::format($booking->hourly_price * (1 - \App\Constants\General::TAX)) }}
                         </td>
                         <td class="text-center">{{ $booking->duration }}</td>
                         <td class="text-end">
-                            {{ \App\Support\Number::format($booking->service_price * (1 - \App\Constants\General::TAX) * $booking->duration) }}
+                            {{ \App\Support\Number::format($booking->hourly_price * (1 - \App\Constants\General::TAX) * $booking->duration) }}
                         </td>
                     </tr>
                     @foreach ($booking->extras as $extra)

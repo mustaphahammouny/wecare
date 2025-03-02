@@ -18,6 +18,17 @@ class ServiceService
             ->get();
     }
 
+    public function first(array $filter = [])
+    {
+        return Service::query()
+            ->with(['durations', 'extras'])
+            ->when(
+                Arr::get($filter, 'slug'),
+                fn($query, $slug) => $query->where('slug', $slug)
+            )
+            ->firstOrFail();
+    }
+
     public function paginate(array $filter = [])
     {
         return Service::query()

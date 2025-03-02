@@ -7,11 +7,10 @@ use App\Enums\BookingStatus;
 use App\Models\Booking;
 use App\Models\Duration;
 use App\Models\Extra;
-use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class BookingService
@@ -42,16 +41,13 @@ class BookingService
 
     public function store(array $data): Booking
     {
-        /** @var User */
-        $user = Auth::user();
-
         $duration = Duration::query()
             ->withWhereHas(
                 'service',
                 fn($query) => $query
                     ->withWhereHas(
                         'extras',
-                        fn($query) => $query->whereIn(Arr::get($data, 'extras'))
+                        fn($query) => $query->whereIn('id', Arr::get($data, 'extras'))
                     )
                     ->where('id', Arr::get($data, 'service_id'))
             )
@@ -66,15 +62,25 @@ class BookingService
 
         $extrasTotal = $duration->service->extras->sum('price');
 
+        $dateTime = Arr::get($data, 'date') . ' ' . Arr::get($data, 'time');
+        $serviceAt = Carbon::createFromFormat('d/m/Y H', $dateTime);
+
         try {
             DB::beginTransaction();
 
-            $booking = $user->bookings()->create([
-                'service_id' => $duration->service->id,
-                'city_id' => Arr::get($data, 'city_id'),
-                'total' => $duration->hourly_price * Arr::get($data, 'duration') + $extrasTotal,
-                'status' => BookingStatus::Scheduled,
-            ]);
+            $booking = Booking::query()
+                ->create([
+                    'user_id' => Arr::get($data, 'user_id'),
+                    'service_id' => $duration->service->id,
+                    'city_id' => Arr::get($data, 'city_id'),
+                    'phone' => Arr::get($data, 'phone'),
+                    'address' => Arr::get($data, 'phone'),
+                    'hourly_price' => $duration->hourly_price,
+                    'duration' => Arr::get($data, 'duration'),
+                    'total' => $duration->hourly_price * Arr::get($data, 'duration') + $extrasTotal,
+                    'service_at' => $serviceAt,
+                    'status' => BookingStatus::Scheduled,
+                ]);
 
             $booking->extras()->createMany($extras);
 

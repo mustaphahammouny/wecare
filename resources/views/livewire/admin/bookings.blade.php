@@ -26,7 +26,7 @@
                                     @endforeach
                                 </td>
                                 <td class="text-center">{{ $booking->user->full_name }}</td>
-                                <td class="text-center">{{ $booking->formatted_service_price }}</td>
+                                <td class="text-center">{{ $booking->formatted_hourly_price }}</td>
                                 <td class="text-center">{{ $booking->duration }}{{ __('h') }}</td>
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
                                 <td class="text-center">{{ $booking->service_at }}</td>

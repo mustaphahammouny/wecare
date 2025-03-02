@@ -24,7 +24,7 @@
                                         <span class="text-muted">({{ $extra->pivot->formatted_extra_price }})</span>
                                     @endforeach
                                 </td>
-                                <td class="text-center">{{ $booking->formatted_service_price }}</td>
+                                <td class="text-center">{{ $booking->formatted_hourly_price }}</td>
                                 <td class="text-center">{{ $booking->duration }}{{ __('h') }}</td>
                                 <td class="text-center">{{ $booking->formatted_total }}</td>
                                 <td class="text-center">{{ $booking->service_at }}</td>
