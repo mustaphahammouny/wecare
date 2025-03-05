@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::anonymousComponentPath(resource_path('views/layouts'), 'layout');
 
         Vite::macro('image', fn(string $asset) => $this->asset("resources/images/{$asset}"));
+
+        // Cashier::calculateTaxes();
 
         Relation::enforceMorphMap([
             1 => User::class,
